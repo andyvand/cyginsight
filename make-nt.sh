@@ -1,11 +1,11 @@
 #!/bin/sh
 # Paradyn/DynInstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.3 1998/06/29 18:44:54 wylie Exp $
-# usage: make-nt [-new] [componentlist]
+# $Id: make-nt.sh,v 1.4 1999/02/09 15:46:04 wylie Exp $
+# usage: make-nt [-no] [-new|-clean] [componentlist]
 
 # Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
 PARADYN_BUILD_ID="Paradyn v2.1"
-DYNINST_BUILD_ID="DynInst v1.1"
+DYNINST_BUILD_ID="DynInst v1.2"
 
 MAKE="nmake /nologo"
 PARADYN_COMPS="util igen rtinst paradynd"
@@ -14,8 +14,22 @@ ALL_COMPS="$PARADYN_COMPS $DYNINST_COMPS"
 LIBRARY_DEST=../lib/$PLATFORM
 PROGRAM_DEST=../bin/$PLATFORM
 
+BUILDOPT=TRUE
+
+if [ "$1" = "-no" ]; then
+    MAKE="$MAKE -n"
+    echo MAKE=$MAKE
+    shift
+fi
+
 if [ "$1" = "-new" ]; then
     CLEANOPT=TRUE
+    shift
+fi
+
+if [ "$1" = "-clean" ]; then
+    CLEANOPT=TRUE
+    BUILDOPT=FALSE
     shift
 fi
 
@@ -64,9 +78,11 @@ do
     if [ "$CLEANOPT" = "TRUE" ]; then
         $MAKE clean
     fi
-    $MAKE install
-    if [ "$?" != 0 ]; then
-        exit
+    if [ "$BUILDOPT" = "TRUE" ]; then
+        $MAKE install
+        if [ "$?" != 0 ]; then
+            exit
+        fi
     fi
     echo "Leaving  $CWD"
     cd ../..
