@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.35 2004/05/14 16:49:06 legendre Exp $
+# $Id: files_PD,v 1.36 2004/06/22 17:33:34 legendre Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -8,11 +8,12 @@ SP2=rs6000-ibm-aix5.1
 AIX=rs6000-ibm-aix5.1
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
+I64=ia64-unknown-linux2.4
 LNX=i386-unknown-linux2.4
 IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SOL $LNX $AIX $WNT"
+ALL_PLATFORMS="$SOL $LNX $AIX $WNT $I64"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -190,7 +191,7 @@ function get_exes
    if [[ $D_COMPS == "true" ]]
    then
       case $PF in
-      $SOL|$LNX|$AIX)
+      $SOL|$LNX|$AIX|$I64)
 	 RET_EXES="$DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"  ;;
       $WNT)
 	 RET_EXES="$DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"  ;;
@@ -230,6 +231,8 @@ function get_libs
 	 RET_LIBS=$DYN_WNT_LIBS ;;
       $IRX)
 	 RET_LIBS="$DYN_UNX_LIBS libdyninstAPI_RT_n32.so.1" ;;
+      $I64)
+    RET_LIBS="$DYN_UNX_LIBS" ;;
       esac
    fi
 
