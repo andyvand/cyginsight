@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildstamp,v 1.6 2000/07/07 17:04:18 wylie Exp $
+# $Id: buildstamp,v 1.7 2003/05/11 22:20:06 schendel Exp $
 # create/update build version identification voucher file
 
 USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"
@@ -71,8 +71,12 @@ if [ -f $V_FILE ]; then
       ;;
     4)
       # extract previous build number
-      BUILD=`awk '{for (i=1;i<=NF;i++) if ($i~/#[0-9]/) \
-                   print int(substr($i,2)+1)}' $V_FILE`
+      # awk doesn't exist on our windows machine, also it appears that
+      # we're not currently using this option but are specifying the
+      # build number on the release variable, so I'm commenting this out
+      # BUILD=`awk '{for (i=1;i<=NF;i++) if ($i~/#[0-9]/) \
+      #             print int(substr($i,2)+1)}' $V_FILE`
+      BUILD=0
       ;;
     esac
   done
