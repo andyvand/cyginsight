@@ -1,6 +1,6 @@
 #!/bin/sh
 # Paradyn/DynInstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.1 1998/04/06 16:09:33 wylie Exp $
+# $Id: make-nt.sh,v 1.2 1998/04/24 18:10:26 wylie Exp $
 # usage: make-nt [-new] [componentlist]
 
 # Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
@@ -51,10 +51,12 @@ PATH="\
 "
 
 if [ ! -d $LIBRARY_DEST ]; then
-    mkdir $LIBRARY_DEST
+    echo "Creating installation directory LIBRARY_DEST=$LIBRARY_DEST"
+    mkdir -p $LIBRARY_DEST
 fi
 if [ ! -d $PROGRAM_DEST ]; then
-    mkdir $PROGRAM_DEST
+    echo "Creating installation directory PROGRAM_DEST=$PROGRAM_DEST"
+    mkdir -p $PROGRAM_DEST
 fi
 
 echo "Making $BUILD_ID $TITLE for $PLATFORM!"
