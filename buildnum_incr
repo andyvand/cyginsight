@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildnum_incr,v 1.1 1998/04/03 21:54:21 wylie Exp $
+# $Id: buildnum_incr,v 1.2 1998/04/03 22:12:23 wylie Exp $
 # automatically increment build number BUILD_NUM
 
 USAGE="usage: $0 FILE"
@@ -31,8 +31,9 @@ fi
 if [ -f $FILE ]; then
     buildnumstr=`grep BUILD_NUM $FILE`
     if [ -z "$buildnumstr" ]; then
-        echo "BUILD_NUM not found in file $FILE -- aborting!"
-        exit
+        echo "BUILD_NUM not found in file $FILE -- appending!"
+        echo "BUILD_NUM=-000" | tee -a $FILE
+        exit 0
     fi
 
     # extract previous build number
