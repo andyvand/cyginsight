@@ -1,0 +1,71 @@
+#!/bin/sh
+# $Paradyn/$DynInst-specific voucher "ident" (a la RCS ident)
+
+USAGE="usage: ident_PD [-l|-a] files"
+
+FILTER="head -1"
+
+while [ ! -z "$1" ]
+do
+  case "$1" in
+    "-l")
+        # show filenames as a "long" option or not
+        LONGOPT=TRUE
+        ;;
+    "-a")
+        # show "all" ident info, or just first (default)
+        FILTER="cat"
+        ;;
+    "-"*)
+        echo "Unrecognized flag: $1"
+        break
+        ;;
+    *)
+        # any non-flag arguments are files to ident
+        FILES=$*
+        break
+        ;;
+  esac
+  shift
+done
+
+# common bail-out point for unknown flags and empty lists of files
+if [ -z "$FILES" ]; then
+    echo $USAGE
+    exit 1
+fi
+
+# if necessary, patch Windows NT shell PATH to recover some Unix utilities
+if [ $PLATFORM = "i386-unknown-nt4.0" ]; then        
+    NTPATH=//E/GNU/gnuwin32/b18/H-i386-cygwin32/bin
+    set ${PATH:=$NTPATH}
+fi
+
+OSTYPE=`uname -s`
+if [ "$OSTYPE" = "AIX" ]; then
+    echo "Warning! SP2/AIX has broken \"strings\" command and may give spurious results!"
+fi
+
+for FILE in $FILES
+do
+    if [ "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
+    if [ -f $FILE ]; then
+##      IDENT=`strings -n9 $FILE 2>&1 | egrep '\$(Paradyn)|(DynInst):' | 
+        IDENT=`strings -n9 $FILE 2>&1 | egrep '(DynInst)|(Paradyn):' | 
+        	$FILTER | cut -d$ -f2`
+##        	$FILTER | sed -n -e 's/^.*\@\$/$/p'`
+##        	$FILTER | sed -n -e 's/.*^ \$/$/p'`
+##        	$FILTER | sed -n -e 's/.*\$DynInst:/$DynInst:/p'`
+##        	$FILTER | sed -n -e 's/.*\$Paradyn:/$Paradyn:/p'`
+#       IDENT=`strings -n9 $FILE 2>&1 | sed -n -e 's/.*\$Paradyn:/$Paradyn:/p'`
+        if [ "$IDENT" ]; then
+            printf "$%s %-9s %-16s %-5s %s %s %s %s\n" $IDENT
+        else
+            if [ -z "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
+            echo "contains no \$Paradyn/DynInst\$ identification information"
+        fi
+    else
+        if [ -z "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
+        echo "does not exist"
+    fi
+done
