@@ -1,7 +1,8 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.1 2002/08/13 18:19:23 schendel Exp $
+# $Id: tests_DI,v 1.2 2002/08/14 00:15:38 schendel Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
+STD_F90=f90
 GNU_CC=gcc
 GNU_CXX=g++
 
@@ -14,6 +15,7 @@ case "$PLATFORM" in
   rs6000-ibm-aix4.*)
     STD_CC=xlc
     STD_CXX=xlC
+    STD_F90=xlf90
     ;;
   i386-unknown-linux*)
     # Linux doesn't have a regular/native "cc", so use PGI compilers instead
@@ -30,7 +32,7 @@ case "$PLATFORM" in
     STD_CXX=CC
 esac
 
-FULL_MC_LIST="$STD_CC $STD_CXX $GNU_CC $GNU_CXX"
+FULL_MC_LIST="$STD_CC $STD_CXX $GNU_CC $GNU_CXX $STD_F90"
 FULLTESTLIST="1 2 3 4 5 6 7"
 SOL_SKIP=""
 LNX_SKIP="7"
@@ -72,13 +74,11 @@ esac
 echo "Test programs ( $SKIPPED_TESTS ) are skipped on this platform"
 
 if [ "$PARADYN_BASE" = "" ]; then
-BASE_DIR=/p/paradyn
+BASE_DIR=$HOME/current
 else
 BASE_DIR=$PARADYN_BASE
 fi
-if [ "$DYNINST_ROOT" != "" ]; then
-BASE_DIR=$DYNINST_ROOT
-fi
+
 if [ "$PDTST" = "" ]; then
 TLOG_DIR=$BASE_DIR/log/tests
 else
@@ -241,10 +241,12 @@ if [ -n "$LOGGING" ]; then
         TESTSLOG=$FILE
     else
         # get a build identifier for log file in default directory
-        BUILD_ID=`$BUILDNUM`
-        if [ $? -ne 0 ]; then
+	if [ -f "$BUILDNUM" ]; then
+	    BUILD_ID=`$BUILDNUM`
+	else
             BUILD_ID=`date '+%Y-%m-%d'`
-        fi
+	fi
+
         TESTSLOG=$TLOG_DIR/$PLATFORM/$BUILD_ID
     fi
     echo "   ... output to $TESTSLOG"
@@ -302,6 +304,13 @@ echo "modified TESTLIST $TESTLIST"
 if [ -z "$MUT_CC_LIST" ]; then
     # set the default mutatee-compiler list to be used in tests
     case $PLATFORM in
+       *alpha*)
+            # STD_CXX&GNU_CXX behaviour is still too poor to include as default
+            echo "Skipping $STD_CXX & $GNU_CXX tests due to their bad behavior!"
+	        TESTLIST="1 3 4 5 6"
+		    FULLTESTLIST="1 3 4 5 6"
+            MUT_CC_LIST="$STD_CC $GNU_CC"
+            ;;
         X-*irix*)
             # STD_CXX&GNU_CXX behaviour is still too poor to include as default
             echo "Skipping $STD_CXX & $GNU_CXX tests due to their bad behavior!"
@@ -391,7 +400,7 @@ RunTest ()
 #           printf "=== Exit code 0x%02x: %s\n" $EXITCODE "$TEST"
         fi
         JunkCheck
-        reap -a -q test$TESTNUM
+        $PDSCRDIR/reap -a -q test$TESTNUM
         echo ""                                       
     fi
 }
@@ -411,9 +420,9 @@ RunTestIndi ()
     5)
         SUBTESTS=12 ;;
     6)
-        SUBTESTS=1 ;;
+        SUBTESTS=6 ;;
     7)
-        SUBTESTS=1 ;;
+        SUBTESTS=9 ;;
     *)
         printf "Unexpected TESTNUM %d\n" $TESTNUM
   esac
@@ -431,7 +440,7 @@ RunTestIndi ()
 
 RUNAWAYS="test[1234567] test[1234567]*.m"
 RUNAWAYS="'test[1234567]*'"
-reap -a -q $RUNAWAYS                                    2>&1 | tee -a $TESTSLOG
+$PDSCRDIR/reap -a -q $RUNAWAYS                          2>&1 | tee -a $TESTSLOG
 
 JunkCheck                                               2>&1 | tee -a $TESTSLOG
 
@@ -443,7 +452,7 @@ do
   printf "\n*** dyninstAPI test$TESTNUM...\n"           2>&1 | tee -a $TESTSLOG
   if [ ! -n "$EXTRA_LEAN" ]; then
       $PDSCRDIR/ident_PD test$TESTNUM$EXT               2>&1 | tee -a $TESTSLOG
-      ldd_PD test$TESTNUM$EXT                           2>&1 | tee -a $TESTSLOG
+      $PDSCRDIR/ldd_PD test$TESTNUM$EXT                 2>&1 | tee -a $TESTSLOG
   fi
   for ABI in $ABILIST
   do
@@ -474,7 +483,7 @@ do
       for MUTATEX in test$TESTNUM*.mutatee_$MUT_CC$ABIX$EXT
       do
           ls -lLF $MUTATEX                              2>&1 | tee -a $TESTSLOG
-          ldd_PD $MUTATEX                               2>&1 | tee -a $TESTSLOG
+          $PDSCRDIR/ldd_PD $MUTATEX                     2>&1 | tee -a $TESTSLOG
           $MUTATEX                                      2>&1 | tee -a $TESTSLOG
       done
       fi
@@ -516,7 +525,7 @@ do
   done
 done
 
-reap -a -q $RUNAWAYS                                    2>&1 | tee -a $TESTSLOG
+$PDSCRDIR/reap -a -q $RUNAWAYS                          2>&1 | tee -a $TESTSLOG
 
 printf "\nTests complete.\n"                            2>&1 | tee -a $TESTSLOG
 date                                                    2>&1 | tee -a $TESTSLOG
