@@ -1,6 +1,6 @@
 #!/bin/sh
 # Paradyn/DynInstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.7 1999/03/13 15:24:47 pcroth Exp $
+# $Id: make-nt.sh,v 1.8 1999/03/17 00:48:15 wylie Exp $
 # usage: make-nt [-no] [-new|-clean] [componentlist]
 
 # Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
@@ -8,7 +8,8 @@ PARADYN_BUILD_ID="Paradyn v2.1"
 DYNINST_BUILD_ID="DynInst v1.2"
 
 MAKE="nmake /nologo"
-PARADYN_COMPS="util igen rtinst paradynd thread paradyn visi visiClients/barchart visiClients/tableVisi visiClients/phaseTable visiClients/tclVisi"
+PARADYN_VISIS="visiClients/barchart visiClients/tableVisi visiClients/phaseTable visiClients/tclVisi"
+PARADYN_COMPS="util igen rtinst paradynd thread paradyn visi $PARADYN_VISIS"
 DYNINST_COMPS="dyninstAPI dyninstAPI_RT dyninstAPI/tests"
 ALL_COMPS="$PARADYN_COMPS $DYNINST_COMPS"
 LIBRARY_DEST=../lib/$PLATFORM
@@ -51,6 +52,7 @@ else
         ;;
       *)
         COMPS=$*
+        TITLE=
         ;;
     esac
 fi
@@ -66,27 +68,28 @@ fi
 
 echo "Making $BUILD_ID $TITLE for $PLATFORM!"
 date
+CORE_DIR=`pwd`
+echo "Build in $CORE_DIR"
 for COMP in $COMPS
 do
-    if [ ! -d $COMP/$PLATFORM ]; then
+    MODULE_DIR=$CORE_DIR/$COMP/$PLATFORM
+    if [ ! -d $MODULE_DIR ]; then
         echo "Target directory $COMP/$PLATFORM does not exist!"
         continue
     fi
-    cd $COMP/$PLATFORM
-    CWD=`pwd`
-    echo "Entering $CWD"
+    cd \\$MODULE_DIR
+    echo "Entering $MODULE_DIR"
     if [ "$CLEANOPT" = "TRUE" ]; then
         $MAKE clean
     fi
     if [ "$BUILDOPT" = "TRUE" ]; then
         $MAKE install
         if [ "$?" != 0 ]; then
-            echo "Aborting $CWD"
+            echo "Aborting $COMP"
             exit
         fi
     fi
-    echo "Leaving  $CWD"
-    cd ../..
+    echo "Leaving  $MODULE_DIR"
 done
 echo "$BUILD_ID build complete for $PLATFORM!"
 date
