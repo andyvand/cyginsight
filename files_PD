@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.1 1998/04/22 20:34:35 wylie Exp $
+# $Id: files_PD,v 1.2 1998/04/24 18:11:15 wylie Exp $
 # list (or otherwise examine) all Paradyn/DynInst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
@@ -12,11 +12,19 @@ WNT=i386-unknown-nt4.0
 ALL_PLATFORMS="$SOL $X86 $SP2 $WNT"
 ARCH_LIST=$PLATFORM
 
-USAGE="usage: files_PD [-a] [-d] [-i|-t] [platform-list]\n\
+#USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
+#   -C_comps_: consider only the components matching the _comps_ key\n\
+#     o: miscellaneous objects\n\
+#     v: visualizers/visis\n\
+USAGE="usage: files_PD [-a] [-w] [-i|-t] [-d|-l|-p|-x] [platform-list]\n\
    -a: consider all supported platforms (instead of optional platform-list)\n\
-   -d: use developer's repository (instead of default common repository)\n\
+   -w: use developer's work repository (instead of default common repository)\n\
    -i: show ident_PD information (instead of default file listing)\n\
    -t: only list stale files (i.e., those not dated today)\n\
+   -d: DynInstAPI components only\n\
+   -l: libraries/objects only\n\
+   -p: Paradyn components only\n\
+   -x: executables only\n\
    platform-list: one or more platforms (defaults to only current platform)\n\
 (current PLATFORM=$PLATFORM)\n\
 (supported platforms: $ALL_PLATFORMS)\n"
@@ -27,15 +35,43 @@ FILTER="cat"
 
 tmp_file="/tmp/.tmp_file"
 
+X_COMPS=true
+L_COMPS=true
+
 while [ -n "$1" ]
 do
   case "$1" in
+    "-C")
+        # consider only listed components
+        ;;
+    "-x")
+        # consider only executables
+        X_COMPS=true
+        L_COMPS=
+        ;;
+    "-l")
+        # consider only libraries
+        X_COMPS=
+        L_COMPS=true
+        ;;
+    "-d")
+        # consider only dynInstAPI components
+        X_COMPS=
+        L_COMPS=true
+        D_COMPS=true
+        ;;
+    "-p")
+        # consider only Paradyn components
+        X_COMPS=
+        L_COMPS=true
+        D_COMPS=false
+        ;;
     "-a")
         # consider all (current) platforms
         ARCH_LIST=$ALL_PLATFORMS
         ;;
-    "-d")
-        # use developer's repository
+    "-w")
+        # use developer's work repository
         if [ -n "$USER" -a "$USER" != "paradyn" ]; then
             P_ROOT=$P_ROOT/development/$USER
         else
@@ -90,36 +126,70 @@ elif [ -n "$CHECK_FRESH" ]; then
     FILTER="grep -v -f $tmp_file"
 fi
 
-ALL_UNX_EXES="paradyn paradynd igen rthist barChart phaseTable tableVisi tclVisi terrain"
+V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
+ALL_UNX_EXES="paradyn paradynd igen $V_COMPS"
 ALL_WNT_EXES="paradynd.exe igen.exe"
 
-ALL_API_OBJS="libdyninstRT.* libdyninstAPI.* libdyninstAPI_RT.*"
-ALL_LIB_OBJS="libhist.a libpdutil.a libpdthread.a libvisi.a"
-ALL_PRT_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
+ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT.*"
+ALL_LIB_OBJS="libdyninstRT.* libhist.a libpdutil.a libpdthread.a libvisi.a"
+ALL_BLK_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
 ALL_CPP_OBJS="libdyninstCP.*"
-ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
-ALL_WNT_LIBS="libpdutil.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
+        
+# decide whether to include DynInstAPI components in library list
+case "$D_COMPS" in
+  false)
+    ALL_UNX_LIBS="$ALL_LIB_OBJS"
+    ALL_WNT_LIBS="libpdutil.lib libdyninstRT.dll"
+    ;;
+  true)
+    ALL_UNX_LIBS="$ALL_API_OBJS"
+    ALL_WNT_LIBS="libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ;;
+  *)
+    ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
+    ALL_WNT_LIBS="libpdutil.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ;;
+esac
 
 for PLATFORM in $ARCH_LIST
 do
     printf "\nPLATFORM=%-22s %8s\n" $PLATFORM "$TODAY"
-    cd $P_ROOT/bin/$PLATFORM ; echo "[7m$P_ROOT/bin/$PLATFORM[m"
-    case $PLATFORM in
-      $WNT)
-        $ACTION $ALL_WNT_EXES | $FILTER ;;
-      *)
-        $ACTION $ALL_UNX_EXES | $FILTER ;;
-    esac
-    cd $P_ROOT/lib/$PLATFORM ; echo "[7m$P_ROOT/bin/$PLATFORM[m"
-    case $PLATFORM in
-      $WNT)
-        $ACTION $ALL_WNT_LIBS | $FILTER ;;
-      $SP2)
-        $ACTION $ALL_UNX_LIBS | $FILTER
-        $ACTION $ALL_PRT_OBJS | $FILTER ;;
-      *)
-        $ACTION $ALL_UNX_LIBS | $FILTER ;;
-    esac
+    if [ -n "$X_COMPS" ]; then
+        PROGRAM_DEST=$P_ROOT/bin/$PLATFORM
+        if [ ! -d $PROGRAM_DEST ]; then       
+            echo "$PROGRAM_DEST does not exist!"
+        else
+            cd $PROGRAM_DEST ; echo "[7m$PROGRAM_DEST[m"
+            case $PLATFORM in
+              $WNT)
+                $ACTION $ALL_WNT_EXES | $FILTER ;;
+              *)
+                $ACTION $ALL_UNX_EXES | $FILTER ;;
+            esac
+        fi
+    fi
+    if [ -n "$L_COMPS" ]; then
+        LIBRARY_DEST=$P_ROOT/lib/$PLATFORM
+        if [ ! -d $LIBRARY_DEST ]; then       
+            echo "$LIBRARY_DEST does not exist!"
+        else
+            cd $LIBRARY_DEST ; echo "[7m$LIBRARY_DEST[m"
+            case $PLATFORM in
+              $WNT)
+                $ACTION $ALL_WNT_LIBS | $FILTER
+                ;;
+              $SP2)
+                $ACTION $ALL_UNX_LIBS | $FILTER
+                if [ "$D_COMPS" != "true" ]; then
+                $ACTION $ALL_BLK_OBJS | $FILTER
+                fi
+                ;;
+              *)
+                $ACTION $ALL_UNX_LIBS | $FILTER
+                ;;
+            esac
+        fi
+    fi
 done
 
 if [ "$FILTER" != "cat" ]; then rm -f $tmp_file; fi
