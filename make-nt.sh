@@ -1,96 +1,55 @@
-#!/bin/sh
-# Paradyn/DyninstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.12 2000/10/17 17:10:08 schendel Exp $
-# usage: make-nt [-no] [-new|-clean] [componentlist]
+#rem Script for building Paradyn & DynInstAPI on WinNT platform
+#@echo off
+#rem $Id: make-nt.sh,v 1.13 2001/06/01 14:02:16 schendel Exp $
+#@echo on
 
-# Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
-PARADYN_BUILD_ID="Paradyn v3.1"
-DYNINST_BUILD_ID="Dyninst v2.2"
+#set LIBRARY_DEST="..\lib"
+#set PROGRAM_DEST="..\bin"
 
-MAKE="nmake /nologo"
-PARADYN_VISIS="visiClients/histVisi visiClients/barchart visiClients/tableVisi visiClients/phaseTable visiClients/tclVisi"
-PARADYN_COMPS="pdutil pdutilOld igen rtinst paradynd thread paradyn visi $PARADYN_VISIS"
-DYNINST_COMPS="dyninstAPI dyninstAPI_RT dyninstAPI/tests dyner"
-ALL_COMPS="$PARADYN_COMPS $DYNINST_COMPS"
-LIBRARY_DEST=../lib/$PLATFORM
-PROGRAM_DEST=../bin/$PLATFORM
+#if not exist %LIBRARY_DEST% mkdir %LIBRARY_DEST%
+#if not exist %LIBRARY_DEST%\%PLATFORM% mkdir %LIBRARY_DEST%\%PLATFORM%
+#if not exist %PROGRAM_DEST% mkdir %PROGRAM_DEST%
+#if not exist %PROGRAM_DEST%\%PLATFORM% mkdir %PROGRAM_DEST%\%PLATFORM%
+pwd
 
-BUILDOPT=TRUE
+PDROOT=`pwd`
+cd pdutil/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd pdutilOld/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd igen/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd rtinst/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd paradynd/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd thread/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd paradyn/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visi/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visiClients/histVisi/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visiClients/barchart/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visiClients/tableVisi/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visiClients/phaseTable/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd visiClients/tclVisi/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+#rem No visiClients/terrain to build for WinNT!
 
-if [ "$1" = "-no" ]; then
-    MAKE="$MAKE -n"
-    echo MAKE=$MAKE
-    shift
-fi
+cd dyninstAPI_RT/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd dyninstAPI/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd dyninstAPI/tests/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
+cd dyner/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
 
-if [ "$1" = "-new" ]; then
-    CLEANOPT=TRUE
-    shift
-fi
 
-if [ "$1" = "-clean" ]; then
-    CLEANOPT=TRUE
-    BUILDOPT=FALSE
-    shift
-fi
 
-BUILD_ID=$PARADYN_BUILD_ID
-
-if [ -z "$*" ]; then
-    COMPS=$ALL_COMPS
-    TITLE=world
-else
-    case "$1" in
-      Paradyn)
-        COMPS=$PARADYN_COMPS
-        TITLE=Paradyn
-        ;;
-      Dyninst*)
-        BUILD_ID=$DYNINST_BUILD_ID
-        COMPS=$DYNINST_COMPS
-        TITLE=Dyninst
-        ;;
-      *)
-        COMPS=$*
-        TITLE=
-        ;;
-    esac
-fi
-
-if [ ! -d $LIBRARY_DEST ]; then
-    echo "Creating installation directory LIBRARY_DEST=$LIBRARY_DEST"
-    mkdir -p $LIBRARY_DEST
-fi
-if [ ! -d $PROGRAM_DEST ]; then
-    echo "Creating installation directory PROGRAM_DEST=$PROGRAM_DEST"
-    mkdir -p $PROGRAM_DEST
-fi
-
-echo "Making $BUILD_ID $TITLE for $PLATFORM!"
-date
-CORE_DIR=`pwd`
-echo "Build in $CORE_DIR"
-for COMP in $COMPS
-do
-    MODULE_DIR=$CORE_DIR/$COMP/$PLATFORM
-    if [ ! -d $MODULE_DIR ]; then
-        echo "Target directory $COMP/$PLATFORM does not exist!"
-        continue
-    fi
-    cd \\$MODULE_DIR
-    echo "Entering $MODULE_DIR"
-    if [ "$CLEANOPT" = "TRUE" ]; then
-        $MAKE clean
-    fi
-    if [ "$BUILDOPT" = "TRUE" ]; then
-        $MAKE install
-        if [ "$?" != 0 ]; then
-            echo "Aborting $COMP"
-            exit
-        fi
-    fi
-    echo "Leaving  $MODULE_DIR"
-done
-echo "$BUILD_ID build complete for $PLATFORM!"
-date
 
