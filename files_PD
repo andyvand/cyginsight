@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.18 2000/06/21 15:50:59 paradyn Exp $
+# $Id: files_PD,v 1.19 2000/10/17 17:10:08 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -161,18 +161,18 @@ ALL_OSF_EXES="paradynd igen dyner"
 ALL_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
 ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT*"
-ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdthread.a libvisi.a"
+ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdutilOld.a libpdthread.a libvisi.a"
 ALL_BLK_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
 ALL_CPP_OBJS="libdyninstCP.*"
-ALL_IRX_LIBS="libdyninstRT.so.1 libdyninstRT_n32.so.1 libpdutil.a \
+ALL_IRX_LIBS="libdyninstRT.so.1 libdyninstRT_n32.so.1 libpdutil.a libpdutilOld.a \
               libdyninstAPI.so libdyninstAPI_RT.so.1 libdyninstAPI_RT_n32.so.1"
-ALL_OSF_LIBS="libdyninstRT.so.1 libpdutil.a $ALL_API_OBJS"
+ALL_OSF_LIBS="libdyninstRT.so.1 libpdutil.a libpdutilOld.a $ALL_API_OBJS"
         
 # decide whether to include DyninstAPI components in library list
 case "$D_COMPS" in
   false)
     ALL_UNX_LIBS="$ALL_LIB_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libvisi.lib libdyninstRT.dll"
+    ALL_WNT_LIBS="libpdutil.lib libpdutilOld.a libpdthread.lib libvisi.lib libdyninstRT.dll"
     ;;
   true)
     ALL_UNX_LIBS="$ALL_API_OBJS"
@@ -180,7 +180,7 @@ case "$D_COMPS" in
     ;;
   *)
     ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libvisi.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ALL_WNT_LIBS="libpdutil.lib libpdutilOld.a libpdthread.lib libvisi.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
     ;;
 esac
 
