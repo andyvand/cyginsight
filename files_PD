@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.6 1999/03/17 00:52:26 wylie Exp $
+# $Id: files_PD,v 1.7 1999/03/19 20:27:35 wylie Exp $
 # list (or otherwise examine) all Paradyn/DynInst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
@@ -13,7 +13,7 @@ LNX=i386-unknown-linux2.0
 IRX=mips-sgi-irix6.4
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$USS $SOL $X86 $LNX $SP2 $WNT"
+ALL_PLATFORMS="$USS $SOL $X86 $LNX $IRX $SP2 $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -145,6 +145,7 @@ ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT.*"
 ALL_LIB_OBJS="libdyninstRT.* libhist.a libpdutil.a libpdthread.a libvisi.a"
 ALL_BLK_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
 ALL_CPP_OBJS="libdyninstCP.*"
+ALL_IRX_LIBS="libpdutil.a $ALL_API_OBJS"
         
 # decide whether to include DynInstAPI components in library list
 case "$D_COMPS" in
@@ -172,6 +173,8 @@ do
         else
             cd $PROGRAM_DEST ; echo "[7m$PROGRAM_DEST[m"
             case $PLATFORM in
+              $IRX)
+                echo "(No executables yet)" ;;
               $WNT)
                 $ACTION $ALL_WNT_EXES | $FILTER ;;
               *)
@@ -186,6 +189,9 @@ do
         else
             cd $LIBRARY_DEST ; echo "[7m$LIBRARY_DEST[m"
             case $PLATFORM in
+              $IRX)
+                $ACTION $ALL_IRX_LIBS | $FILTER
+                ;;
               $WNT)
                 $ACTION $ALL_WNT_LIBS | $FILTER
                 ;;
