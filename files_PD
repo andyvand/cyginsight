@@ -1,20 +1,21 @@
 #!/bin/sh
-# $Id: files_PD,v 1.16 1999/12/09 15:41:55 paradyn Exp $
+# $Id: files_PD,v 1.17 2000/04/01 00:40:36 paradyn Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
-SOS=sparc-sun-sunos4.1.3
-SOL=sparc-sun-solaris2.4
-USS=sparc-sun-solaris2.6
-X86=i386-unknown-solaris2.5
-SP2=rs6000-ibm-aix4.1
-AIX=rs6000-ibm-aix4.3
+#SOS=sparc-sun-sunos4.1.3
+SS6=sparc-sun-solaris2.6
+SS7=sparc-sun-solaris2.7
+XS6=i386-unknown-solaris2.6
+XS7=i386-unknown-solaris2.7
+SP2=rs6000-ibm-aix4.3
+AIX=rs6000-ibm-aix4.2
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
-LNX=i386-unknown-linux2.0
-IRX=mips-sgi-irix6.4
+LNX=i386-unknown-linux2.2
+IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$USS $SOL $X86 $LNX $IRX $SP2 $WNT"
+ALL_PLATFORMS="$SS6 $SS7 $XS6 $XS7 $LNX $IRX $AIX $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -155,8 +156,8 @@ fi
 
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
 V_COMPS_WNT="rthist.exe barChart.exe phaseTable.exe tableVisi.exe tclVisi.exe"
-ALL_UNX_EXES="paradyn paradynd* igen $V_COMPS"
-ALL_WNT_EXES="paradyn.exe paradynd.exe igen.exe $V_COMPS_WNT"
+ALL_UNX_EXES="paradyn paradynd* igen dyner $V_COMPS"
+ALL_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
 ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT*"
 ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdthread.a libvisi.a"
