@@ -1,6 +1,6 @@
 #!/bin/sh
 # Paradyn/DynInstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.6 1999/03/03 18:22:04 pcroth Exp $
+# $Id: make-nt.sh,v 1.7 1999/03/13 15:24:47 pcroth Exp $
 # usage: make-nt [-no] [-new|-clean] [componentlist]
 
 # Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
@@ -8,7 +8,7 @@ PARADYN_BUILD_ID="Paradyn v2.1"
 DYNINST_BUILD_ID="DynInst v1.2"
 
 MAKE="nmake /nologo"
-PARADYN_COMPS="util igen rtinst paradynd thread paradyn"
+PARADYN_COMPS="util igen rtinst paradynd thread paradyn visi visiClients/barchart visiClients/tableVisi visiClients/phaseTable visiClients/tclVisi"
 DYNINST_COMPS="dyninstAPI dyninstAPI_RT dyninstAPI/tests"
 ALL_COMPS="$PARADYN_COMPS $DYNINST_COMPS"
 LIBRARY_DEST=../lib/$PLATFORM

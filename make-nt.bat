@@ -1,6 +1,6 @@
 rem Script for building Paradyn & DynInstAPI on WinNT platform
 @echo off
-rem $Id: make-nt.bat,v 1.6 1999/03/03 18:22:04 pcroth Exp $
+rem $Id: make-nt.bat,v 1.7 1999/03/13 15:24:47 pcroth Exp $
 @echo on
 
 set LIBRARY_DEST="..\lib"
@@ -17,6 +17,11 @@ cmd /c "cd rtinst\%PLATFORM% && nmake clean && nmake install"
 cmd /c "cd paradynd\%PLATFORM% && nmake clean && nmake install"
 cmd /c "cd thread\%PLATFORM% && nmake clean && nmake install"
 cmd /c "cd paradyn\%PLATFORM% && nmake clean && nmake install"
+cmd /c "cd visi\%PLATFORM% && nmake clean && nmake install"
+cmd /c "cd visiClients\barchart\%PLATFORM% && nmake clean && nmake install"
+cmd /c "cd visiClients\tableVisi\%PLATFORM% && nmake clean && nmake install"
+cmd /c "cd visiClients\phaseTable\%PLATFORM% && nmake clean && nmake install"
+cmd /c "cd visiClients\tclVisi\%PLATFORM% && nmake clean && nmake install"
 
 cmd /c "cd dyninstAPI\%PLATFORM% && nmake clean && nmake install"
 cmd /c "cd dyninstAPI_RT\%PLATFORM% && nmake clean && nmake install"
