@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.2 2002/08/14 00:15:38 schendel Exp $
+# $Id: tests_DI,v 1.3 2003/06/26 14:35:45 schendel Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 STD_F90=f90
@@ -12,7 +12,7 @@ case "$PLATFORM" in
     STD_CC=cc
     STD_CXX=cxx
     ;;
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     STD_CC=xlc
     STD_CXX=xlC
     STD_F90=xlf90
@@ -56,7 +56,7 @@ case "$PLATFORM" in
   i386-unknown-linux*)
     SKIPPED_TESTS="7"
     ;;
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     SKIPPED_TESTS="7"
     ;;
   i386-unknown-nt4.0)
@@ -118,7 +118,7 @@ PARADYN_LIB_RTL=../../../dyninstAPI_RT/$PLATFORM
 fi
 
 case "$PLATFORM" in
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     # no dynamic libraries supported yet!
     ;;
   i386-unknown-nt4.0)
@@ -139,7 +139,7 @@ case "$PLATFORM" in
 esac
 
 case "$PLATFORM" in
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     # no dynamic libraries supported yet!
     ;;
   *)
@@ -350,7 +350,7 @@ echo "TESTSDIR=$TESTSDIR"                               2>&1 | tee -a $TESTSLOG
 
 if [ ! -n "$EXTRA_LEAN" ]; then
 case "$PLATFORM" in
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     # no dynamic libraries supported yet!
     ;;
   mips-sgi-irix6.*)
@@ -362,7 +362,7 @@ case "$PLATFORM" in
     ;;
 esac
 case "$PLATFORM" in
-  rs6000-ibm-aix4.*)
+  rs6000-ibm-aix*)
     # no dynamic libraries supported yet!
     ;;
   *)
