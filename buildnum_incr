@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildnum_incr,v 1.3 1998/05/04 03:10:53 wylie Exp $
+# $Id: buildnum_incr,v 1.4 2002/04/17 15:56:58 schendel Exp $
 # automatically increment build number BUILD_NUM
 
 USAGE="usage: $0 [-a] FILE"
@@ -46,7 +46,7 @@ if [ -f $FILE ]; then
     oldbuildnum=`echo $buildnumstr | awk -F- '{print (substr($2,0,3))}'`
     newbuildnum=`echo $oldbuildnum | awk '{print int($1+1)}'`
     newbuildnum=`printf "%03d" $newbuildnum`
-    sedcmd=/BUILD_NUM/s/$oldbuildnum/$newbuildnum/p
+    sedcmd=s/BUILD_NUM=-$oldbuildnum/BUILDNUM=-$newbuildnum/
     sed -e $sedcmd $FILE > $TMP
     if [ $? -ne 0 ]; then
         echo "Aborting broken sed"
