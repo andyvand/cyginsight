@@ -1,22 +1,18 @@
-#!/bin/sh
-# $Id: files_PD,v 1.28 2002/07/31 23:00:39 schendel Exp $
+#!/bin/ksh
+# $Id: files_PD,v 1.29 2002/08/09 20:06:26 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
-SS7=sparc-sun-solaris2.7
-SS8=sparc-sun-solaris2.8
-XS6=i386-unknown-solaris2.6
-XS7=i386-unknown-solaris2.7
+SOL=sparc-sun-solaris2.8
 SP2=rs6000-ibm-aix4.3
 AIX=rs6000-ibm-aix4.2
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
-LNX22=i386-unknown-linux2.2
-LNX24=i386-unknown-linux2.4
+LNX=i386-unknown-linux2.4
 IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SS8 $LNX24 $AIX $WNT"
+ALL_PLATFORMS="$SOL $LNX $AIX $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -158,6 +154,9 @@ fi
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
 V_COMPS_WNT="rthist.exe barChart.exe phaseTable.exe tableVisi.exe tclVisi.exe"
 DYNINST_UNX_MUTTEES="testprogs/test1.mutatee_g++ testprogs/test1.mutatee_gcc testprogs/test2.mutatee_g++ testprogs/test2.mutatee_gcc testprogs/test3.mutatee_g++ testprogs/test3.mutatee_gcc testprogs/test4a.mutatee_g++ testprogs/test4a.mutatee_gcc testprogs/test4b.mutatee_g++ testprogs/test4b.mutatee_gcc testprogs/test5.mutatee_g++"
+DYNINST_SOL_MUTTEES="testprogs/test1.mutatee_CC testprogs/test1.mutatee_cc testprogs/test2.mutatee_CC testprogs/test2.mutatee_cc testprogs/test3.mutatee_CC testprogs/test3.mutatee_cc testprogs/test4a.mutatee_CC testprogs/test4a.mutatee_cc testprogs/test4b.mutatee_CC testprogs/test4b.mutatee_cc testprogs/test5.mutatee_CC testprogs/test6.mutatee_cc testprogs/test7.mutatee_CC testprogs/test7.mutatee_cc"
+DYNINST_LNX_MUTTEES="testprogs/test1.mutatee_pgCC testprogs/test1.mutatee_pgcc testprogs/test2.mutatee_pgCC testprogs/test2.mutatee_pgcc testprogs/test3.mutatee_pgCC testprogs/test3.mutatee_pgcc testprogs/test4a.mutatee_pgCC testprogs/test4a.mutatee_pgcc testprogs/test4b.mutatee_pgCC testprogs/test4b.mutatee_pgcc testprogs/test5.mutatee_pgCC testprogs/test6.mutatee_pgcc testprogs/test7.mutatee_pgCC testprogs/test7.mutatee_pgcc"
+DYNINST_AIX_MUTTEES="testprogs/test1.mutatee_xlC testprogs/test1.mutatee_xlc testprogs/test1.mutatee_xlf90 testprogs/test2.mutatee_xlC testprogs/test2.mutatee_xlc testprogs/test3.mutatee_xlC testprogs/test3.mutatee_xlc testprogs/test4a.mutatee_xlC testprogs/test4a.mutatee_xlc testprogs/test4b.mutatee_xlC testprogs/test4b.mutatee_xlc testprogs/test5.mutatee_xlC testprogs/test6.mutatee_xlc testprogs/test7.mutatee_xlC testprogs/test7.mutatee_xlc"
 DYNINST_UNX_MUTTORS="testprogs/test1 testprogs/test2 testprogs/test3 testprogs/test4 testprogs/test5"
 
 DYNINST_WNT_MUTTEES="testprogs/test1.mutatee_VC++.exe* testprogs/test1.mutatee_VC.exe* testprogs/test2.mutatee_VC++.exe* testprogs/test2.mutatee_VC.exe* testprogs/test3.mutatee_VC++.exe* testprogs/test3.mutatee_VC.exe* testprogs/test4a.mutatee_VC++.exe* testprogs/test4a.mutatee_VC.exe* testprogs/test4b.mutatee_VC++.exe* testprogs/test4b.mutatee_VC.exe* testprogs/test5.mutatee_VC++.exe*"
@@ -197,8 +196,32 @@ case "$D_COMPS" in
     ;;
 esac
 
+#add in per platform mutatees
+function add_dyninst_pf_mutatees
+{
+    PF=$1  # pass in the PLATFORM
+    case "$D_COMPS" in
+    false)
+	;;
+    *)
+	case $PF in
+	$SOL)
+	    ALL_UNX_EXES="$DYNINST_SOL_MUTTEES"
+	    ;;
+	$LNX)
+	    ALL_UNX_EXES="$DYNINST_LNX_MUTTEES"
+	    ;;
+	$AIX)
+	  ALL_UNX_EXES="$DYNINST_AIX_MUTTEES"
+	    ;;
+	esac
+	;;
+    esac
+}
+
 for PLATFORM in $ARCH_LIST
 do
+    add_dyninst_pf_mutatees $PLATFORM
     printf "\nPLATFORM=%-22s %8s\n" $PLATFORM "$TODAY"
     if [ -n "$X_COMPS" ]; then
         PROGRAM_DEST=$P_ROOT/bin/$PLATFORM
