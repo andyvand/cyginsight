@@ -73,7 +73,7 @@ print <<END_OF_PREAMBLE;
 #define SAFE_EVAL(str, file)                               \\
 do {                                                       \\
     if (Tcl_VarEval(interp, str, 0) != TCL_OK) {           \\
-        fprintf(stderr, "%s: %s\\n", file, interp->result); \\
+        fprintf(stderr, "%s: %s\\n", file, Tcl_GetStringResult(interp)); \\
         return TCL_ERROR;                                  \\
     }                                                      \\
 } while (0)
