@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.3 2003/06/26 14:35:45 schendel Exp $
+# $Id: tests_DI,v 1.4 2004/01/19 21:54:26 schendel Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 STD_F90=f90
@@ -33,7 +33,7 @@ case "$PLATFORM" in
 esac
 
 FULL_MC_LIST="$STD_CC $STD_CXX $GNU_CC $GNU_CXX $STD_F90"
-FULLTESTLIST="1 2 3 4 5 6 7"
+FULLTESTLIST="1 2 3 4 5 6 7 8 9 10"
 SOL_SKIP=""
 LNX_SKIP="7"
 AIX_SKIP="7"
@@ -54,7 +54,7 @@ case "$PLATFORM" in
   sparc-sun-solaris*)
     ;;
   i386-unknown-linux*)
-    SKIPPED_TESTS="7"
+#    SKIPPED_TESTS="7"
     ;;
   rs6000-ibm-aix*)
     SKIPPED_TESTS="7"
@@ -186,7 +186,7 @@ do
     -t)
         #echo "Test selection..."
         case "$2" in
-          [1234567])
+          [123456789])
             echo "Selected test$2"
             TESTLIST="$TESTLIST$2 "
             shift
@@ -423,6 +423,10 @@ RunTestIndi ()
         SUBTESTS=6 ;;
     7)
         SUBTESTS=9 ;;
+    8)
+        SUBTESTS=2 ;;
+    9)
+        SUBTESTS=6 ;;
     *)
         printf "Unexpected TESTNUM %d\n" $TESTNUM
   esac
@@ -438,8 +442,8 @@ RunTestIndi ()
   done
 }
 
-RUNAWAYS="test[1234567] test[1234567]*.m"
-RUNAWAYS="'test[1234567]*'"
+RUNAWAYS="test[123456789] test[123456789]*.m"
+RUNAWAYS="'test[123456789]*'"
 $PDSCRDIR/reap -a -q $RUNAWAYS                          2>&1 | tee -a $TESTSLOG
 
 JunkCheck                                               2>&1 | tee -a $TESTSLOG
@@ -509,7 +513,7 @@ do
       if [ -n "$EXTRA_LEAN" ]; then
           continue
       fi
-      if [ $TESTNUM = 3 -o $TESTNUM = 4 -o $TESTNUM = 5 -o $TESTNUM = 7 ]; then
+      if [ $TESTNUM = 3 -o $TESTNUM = 4 -o $TESTNUM = 5 -o $TESTNUM = 7 -o $TESTNUM = 8 -o $TESTNUM = 9 -o $TESTNUM = 10 ]; then
           # no -attach tests for these
           continue
       fi
