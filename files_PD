@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.27 2002/05/10 19:24:56 schendel Exp $
+# $Id: files_PD,v 1.28 2002/07/31 23:00:39 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -16,7 +16,7 @@ LNX24=i386-unknown-linux2.4
 IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SS7 $SS8 $LNX24 $AIX $WNT"
+ALL_PLATFORMS="$SS8 $LNX24 $AIX $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -168,7 +168,7 @@ PDN_OSF_EXES="paradynd igen dyner"
 PDN_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
 ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT*"
-ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdthread.a libvisi.a"
+ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdthread.so libvisi.a"
 ALL_BLK_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
 ALL_CPP_OBJS="libdyninstCP.*"
 ALL_IRX_LIBS="libdyninstRT.so.1 libdyninstRT_n32.so.1 libpdutil.a \
