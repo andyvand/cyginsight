@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildstamp,v 1.5 1998/06/29 18:46:24 wylie Exp $
+# $Id: buildstamp,v 1.6 2000/07/07 17:04:18 wylie Exp $
 # create/update build version identification voucher file
 
 USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"
@@ -100,7 +100,7 @@ HOST=`hostname | tr 'A-Z' 'a-z'`
 # remap Paradyn/DynInst account addresses
 if [ "$USER" = "paradyn" ]; then
     if [ "$SUITE" = "DynInst" ]; then
-        USER="hollings"
+        USER="dyninst"
         HOST="cs.umd.edu"
     else
         HOST="cs.wisc.edu"
