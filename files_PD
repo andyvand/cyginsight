@@ -1,11 +1,11 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.31 2002/08/23 03:19:27 schendel Exp $
+# $Id: files_PD,v 1.32 2003/04/25 18:16:40 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
 SOL=sparc-sun-solaris2.8
-SP2=rs6000-ibm-aix4.3
-AIX=rs6000-ibm-aix4.2
+SP2=rs6000-ibm-aix5.1
+AIX=rs6000-ibm-aix5.1
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
 LNX=i386-unknown-linux2.4
