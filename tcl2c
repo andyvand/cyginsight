@@ -1,4 +1,4 @@
-#!/bin/ksh -- # perl script
+#!/bin/sh -- # perl script
 eval 'exec perl -S $0 ${1+"$@"}'
     if 0;
 require 5;
