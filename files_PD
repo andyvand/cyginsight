@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.2 1998/04/24 18:11:15 wylie Exp $
+# $Id: files_PD,v 1.3 1998/06/29 18:48:37 wylie Exp $
 # list (or otherwise examine) all Paradyn/DynInst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
@@ -100,11 +100,7 @@ do
   shift
 done
 
-# if necessary, patch WindowsNT shell PATH to recover some Unix utilities
 if [ $PLATFORM = "i386-unknown-nt4.0" ]; then        
-    NTPATH=//E/GNU/gnuwin32/b18/H-i386-cygwin32/bin
-    #set ${PATH:=$NTPATH}
-    PATH=$NTPATH
     P_ROOT="/$P_ROOT"
 fi
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildstamp,v 1.4 1998/05/05 00:15:09 wylie Exp $
+# $Id: buildstamp,v 1.5 1998/06/29 18:46:24 wylie Exp $
 # create/update build version identification voucher file
 
 USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"
@@ -40,12 +40,6 @@ done
 if [ -z "$TARGET" ]; then
     echo $USAGE
     exit 1
-fi
-
-# if necessary, patch Windows NT shell PATH to recover common Unix utilities
-if [ $PLATFORM = "i386-unknown-nt4.0" ]; then        
-    PATH=//E/GNU/gnuwin32/b18/H-i386-cygwin32/bin
-#   set ${PATH:=$NTPATH}
 fi
 
 # ensure TARGET is specified
