@@ -1,4 +1,7 @@
-rem script for building Paradyn & DynInstAPI on WinNT platform
+rem Script for building Paradyn & DynInstAPI on WinNT platform
+@echo off
+rem $Id: make-nt.bat,v 1.4 1998/04/03 22:45:26 wylie Exp $
+@echo on
 
 cmd /c "cd util\%PLATFORM% && nmake clean && nmake install"
 cmd /c "cd igen\%PLATFORM% && nmake clean && nmake install"
