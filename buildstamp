@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildstamp,v 1.2 1998/04/03 13:31:00 wylie Exp $
+# $Id: buildstamp,v 1.3 1998/04/06 04:28:39 wylie Exp $
 # create/update build version identification voucher file
 
 USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"
@@ -18,6 +18,10 @@ do
         # set release identifier
         RELEASE=v$2
         shift
+        ;;
+    -[0-9]*)
+        # got detached build number
+        RELEASE=$RELEASE$1
         ;;
     -*)
         echo "Unrecognized flag: $1"
@@ -62,7 +66,7 @@ if [ -f $V_FILE ]; then
     case $n in
     2)
       if [ "$RELEASE" != "$i" ]; then
-        echo "Warning: change of release from $i to $RELEASE"
+        #echo "Warning: change of release from $i to $RELEASE"
         RESET=true
       fi
       ;;
