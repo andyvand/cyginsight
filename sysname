@@ -1,5 +1,5 @@
 #! /bin/sh
-# $Id: sysname,v 1.4 2004/09/07 16:27:35 legendre Exp $
+# $Id: sysname,v 1.5 2005/01/24 19:33:06 tlmiller Exp $
 # Attempt to guess a canonical system name.
 #   Copyright (C) 1992, 1993, 1994, 1995 Free Software Foundation, Inc.
 #
@@ -342,6 +342,8 @@ EOF
 	  echo "${UNAME_MACHINE}-unknown-linuxaout" ; exit 0
 	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: i[345]86coff"; then
 	  echo "${UNAME_MACHINE}-unknown-linuxcoff" ; exit 0
+	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: elf64_ia64"; then
+	  echo "${UNAME_MACHINE}-unknown-linux" ; exit 0
 	elif test "${UNAME_MACHINE}" = "alpha" ; then
 	  echo alpha-unknown-linux ; exit 0
 	else
