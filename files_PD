@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.3 1998/06/29 18:48:37 wylie Exp $
+# $Id: files_PD,v 1.4 1998/09/02 16:48:36 wylie Exp $
 # list (or otherwise examine) all Paradyn/DynInst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
@@ -8,6 +8,8 @@ X86=i386-unknown-solaris2.5
 SP2=rs6000-ibm-aix4.1
 HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
+LNX=i386-unknown-linux2.0
+DUX=alpha-dec-osf4.0
 
 ALL_PLATFORMS="$SOL $X86 $SP2 $WNT"
 ARCH_LIST=$PLATFORM
@@ -16,9 +18,10 @@ ARCH_LIST=$PLATFORM
 #   -C_comps_: consider only the components matching the _comps_ key\n\
 #     o: miscellaneous objects\n\
 #     v: visualizers/visis\n\
-USAGE="usage: files_PD [-a] [-w] [-i|-t] [-d|-l|-p|-x] [platform-list]\n\
+USAGE="usage: files_PD [-a] [-w] [-W dir] [-i|-t] [-d|-l|-p|-x] [platform-list]\n\
    -a: consider all supported platforms (instead of optional platform-list)\n\
    -w: use developer's work repository (instead of default common repository)\n\
+   -W: use specified directory as the repository\n\
    -i: show ident_PD information (instead of default file listing)\n\
    -t: only list stale files (i.e., those not dated today)\n\
    -d: DynInstAPI components only\n\
@@ -76,6 +79,15 @@ do
             P_ROOT=$P_ROOT/development/$USER
         else
             echo "Sorry, no developer repository for USER=$USER"
+        fi
+        ;;
+    "-W")
+        # use specified work repository
+        if [ -d "$2" ]; then
+            P_ROOT=$2
+            shift
+        else
+            echo "Sorry, $2 is not a repository"
         fi
         ;;
     "-i")
