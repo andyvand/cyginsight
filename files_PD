@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.30 2002/08/21 19:42:26 schendel Exp $
+# $Id: files_PD,v 1.31 2002/08/23 03:19:27 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -57,6 +57,8 @@ tmp_file="/tmp/.tmp_file"
 
 X_COMPS=true
 L_COMPS=true
+D_COMPS=false
+P_COMPS=false
 
 while [ -n "$1" ]
 do
@@ -84,7 +86,7 @@ do
         # consider only Paradyn components
         X_COMPS=
         L_COMPS=true
-        D_COMPS=false
+        P_COMPS=true
         ;;
     "-a")
         # consider all (current) platforms
@@ -129,26 +131,32 @@ do
   shift
 done
 
+if { [[ $D_COMPS == "false" ]] && [[ $P_COMPS == "false" ]] }
+then
+   D_COMPS="true"
+   P_COMPS="true"
+fi
+
 if [ $PLATFORM = "$WNT" ]; then
-    P_ROOT="/$P_ROOT"
+   P_ROOT="/$P_ROOT"
 fi
 
 if [ -n "$PRINT_USAGE" ]; then
-    printf "$USAGE"
-    exit 1
+   printf "$USAGE"
+   exit 1
 fi
 
 if [ -n "$IDENT_ACTION" ]; then
-    if [ $PLATFORM = "$WNT" ]; then
-        ACTION="sh $P_ROOT/scripts/ident_PD"
-    else
-        ACTION="$P_ROOT/scripts/ident_PD"
-    fi
+   if [ $PLATFORM = "$WNT" ]; then
+      ACTION="sh $P_ROOT/scripts/ident_PD"
+   else
+      ACTION="$P_ROOT/scripts/ident_PD"
+   fi
 elif [ -n "$CHECK_FRESH" ]; then
-    TODAY=`date '+%b %e'`
-    date '+%b %e' > $tmp_file
-    TODAY="($TODAY)"
-    FILTER="grep -v -f $tmp_file"
+   TODAY=`date '+%b %e'`
+   date '+%b %e' > $tmp_file
+   TODAY="($TODAY)"
+   FILTER="grep -v -f $tmp_file"
 fi
 
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
@@ -166,107 +174,105 @@ PDN_UNX_EXES="paradyn paradynd* igen dyner $V_COMPS"
 PDN_OSF_EXES="paradynd igen dyner"
 PDN_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
-ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT*"
-ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdthread.so libvisi.a"
-ALL_BLK_OBJS="DYNINSTendCode.o DYNINSTstartCode.o"
-ALL_CPP_OBJS="libdyninstCP.*"
-ALL_IRX_LIBS="libdyninstRT.so.1 libdyninstRT_n32.so.1 libpdutil.a \
-              libdyninstAPI.so libdyninstAPI_RT.so.1 libdyninstAPI_RT_n32.so.1"
-ALL_OSF_LIBS="libdyninstRT.so.1 libpdutil.a $ALL_API_OBJS"
-        
-# decide whether to include DyninstAPI components in library list
-case "$D_COMPS" in
-  false)
-    ALL_UNX_LIBS="$ALL_LIB_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libvisi.lib libdyninstRT.dll"
-    ALL_UNX_EXES="$ALL_UNX_EXES $PDN_UNX_EXES"
-    ALL_WNT_EXES="$ALL_WNT_EXES $PDN_WNT_EXES"
-    ;;
-  true)
-    ALL_UNX_LIBS="$ALL_API_OBJS"
-    ALL_WNT_LIBS="libdyninstAPI.lib libdyninstAPI_RT.dll"
-    ALL_UNX_EXES="$ALL_UNX_EXES $DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"
-    ALL_WNT_EXES="$ALL_WNT_EXES $DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"
-    ;;
-  *)
-    ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libvisi.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
-    ALL_UNX_EXES="$ALL_UNX_EXES $PDN_UNX_EXES $DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"
-    ALL_WNT_EXES="$ALL_WNT_EXES $PDN_WNT_EXES $DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"
-    ;;
-esac
+PDN_UNX_LIBS="libdyninstRT* libpdutil.a libpdthread.so libvisi.a"
+DYN_UNX_LIBS='libdyninstAPI.* libdyninstAPI_RT*'
 
-#add in per platform mutatees
-function add_dyninst_pf_mutatees
+PDN_WNT_LIBS="libpdutil.lib libpdthread.lib libvisi.lib libdyninstRT.dll"
+DYN_WNT_LIBS="libdyninstAPI.lib libdyninstAPI_RT.dll"
+
+function get_exes
 {
-    PF=$1  # pass in the PLATFORM
-    case "$D_COMPS" in
-    false)
-	;;
-    *)
-	case $PF in
-	$SOL)
-	    ALL_UNX_EXES="$DYNINST_SOL_MUTTEES $ALL_UNX_EXES"
-	    ;;
-	$LNX)
-	    ALL_UNX_EXES="$DYNINST_LNX_MUTTEES $ALL_UNX_EXES"
-	    ;;
-	$AIX)
-	  ALL_UNX_EXES+="$DYNINST_AIX_MUTTEES $ALL_UNX_EXES"
-	    ;;
-	esac
-	;;
-    esac
+   typeset PF=$1
+   typeset RET_EXES
+
+   cd $P_ROOT/bin/$PF   # need to be in proper dir so "*" in vars will work
+
+   if [[ $D_COMPS == "true" ]]
+   then
+      case $PF in
+      $SOL|$LNX|$AIX)
+	 RET_EXES="$DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"  ;;
+      $WNT)
+	 RET_EXES="$DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"  ;;
+      $OSF)
+	 RET_EXES="" ;;
+      esac
+   fi
+
+   if [[ $P_COMPS == "true" ]]
+   then
+      case $PF in
+      $SOL|$AIX)
+	 RET_EXES="$PDN_UNX_EXES $RET_EXES paradyndMT"  ;;
+      $LNX)
+	 RET_EXES="$PDN_UNX_EXES $RET_EXES"  ;;
+      $WNT)
+	 RET_EXES="$PDN_WNT_EXES $RET_EXES"  ;;
+      esac
+   fi
+
+   print $RET_EXES
+}
+
+function get_libs
+{
+   typeset PF=$1
+   typeset RET_LIBS
+
+   cd $P_ROOT/lib/$PF   # need to be in proper dir so "*" in vars will work
+
+   if [[ $D_COMPS == "true" ]]
+   then
+      case $PF in
+      $SOL|$LNX|$AIX|$OSF)
+	 RET_LIBS="$DYN_UNX_LIBS" ;;
+      $WNT)
+	 RET_LIBS=$DYN_WNT_LIBS ;;
+      $IRX)
+	 RET_LIBS="$DYN_UNX_LIBS libdyninstAPI_RT_n32.so.1" ;;
+      esac
+   fi
+
+   if [[ $P_COMPS == "true" ]]
+   then
+      case $PF in
+      $SOL|$AIX)
+	 RET_LIBS="$PDN_UNX_LIBS libparadynMT.so.1 $RET_LIBS" ;;
+      $LNX)
+	 RET_LIBS="$PDN_UNX_LIBS $RET_LIBS" ;;
+      $WNT)
+	 RET_LIBS="$PDN_WNT_LIBS $RET_LIBS" ;;
+      esac
+   fi
+
+   print $RET_LIBS
 }
 
 for PLATFORM in $ARCH_LIST
 do
-    add_dyninst_pf_mutatees $PLATFORM
-    printf "\nPLATFORM=%-22s %8s\n" $PLATFORM "$TODAY"
-    if [ -n "$X_COMPS" ]; then
-        PROGRAM_DEST=$P_ROOT/bin/$PLATFORM
-        if [ ! -d $PROGRAM_DEST ]; then       
-            echo "$PROGRAM_DEST does not exist!"
-        else
-            cd $PROGRAM_DEST ; echo "[7m$PROGRAM_DEST[m"
-            case $PLATFORM in
-              $OSF)
-                $ACTION $ALL_OSF_EXES | $FILTER ;;
-              $WNT)
-                $ACTION $ALL_WNT_EXES | $FILTER ;;
-              *)
-                $ACTION $ALL_UNX_EXES | $FILTER ;;
-            esac
-        fi
-    fi
-    if [ -n "$L_COMPS" ]; then
-        LIBRARY_DEST=$P_ROOT/lib/$PLATFORM
-        if [ ! -d $LIBRARY_DEST ]; then       
-            echo "$LIBRARY_DEST does not exist!"
-        else
-            cd $LIBRARY_DEST ; echo "[7m$LIBRARY_DEST[m"
-            case $PLATFORM in
-              $OSF)
-                $ACTION $ALL_OSF_LIBS | $FILTER
-                ;;
-              $IRX)
-                $ACTION $ALL_IRX_LIBS | $FILTER
-                ;;
-              $WNT)
-                $ACTION $ALL_WNT_LIBS | $FILTER
-                ;;
-              $SP2)
-                $ACTION $ALL_UNX_LIBS | $FILTER
-                if [ "$D_COMPS" != "true" ]; then
-                $ACTION $ALL_BLK_OBJS | $FILTER
-                fi
-                ;;
-              *)
-                $ACTION $ALL_UNX_LIBS | $FILTER
-                ;;
-            esac
-        fi
-    fi
+   PF_LIBS=$(get_libs $PLATFORM)
+   PF_EXES=$(get_exes $PLATFORM)
+
+   printf "\nPLATFORM=%-22s %8s\n" $PLATFORM "$TODAY"
+   if [ -n "$X_COMPS" ]; then
+      PROGRAM_DEST=$P_ROOT/bin/$PLATFORM
+      if [ ! -d $PROGRAM_DEST ]; then       
+	 echo "$PROGRAM_DEST does not exist!"
+      else
+	 cd $PROGRAM_DEST ; echo "[7m$PROGRAM_DEST[m"
+	 $ACTION $PF_EXES | $FILTER
+      fi
+   fi
+
+   if [ -n "$L_COMPS" ]; then
+      LIBRARY_DEST=$P_ROOT/lib/$PLATFORM
+      if [ ! -d $LIBRARY_DEST ]; then       
+	 echo "$LIBRARY_DEST does not exist!"
+      else
+	 cd $LIBRARY_DEST ; echo "[7m$LIBRARY_DEST[m"
+	 $ACTION $PF_LIBS | $FILTER
+      fi
+   fi
 done
 
 if [ "$FILTER" != "cat" ]; then rm -f $tmp_file; fi
