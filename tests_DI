@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.5 2004/02/11 16:52:56 schendel Exp $
+# $Id: tests_DI,v 1.6 2004/02/25 04:36:58 schendel Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 STD_F90=f90
@@ -461,9 +461,9 @@ do
   for ABI in $ABILIST
   do
     if [ $ABI = "." ]; then
-        ABIF=""; ABIX=""
+        OPFLAG=""; ABIX=""
     else
-        ABIF="-$ABI"; ABIX="_$ABI"
+        OPFLAG="-$ABI"; ABIX="_$ABI"
         printf "\n[Test series with ABI=$ABI]\n"        2>&1 | tee -a $TESTSLOG
     fi
     for MUT_CC in $MUT_CC_LIST
@@ -477,6 +477,10 @@ do
           # no C++ tests for these
           continue
       fi
+      if [ $TESTNUM = 9 ]; then
+        OPFLAG="$OPFLAG -rmdirs"
+      fi
+
       MUTATEE="test$TESTNUM$TESTNUMOPT.mutatee_$MUT_CC$ABIX$EXT"
       printf "\n[Tests with $MUTATEE]\n"                2>&1 | tee -a $TESTSLOG
       if [ ! -x $MUTATEE ]; then
@@ -492,7 +496,7 @@ do
       done
       fi
       echo ""                                           2>&1 | tee -a $TESTSLOG
-      TEST="test$TESTNUM $ABIF -mutatee $MUTATEE"
+      TEST="test$TESTNUM $OPFLAG -mutatee $MUTATEE"
       if [ -n "$INDITESTS" ]; then
           RunTestIndi                                   2>&1 | tee -a $TESTSLOG
       else
@@ -502,7 +506,7 @@ do
       # if x86 or sparc run extra test with relocation
       if [ $ARCH = "i386" -o $ARCH = "sparc" ]; then
  
-        TEST="test$TESTNUM -relocate $ABIF -mutatee $MUTATEE"
+        TEST="test$TESTNUM -relocate $OPFLAG -mutatee $MUTATEE"
         if [ -n "$INDITESTS" ]; then
             RunTestIndi                                 2>&1 | tee -a $TESTSLOG
         else
@@ -518,12 +522,7 @@ do
           continue
       fi
 
-      if [ $ARCH = "ia64" ]; then
-          # -attach isn't implemented on IA64 yet
-          continue
-      fi
-
-      TEST="test$TESTNUM $ABIF -mutatee $MUTATEE -attach"
+      TEST="test$TESTNUM $OPFLAG -mutatee $MUTATEE -attach"
       if [ -n "$INDITESTS" ]; then
           RunTestIndi                                   2>&1 | tee -a $TESTSLOG
       else
