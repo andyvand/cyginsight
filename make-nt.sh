@@ -1,6 +1,6 @@
 #rem Script for building Paradyn & DynInstAPI on WinNT platform
 #@echo off
-#rem $Id: make-nt.sh,v 1.19 2003/11/13 19:03:16 pcroth Exp $
+#rem $Id: make-nt.sh,v 1.20 2003/11/14 22:41:35 pcroth Exp $
 #@echo on
 
 #set LIBRARY_DEST="..\lib"
@@ -15,7 +15,7 @@ pwd
 PDROOT=`pwd`
 cd igen/$PLATFORM; nmake clean; nmake install
 cd $PDROOT
-cd xplat/$PLATFORM; nmake clean; nmake install
+cd mrnet/$PLATFORM; nmake clean; nmake install
 cd $PDROOT
 cd pdutil/$PLATFORM; nmake clean; nmake install
 cd $PDROOT
