@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.4 2004/01/19 21:54:26 schendel Exp $
+# $Id: tests_DI,v 1.5 2004/02/11 16:52:56 schendel Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 STD_F90=f90
@@ -515,6 +515,11 @@ do
       fi
       if [ $TESTNUM = 3 -o $TESTNUM = 4 -o $TESTNUM = 5 -o $TESTNUM = 7 -o $TESTNUM = 8 -o $TESTNUM = 9 -o $TESTNUM = 10 ]; then
           # no -attach tests for these
+          continue
+      fi
+
+      if [ $ARCH = "ia64" ]; then
+          # -attach isn't implemented on IA64 yet
           continue
       fi
 
