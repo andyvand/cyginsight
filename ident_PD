@@ -1,4 +1,5 @@
 #!/bin/sh
+# $Id: ident_PD,v 1.2 1998/04/03 13:31:02 wylie Exp $
 # $Paradyn/$DynInst-specific voucher "ident" (a la RCS ident)
 
 USAGE="usage: ident_PD [-l|-a] files"

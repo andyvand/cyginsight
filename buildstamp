@@ -1,4 +1,5 @@
 #!/bin/sh
+# $Id: buildstamp,v 1.2 1998/04/03 13:31:00 wylie Exp $
 # create/update build version identification voucher file
 
 USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"

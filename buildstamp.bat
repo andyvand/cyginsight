@@ -1,4 +1,5 @@
 @echo off
+rem $Id: buildstamp.bat,v 1.2 1998/04/03 13:31:01 wylie Exp $
 rem build version identification voucher
 setlocal
 rem Since I can't find a way to catch date and time output in a variable, it
