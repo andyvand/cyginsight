@@ -20,11 +20,11 @@ my $testRevision = shift;
 
 # Open file and retrieve header revision.
 open(HEADER, $filename) or print "ERROR" and exit;
-while (<HEADER>) { last if (/\$Revision: 1.2 $/); }
+while (<HEADER>) { last if (/\$Revision: [.\d]+ /); }
 close(HEADER);
 
 # Exit if we can't find the revision string.
-print "ERROR" and exit if (! /\$Revision: 1.2 $/);
+print "ERROR" and exit if (! /\$Revision: ([.\d]+) /);
 my $fileRevision = $1;
 
 # Perform compairison.
