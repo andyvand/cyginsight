@@ -174,9 +174,10 @@ sub final_reap()
 
 	foreach (@input) {
 	    # Parse 'pid' and 'command' from line.
-	    my ($pid) = split(' ', $_, 2);
+	    my ($pid, $aixPid) = split(' ', $_, 3);
 	    my $cmd = substr($_, $cmdIdx);
 
+	    $pid = $aixPid if ($ENV{"PLATFORM"} =~ /^rs6000-ibm-aix/);
 	    foreach my $pattern (@regexList) {
 		if ($cmd =~ /$pattern/) {
 		    print(STDERR "*** Extra process found;  Reaping $pid ($cmd).\n");
