@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: ident_PD,v 1.6 1999/05/30 17:01:15 wylie Exp $
+# $Id: ident_PD,v 1.7 1999/07/29 21:10:54 wylie Exp $
 # $Paradyn/$Dyninst-specific voucher "ident" (a la RCS ident)
 
 USAGE="usage: ident_PD [-l|-a] files"
@@ -48,7 +48,7 @@ do
     if [ "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
     if [ -f $FILE ]; then
 ##      IDENT=`strings -9 $FILE 2>&1 | egrep '\$(Paradyn)|(Dyninst):' | 
-        IDENT=`strings -9 $FILE 2>&1 | egrep '(Dyninst:)|(Paradyn:)' | 
+        IDENT=`strings -8 $FILE 2>&1 | egrep '(Dyninst:)|(Paradyn:)' | 
         	$FILTER | cut -d$ -f2`
 ##        	$FILTER | sed -n -e 's/^.*\@\$/$/p'`
 ##        	$FILTER | sed -n -e 's/.*^ \$/$/p'`
