@@ -1,17 +1,19 @@
 #!/bin/sh
-# $Id: files_PD,v 1.4 1998/09/02 16:48:36 wylie Exp $
+# $Id: files_PD,v 1.5 1999/03/03 23:41:19 wylie Exp $
 # list (or otherwise examine) all Paradyn/DynInst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
 SOL=sparc-sun-solaris2.4
+USS=sparc-sun-solaris2.6
 X86=i386-unknown-solaris2.5
 SP2=rs6000-ibm-aix4.1
 HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
 LNX=i386-unknown-linux2.0
-DUX=alpha-dec-osf4.0
+IRX=mips-sgi-irix6.4
+OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SOL $X86 $SP2 $WNT"
+ALL_PLATFORMS="$USS $SOL $X86 $LNX $SP2 $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -136,7 +138,7 @@ fi
 
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
 ALL_UNX_EXES="paradyn paradynd igen $V_COMPS"
-ALL_WNT_EXES="paradynd.exe igen.exe"
+ALL_WNT_EXES="paradyn.exe paradynd.exe igen.exe"
 
 ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT.*"
 ALL_LIB_OBJS="libdyninstRT.* libhist.a libpdutil.a libpdthread.a libvisi.a"
@@ -147,7 +149,7 @@ ALL_CPP_OBJS="libdyninstCP.*"
 case "$D_COMPS" in
   false)
     ALL_UNX_LIBS="$ALL_LIB_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libdyninstRT.dll"
+    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libdyninstRT.dll"
     ;;
   true)
     ALL_UNX_LIBS="$ALL_API_OBJS"
@@ -155,7 +157,7 @@ case "$D_COMPS" in
     ;;
   *)
     ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
-    ALL_WNT_LIBS="libpdutil.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ALL_WNT_LIBS="libpdutil.lib libpdthread.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
     ;;
 esac
 
