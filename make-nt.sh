@@ -1,6 +1,6 @@
 #rem Script for building Paradyn & DynInstAPI on WinNT platform
 #@echo off
-#rem $Id: make-nt.sh,v 1.21 2004/03/02 07:06:08 rchen Exp $
+#rem $Id: make-nt.sh,v 1.22 2004/05/14 16:49:09 legendre Exp $
 #@echo on
 
 #set DEST_DIR="..\%PLATFORM%"
@@ -41,6 +41,8 @@ cd visiClients/tclVisi/$PLATFORM; nmake clean; nmake install
 cd $PDROOT
 #rem No visiClients/terrain to build for WinNT!
 
+cd sharedMem/$PLATFORM; nmake clean; nmake install
+cd $PDROOT
 cd dyninstAPI_RT/$PLATFORM; nmake clean; nmake install
 cd $PDROOT
 cd dyninstAPI/$PLATFORM; nmake clean; nmake install

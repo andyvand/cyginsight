@@ -1,6 +1,6 @@
 rem Script for building Paradyn & DynInstAPI on WinNT platform
 @echo off
-rem $Id: make-nt.bat,v 1.21 2004/03/02 17:33:25 pcroth Exp $
+rem $Id: make-nt.bat,v 1.22 2004/05/14 16:49:08 legendre Exp $
 @echo on
 
 rem enable the following to build with symbols
@@ -29,6 +29,7 @@ cmd /c "cd visiClients\phaseTable\%PLATFORM% && nmake clean && nmake %DBG% insta
 cmd /c "cd visiClients\tclVisi\%PLATFORM% && nmake clean && nmake %DBG% install"
 rem No visiClients/terrain to build for WinNT!
 
+cmd /c "cd sharedMem\%PLATFORM% && nmake clean && nmake %DBG% install"
 cmd /c "cd dyninstAPI_RT\%PLATFORM% && nmake clean && nmake %DBG% install"
 cmd /c "cd dyninstAPI\%PLATFORM% && nmake clean && nmake %DBG% install"
 cmd /c "cd dyninstAPI\tests\%PLATFORM% && nmake clean && nmake %DBG% install"
