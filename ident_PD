@@ -1,6 +1,6 @@
 #!/bin/sh
-# $Id: ident_PD,v 1.5 1998/06/29 18:47:16 wylie Exp $
-# $Paradyn/$DynInst-specific voucher "ident" (a la RCS ident)
+# $Id: ident_PD,v 1.6 1999/05/30 17:01:15 wylie Exp $
+# $Paradyn/$Dyninst-specific voucher "ident" (a la RCS ident)
 
 USAGE="usage: ident_PD [-l|-a] files"
 
@@ -47,19 +47,19 @@ do
     if [ -n "$ALLOPT" -a "$FILE" != "$FILES" ]; then printf "(%s)\n" $FILE; fi
     if [ "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
     if [ -f $FILE ]; then
-##      IDENT=`strings -9 $FILE 2>&1 | egrep '\$(Paradyn)|(DynInst):' | 
-        IDENT=`strings -9 $FILE 2>&1 | egrep '(DynInst:)|(Paradyn:)' | 
+##      IDENT=`strings -9 $FILE 2>&1 | egrep '\$(Paradyn)|(Dyninst):' | 
+        IDENT=`strings -9 $FILE 2>&1 | egrep '(Dyninst:)|(Paradyn:)' | 
         	$FILTER | cut -d$ -f2`
 ##        	$FILTER | sed -n -e 's/^.*\@\$/$/p'`
 ##        	$FILTER | sed -n -e 's/.*^ \$/$/p'`
-##        	$FILTER | sed -n -e 's/.*\$DynInst:/$DynInst:/p'`
+##        	$FILTER | sed -n -e 's/.*\$Dyninst:/$Dyninst:/p'`
 ##        	$FILTER | sed -n -e 's/.*\$Paradyn:/$Paradyn:/p'`
 #       IDENT=`strings -n9 $FILE 2>&1 | sed -n -e 's/.*\$Paradyn:/$Paradyn:/p'`
         if [ "$IDENT" ]; then
             printf "$%s %-9s %-16s %-4s %s %s %s\n" $IDENT
         else
             if [ -z "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
-            echo "contains no \$Paradyn/DynInst\$ identification information"
+            echo "contains no \$Paradyn/Dyninst\$ identification information"
         fi
     elif [ -d $FILE ]; then
         if [ -z "$LONGOPT" ]; then printf "%-18s: " $FILE; fi
