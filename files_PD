@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.22 2001/06/04 19:33:26 schendel Exp $
+# $Id: files_PD,v 1.23 2001/08/28 21:24:57 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -15,7 +15,7 @@ LNX=i386-unknown-linux2.2
 IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SS7 $SS8 $LNX $IRX $AIX $WNT"
+ALL_PLATFORMS="$SS7 $SS8 $LNX $AIX $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
@@ -79,7 +79,7 @@ do
         ;;
     "-d")
         # consider only dynInstAPI components
-        X_COMPS=
+        X_COMPS=true
         L_COMPS=true
         D_COMPS=true
         ;;
@@ -156,9 +156,15 @@ fi
 
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
 V_COMPS_WNT="rthist.exe barChart.exe phaseTable.exe tableVisi.exe tclVisi.exe"
-ALL_UNX_EXES="paradyn paradynd* igen dyner $V_COMPS"
-ALL_OSF_EXES="paradynd igen dyner"
-ALL_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
+DYNINST_UNX_MUTTEES="testprogs/test1.mutatee_g++ testprogs/test1.mutatee_gcc testprogs/test2.mutatee_g++ testprogs/test2.mutatee_gcc testprogs/test3.mutatee_g++ testprogs/test3.mutatee_gcc testprogs/test4a.mutatee_g++ testprogs/test4a.mutatee_gcc testprogs/test4b.mutatee_g++ testprogs/test4b.mutatee_gcc testprogs/test5.mutatee_g++"
+DYNINST_UNX_MUTTORS="testprogs/test1 testprogs/test2 testprogs/test3 testprogs/test4 testprogs/test5"
+
+DYNINST_WNT_MUTTEES="testprogs/test1.mutatee_VC++.exe* testprogs/test1.mutatee_VC.exe* testprogs/test1.mutatee_g++.exe* testprogs/test1.mutatee_gcc.exe* testprogs/test2.mutatee_VC++.exe* testprogs/test2.mutatee_VC.exe* testprogs/test2.mutatee_g++.exe* testprogs/test2.mutatee_gcc.exe* testprogs/test3.mutatee_VC++.exe* testprogs/test3.mutatee_VC.exe* testprogs/test3.mutatee_g++.exe* testprogs/test3.mutatee_gcc.exe* testprogs/test4a.mutatee_VC++.exe* testprogs/test4a.mutatee_VC.exe* testprogs/test4a.mutatee_g++.exe* testprogs/test4a.mutatee_gcc.exe* testprogs/test4b.mutatee_VC++.exe* testprogs/test4b.mutatee_VC.exe* testprogs/test4b.mutatee_g++.exe* testprogs/test4b.mutatee_gcc.exe* testprogs/test5.mutatee_VC++.exe* testprogs/test5.mutatee_g++.exe*"
+DYNINST_WNT_MUTTORS="testprogs/test1.exe testprogs/test2.exe testprogs/test3.exe testprogs/test4.exe testprogs/test5.exe"
+
+PDN_UNX_EXES="paradyn paradynd* igen dyner $V_COMPS"
+PDN_OSF_EXES="paradynd igen dyner"
+PDN_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
 ALL_API_OBJS="libdyninstAPI.* libdyninstAPI_RT*"
 ALL_LIB_OBJS="libdyninstRT* libpdutil.a libpdutilOld.a libpdthread.a libvisi.a"
@@ -173,14 +179,20 @@ case "$D_COMPS" in
   false)
     ALL_UNX_LIBS="$ALL_LIB_OBJS"
     ALL_WNT_LIBS="libpdutil.lib libpdutilOld.lib libpdthread.lib libvisi.lib libdyninstRT.dll"
+    ALL_UNX_EXES="$ALL_UNX_EXES $PDN_UNX_EXES"
+    ALL_WNT_EXES="$ALL_WNT_EXES $PDN_WNT_EXES"
     ;;
   true)
     ALL_UNX_LIBS="$ALL_API_OBJS"
     ALL_WNT_LIBS="libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ALL_UNX_EXES="$ALL_UNX_EXES $DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"
+    ALL_WNT_EXES="$ALL_WNT_EXES $DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"
     ;;
   *)
     ALL_UNX_LIBS="$ALL_LIB_OBJS $ALL_API_OBJS"
     ALL_WNT_LIBS="libpdutil.lib libpdutilOld.lib libpdthread.lib libvisi.lib libdyninstRT.dll libdyninstAPI.lib libdyninstAPI_RT.dll"
+    ALL_UNX_EXES="$ALL_UNX_EXES $PDN_UNX_EXES $DYNINST_UNX_MUTTORS $DYNINST_UNX_MUTTEES"
+    ALL_WNT_EXES="$ALL_WNT_EXES $PDN_WNT_EXES $DYNINST_WNT_MUTTORS $DYNINST_WNT_MUTTEES"
     ;;
 esac
 
