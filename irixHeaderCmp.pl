@@ -20,18 +20,18 @@ my $testRevision = shift;
 
 # Open file and retrieve header revision.
 open(HEADER, $filename) or print "ERROR" and exit;
-while (<HEADER>) { last if (/\$Revision: 1.1 $/); }
+while (<HEADER>) { last if (/\$Revision: 1.2 $/); }
 close(HEADER);
 
 # Exit if we can't find the revision string.
-print "ERROR" and exit if (! /\$Revision: 1.1 $/);
+print "ERROR" and exit if (! /\$Revision: 1.2 $/);
 my $fileRevision = $1;
 
 # Perform compairison.
 my @a = split(/\./, $fileRevision);
 my @b = split(/\./, $testRevision);
 
-for (my $i = 0; defined($a[$i]) && defined($b[$i]); $i++) {
+for (my $i = 0; defined($a[$i]) || defined($b[$i]); $i++) {
     print "OLDER" and exit if ($a[$i] < $b[$i]);
     print "NEWER" and exit if ($a[$i] > $b[$i]);
 }
