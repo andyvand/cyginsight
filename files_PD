@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.23 2001/08/28 21:24:57 schendel Exp $
+# $Id: files_PD,v 1.24 2001/10/24 21:03:40 schendel Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -11,11 +11,12 @@ SP2=rs6000-ibm-aix4.3
 AIX=rs6000-ibm-aix4.2
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
-LNX=i386-unknown-linux2.2
+LNX22=i386-unknown-linux2.2
+LNX24=i386-unknown-linux2.4
 IRX=mips-sgi-irix6.5
 OSF=alpha-dec-osf4.0
 
-ALL_PLATFORMS="$SS7 $SS8 $LNX $AIX $WNT"
+ALL_PLATFORMS="$SS7 $SS8 $LNX22 $LNX24 $AIX $WNT"
 ARCH_LIST=$PLATFORM
 
 #USAGE="usage: files_PD [-a] [-w] [-i|-t] [-C[dlopvx]] [platform-list]\n\
