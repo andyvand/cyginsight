@@ -7,11 +7,6 @@ require 5;
 
 BEGIN {
     ($prog = $0) =~ s#.*/##;
-
-    chop($date = `date`);
-    chop($user = `whoami`);
-    chop($host = `hostname`);
-    chop($pwd  = `pwd`);
 }
 
 #################################################################
@@ -25,8 +20,10 @@ BEGIN {
 foreach $tcl (@tcls) {
     open($tcl, $tcl) or die("[$prog] cannot open `$tcl', skipping file\n");
     $data = join('', <$tcl>);
-    $data =~ s/["\\]/\\$&/g;
-    $data =~ s/\n/\\n\\\n/g;
+	$data =~ s/./'$&',/g;
+    $data =~ s/\\/\\\\/g;
+    $data =~ s/'''/'\\''/g;
+    $data =~ s/\n/'\\n',\n/g;
     close($tcl);
 
     ($name = $tcl) =~ s/[^a-zA-Z0-9_]/_/g;
@@ -43,9 +40,6 @@ print <<"END_OF_HEADER";
  * Converter   :  $prog
  * Author      :  Krishna Kunchithapadam (krishna\@cs.wisc.edu)
  * Version     :  0.03, 2 August 1995
- * Date        :  $date
- * User        :  $user\@$host
- * Exec dir    :  $pwd
  *
  * Tcl sources :
  *    $files
@@ -56,7 +50,7 @@ print <<"END_OF_HEADER";
  */
 
 #include <stdio.h>
-#include <tcl.h>
+#include "tcl.h"
 
 
 END_OF_HEADER
@@ -65,8 +59,11 @@ foreach $tcl (sort keys %names) {
     print <<"END_OF_SOURCE";
 /* source file : $tcl */
 
-static const char* tcl2c_$names{$tcl}_cstring = "\\
-$data{$tcl}";
+static const char tcl2c_$names{$tcl}_cstring[] =
+{
+$data{$tcl}
+'\\0'
+};
 
 
 END_OF_SOURCE
