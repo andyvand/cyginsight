@@ -1,6 +1,6 @@
 #!/bin/sh
 # Paradyn/DynInstAPI build script for WinNT platform
-# $Id: make-nt.sh,v 1.4 1999/02/09 15:46:04 wylie Exp $
+# $Id: make-nt.sh,v 1.5 1999/02/09 15:57:44 wylie Exp $
 # usage: make-nt [-no] [-new|-clean] [componentlist]
 
 # Note: these IDs are only used for local purposes!  Real IDs are in makefiles.
@@ -81,6 +81,7 @@ do
     if [ "$BUILDOPT" = "TRUE" ]; then
         $MAKE install
         if [ "$?" != 0 ]; then
+            echo "Aborting $CWD"
             exit
         fi
     fi
