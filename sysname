@@ -1,5 +1,5 @@
 #! /bin/sh
-# $Id: sysname,v 1.2 1998/04/03 13:31:03 wylie Exp $
+# $Id: sysname,v 1.3 2003/05/30 21:54:06 paradyn Exp $
 # Attempt to guess a canonical system name.
 #   Copyright (C) 1992, 1993, 1994, 1995 Free Software Foundation, Inc.
 #
@@ -195,6 +195,19 @@ EOF
 	fi
 	echo ${IBM_ARCH}-ibm-aix${IBM_REV}
 	exit 0 ;;
+    *:AIX:*:5)
+        if /usr/sbin/lsattr -EHl proc0 | grep POWER >/dev/null 2>&1; then
+		IBM_ARCH=rs6000
+	else
+		IBM_ARCH=powerpc
+        fi
+	if [ -x /usr/bin/oslevel ] ; then
+                IBM_REV=`/usr/bin/oslevel`
+        else
+                IBM_REV=5.${UNAME_RELEASE}
+        fi
+        echo ${IBM_ARCH}-ibm-aix${IBM_REV}
+        exit 0 ;;
     *:AIX:*:*)
 	echo rs6000-ibm-aix
 	exit 0 ;;
