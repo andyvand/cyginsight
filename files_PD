@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: files_PD,v 1.15 1999/10/26 15:10:24 wylie Exp $
+# $Id: files_PD,v 1.16 1999/12/09 15:41:55 paradyn Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 SOS=sparc-sun-sunos4.1.3
@@ -7,6 +7,7 @@ SOL=sparc-sun-solaris2.4
 USS=sparc-sun-solaris2.6
 X86=i386-unknown-solaris2.5
 SP2=rs6000-ibm-aix4.1
+AIX=rs6000-ibm-aix4.3
 #HPX=hppa1.1-hp-hpux
 WNT=i386-unknown-nt4.0
 LNX=i386-unknown-linux2.0
@@ -47,11 +48,12 @@ fi
 
 FILTER="cat"
 
-if [ $PLATFORM = "$SP2" -o $PLATFORM = "$OSF" ]; then
-    ACTION="ls -oLF"
-else
-    ACTION="ls -lGLF"
-fi
+case "$PLATFORM" in
+  "$SP2"|"$AIX"|"$OSF")
+    ACTION="ls -oLF";;
+  *)
+    ACTION="ls -lGLF";;
+esac
 
 tmp_file="/tmp/.tmp_file"
 
