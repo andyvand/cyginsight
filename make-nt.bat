@@ -1,6 +1,6 @@
 rem Script for building Paradyn & DynInstAPI on WinNT platform
 @echo off
-rem $Id: make-nt.bat,v 1.22 2004/05/14 16:49:08 legendre Exp $
+rem $Id: make-nt.bat,v 1.23 2005/03/07 21:23:49 legendre Exp $
 @echo on
 
 rem enable the following to build with symbols
@@ -9,6 +9,7 @@ rem set DBG="NO_OPT_FLAG=true"
 set DEST_DIR="..\%PLATFORM%"
 set LIBRARY_DEST="..\%PLATFORM%\lib"
 set PROGRAM_DEST="..\%PLATFORM%\bin"
+set PLATFORM=i386-unknown-nt4.0
 
 if not exist %DEST_DIR% mkdir %DEST_DIR%
 if not exist %LIBRARY_DEST% mkdir %LIBRARY_DEST%

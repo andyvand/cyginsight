@@ -1,10 +1,11 @@
 #!/bin/sh
-# $Id: buildstamp,v 1.7 2003/05/11 22:20:06 schendel Exp $
+# $Id: buildstamp,v 1.8 2005/03/07 21:23:49 legendre Exp $
 # create/update build version identification voucher file
 
-USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] TARGET"
+USAGE="usage: buildstamp [-s SUITE_NAME] [-v RELEASE_ID] [-win] TARGET"
 SUITE=Paradyn
-RELEASE=v2.1
+RELEASE=v4.2
+RUNNING_ON_WIN=0
 
 while [ ! -z "$1" ]
 do
@@ -22,6 +23,10 @@ do
     -[0-9]*)
         # got detached build number
         RELEASE=$RELEASE$1
+        ;;
+    -win)
+        # We're runing on Windows
+        RUNNING_ON_WIN=1
         ;;
     -*)
         echo "Unrecognized flag: $1"
@@ -94,13 +99,13 @@ fi
 
 # collect additional build voucher information
 DATE=`date '+%Y/%m/%d %H:%M'`
-if [ $PLATFORM = "i386-unknown-nt4.0" ]; then
+if [ $RUNNING_ON_WIN = "1" ]; then
     USER=`logname`
 else
     USER=`whoami`
 fi
-HOST=`hostname | tr 'A-Z' 'a-z'`
 
+HOST=`hostname | tr 'A-Z' 'a-z'`
 # remap Paradyn/DynInst account addresses
 if [ "$USER" = "paradyn" ]; then
     if [ "$SUITE" = "DynInst" ]; then

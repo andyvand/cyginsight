@@ -1,8 +1,9 @@
 #rem Script for building Paradyn & DynInstAPI on WinNT platform
 #@echo off
-#rem $Id: make-nt.sh,v 1.22 2004/05/14 16:49:09 legendre Exp $
+#rem $Id: make-nt.sh,v 1.23 2005/03/07 21:23:49 legendre Exp $
 #@echo on
 
+set PLATFORM=i386-unknown-nt4.0
 #set DEST_DIR="..\%PLATFORM%"
 #set LIBRARY_DEST="..\%PLATFORM%\lib"
 #set PROGRAM_DEST="..\%PLATFORM%\bin"
