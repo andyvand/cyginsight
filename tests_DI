@@ -1,0 +1,531 @@
+#!/bin/sh
+# $Id: tests_DI,v 1.1 2002/08/13 18:19:23 schendel Exp $
+# run Dyninst test suite (on current platform) with optional logging, etc.
+
+GNU_CC=gcc
+GNU_CXX=g++
+
+# determine the platform-specific standard/native compilers
+case "$PLATFORM" in
+  alpha-dec-osf4.*)
+    STD_CC=cc
+    STD_CXX=cxx
+    ;;
+  rs6000-ibm-aix4.*)
+    STD_CC=xlc
+    STD_CXX=xlC
+    ;;
+  i386-unknown-linux*)
+    # Linux doesn't have a regular/native "cc", so use PGI compilers instead
+    STD_CC=pgcc
+    STD_CXX=pgCC
+    ;;
+  i386-unknown-nt4.0)
+    # VisualC++ (actually "cl") handles C and C++, but contrive a distinction
+    STD_CC=VC
+    STD_CXX=VC++
+    ;;
+  *)
+    STD_CC=cc
+    STD_CXX=CC
+esac
+
+FULL_MC_LIST="$STD_CC $STD_CXX $GNU_CC $GNU_CXX"
+FULLTESTLIST="1 2 3 4 5 6 7"
+SOL_SKIP=""
+LNX_SKIP="7"
+AIX_SKIP="7"
+NT_SKIP="7"
+OSF_SKIP="7"
+USAGE="usage: $0 [-help] [-n] [-i] [-l [logfile]] [-t ($FULLTESTLIST)] [-c ($FULL_MC_LIST)]\n\
+Runs dyninst test suite (appropriately selected/defined for current platform)\n\
+  -help: this usage information\n\
+  -n: skips running actual tests\n\
+  -i: run subtests individually (rather than as a complete suite)\n\
+  -l: performs logging (to logfile if specified)\n\
+  -t: select specified test from current test list: $FULLTESTLIST\n\
+  -c: select specified mutatee compiler from list: $FULL_MC_LIST\n\
+"
+
+#specify if any tests should be skipped
+case "$PLATFORM" in
+  sparc-sun-solaris*)
+    ;;
+  i386-unknown-linux*)
+    SKIPPED_TESTS="7"
+    ;;
+  rs6000-ibm-aix4.*)
+    SKIPPED_TESTS="7"
+    ;;
+  i386-unknown-nt4.0)
+    SKIPPED_TESTS="7"
+    ;;
+  mips-sgi-irix6.*)
+    SKIPPED_TESTS="7"
+    ;;
+  alpha-dec-osf4.*)
+    SKIPPED_TESTS="7"
+    ;;
+  *)
+    ;;
+esac
+echo "Test programs ( $SKIPPED_TESTS ) are skipped on this platform"
+
+if [ "$PARADYN_BASE" = "" ]; then
+BASE_DIR=/p/paradyn
+else
+BASE_DIR=$PARADYN_BASE
+fi
+if [ "$DYNINST_ROOT" != "" ]; then
+BASE_DIR=$DYNINST_ROOT
+fi
+if [ "$PDTST" = "" ]; then
+TLOG_DIR=$BASE_DIR/log/tests
+else
+TLOG_DIR=$PDTST
+fi
+
+if [ "$PLATFORM" = "" ]; then
+    echo "Abort: PLATFORM undefined!"
+fi
+
+# canonical locations
+TESTSDIR=$BASE_DIR/bin/$PLATFORM/testprogs
+PARADYN_LIB_API=$BASE_DIR/lib/$PLATFORM
+PARADYN_LIB_RTL=$BASE_DIR/lib/$PLATFORM
+
+CWD=`pwd | sed -e 's/\/afs\/cs.wisc.edu//'`
+DIR0=`basename $CWD`
+DIR1=`dirname $CWD`
+DIR2=`basename $DIR1`
+
+if [ "$DIR0" = "testprogs" ]; then
+TESTSDIR=$CWD
+# navigate from bin/$PLATFORM/testprogs
+DIR1=`dirname $DIR1`
+DIR1=`dirname $DIR1`
+PARADYN_LIB_API=$DIR1/lib/$PLATFORM
+PARADYN_LIB_RTL=$DIR1/lib/$PLATFORM
+fi
+if [ "$DIR2" = "tests" ]; then
+TESTSDIR=$CWD
+# navigate from core/dyninstAPI/tests/$PLATFORM
+DIR1=`dirname $DIR1`
+DIR1=`dirname $DIR1`
+DIR1=`dirname $DIR1`
+PARADYN_LIB_API=../../$PLATFORM:$DIR1/lib/$PLATFORM
+PARADYN_LIB_RTL=../../../dyninstAPI_RT/$PLATFORM
+fi
+
+case "$PLATFORM" in
+  rs6000-ibm-aix4.*)
+    # no dynamic libraries supported yet!
+    ;;
+  i386-unknown-nt4.0)
+    # no dynamic loading of libdyninstAPI yet!
+    DYNINSTAPI_RT_LIB=${PARADYN_LIB_RTL}/libdyninstAPI_RT.dll
+    export DYNINSTAPI_RT_LIB
+    ;;
+  mips-sgi-irix6.*)
+    LD_LIBRARY64_PATH=${PARADYN_LIB_API}:${LD_LIBRARY64_PATH}
+    DYNINSTAPI_RT_LIB=${PARADYN_LIB_RTL}/libdyninstAPI_RT.so.1
+    export LD_LIBRARY64_PATH DYNINSTAPI_RT_LIB
+    ;;
+  *)
+    LD_LIBRARY_PATH=${PARADYN_LIB_API}:${LD_LIBRARY_PATH}
+    DYNINSTAPI_RT_LIB=${PARADYN_LIB_RTL}/libdyninstAPI_RT.so.1
+    export LD_LIBRARY_PATH DYNINSTAPI_RT_LIB
+    ;;
+esac
+
+case "$PLATFORM" in
+  rs6000-ibm-aix4.*)
+    # no dynamic libraries supported yet!
+    ;;
+  *)
+    if [ -n "$DYNINSTAPI_RT_LIB" -a ! -r "$DYNINSTAPI_RT_LIB" ]; then
+        echo DYNINSTAPI_RT_LIB=$DYNINSTAPI_RT_LIB
+        echo "Abort: file is not readable or does not exist!"
+        exit
+    fi
+esac
+
+PDSCRDIR=$BASE_DIR/scripts
+BUILDNUM=$PDSCRDIR/buildnum
+TERMNULL=/dev/null
+LOGGING=
+
+while [ ! -z "$1" ]
+do
+  case "$1" in
+    -h|-help)
+        BAILOUT=1
+        break
+        ;;
+    -l)
+        echo "Tests logging..."
+        LOGGING=1
+        case "$2" in
+          "") #echo "Null logfile name"
+              ;;
+          -*) #echo "Invalid logfile name: $2"
+              ;;
+          *)  #echo "Logfile name: $2"
+              FILE=$2
+              shift
+        esac
+        ;;
+    -n)
+        echo "Skipping actual tests..."
+        SKIPTESTS=1
+        ;;
+    -i)
+        echo "Running (sub)tests individually..."
+        INDITESTS=1
+        ;;
+    -t)
+        #echo "Test selection..."
+        case "$2" in
+          [1234567])
+            echo "Selected test$2"
+            TESTLIST="$TESTLIST$2 "
+            shift
+            ;;
+          *)
+            echo "Invalid test selection: $2"
+            BAILOUT=1
+            break
+        esac
+        ;;
+    -c)
+        #echo "Mutatee compiler selection..."
+        case "$2" in
+          $STD_CC|$STD_CXX|$GNU_CC|$GNU_CXX)
+            echo "Selected mutatee compiler $2"
+            MUT_CC_LIST="$MUT_CC_LIST $2 "
+            shift
+            ;;
+          *)
+            echo "Invalid mutatee compiler selection: $2"
+            BAILOUT=1
+            break
+        esac
+        ;;
+    -x)
+        echo "Skipping extra tests (and bells & whistles)..."
+        EXTRA_LEAN=1
+        ;;
+    -*)
+        echo "Unrecognized flag: $1"
+        BAILOUT=1
+        break
+        ;;
+    *)
+        echo "Unexpected argument: $1"
+        BAILOUT=1
+        break
+        ;;
+  esac
+  shift
+done
+
+# bail-point for unrecognized flags/selections
+if [ -n "$BAILOUT" ]; then
+    printf "$USAGE"
+    exit 1
+fi
+
+if [ -n "$LOGGING" ]; then
+    if [ -n "$FILE" ]; then
+        # use specified filename for log
+        TESTSLOG=$FILE
+    else
+        # get a build identifier for log file in default directory
+        BUILD_ID=`$BUILDNUM`
+        if [ $? -ne 0 ]; then
+            BUILD_ID=`date '+%Y-%m-%d'`
+        fi
+        TESTSLOG=$TLOG_DIR/$PLATFORM/$BUILD_ID
+    fi
+    echo "   ... output to $TESTSLOG"
+    TESTSLOGDIR=`dirname $TESTSLOG`
+    if [ ! -d "$TESTSLOGDIR" ]; then
+        echo "$TESTSLOGDIR does not exist (yet)!"
+        mkdir -p $TESTSLOGDIR
+        if [ ! -d "$TESTSLOGDIR" ]; then
+            echo "$TESTSLOGDIR creation failed - aborting!"
+            exit
+        else
+            echo "$TESTSLOGDIR created for test logs!"
+        fi
+    fi
+    if [ -f "$TESTSLOG" ]; then
+        echo "File exists!"
+    else
+        touch $TESTSLOG
+    fi
+    if [ -f "$TESTSLOG".gz ]; then
+        echo "File.gz exists!"
+    fi
+else
+    TESTSLOG=$TERMNULL
+fi
+
+# sort out the test and mutatee lists
+if [ -z "$TESTLIST" ]; then
+    TESTLIST=$FULLTESTLIST
+fi
+
+#take skipped tests out of TESTLIST
+echo "TESTLIST $TESTLIST"
+for curtest in $TESTLIST
+do
+  echo "considering test $curtest"
+  INCLUDE_TEST=1
+  for skiptest in $SKIPPED_TESTS
+  do
+    if (( $curtest == $skiptest ))
+    then
+      INCLUDE_TEST=0
+    fi
+  done
+
+  echo INCLUDE_TEST $INCLUDE_TEST
+  if test $INCLUDE_TEST -eq 1
+  then
+    NEWTESTLIST="$NEWTESTLIST $curtest"
+  fi
+done
+TESTLIST=$NEWTESTLIST
+echo "modified TESTLIST $TESTLIST"
+
+if [ -z "$MUT_CC_LIST" ]; then
+    # set the default mutatee-compiler list to be used in tests
+    case $PLATFORM in
+        X-*irix*)
+            # STD_CXX&GNU_CXX behaviour is still too poor to include as default
+            echo "Skipping $STD_CXX & $GNU_CXX tests due to their bad behavior!"
+            MUT_CC_LIST="$STD_CC $GNU_CC"
+            ;;
+        X-i386*solaris*)
+            # STD_CXX behaviour is still too poor to include as default
+            echo "Skipping STD_CXX=$STD_CXX tests due to their bad behavior!"
+            MUT_CC_LIST="$STD_CC $GNU_CC $GNU_CXX"
+            ;;
+        *)
+            MUT_CC_LIST=$FULL_MC_LIST
+            ;;
+    esac
+fi
+
+# WindowsNT executables have ".exe" extensions
+if [ $PLATFORM = "i386-unknown-nt4.0" ]; then
+  EXT=.exe
+else
+  EXT=
+fi
+
+# some systems (currently only Irix) support multiple ABIs
+ABILIST="."
+
+# go to it!
+
+cd $TESTSDIR
+CWD=`pwd | sed -e 's/\/afs\/cs.wisc.edu//'`
+
+echo ""                                                 2>&1 | tee -a $TESTSLOG
+echo "Commencing DyninstAPI test(s) $TESTLIST ..."      2>&1 | tee -a $TESTSLOG
+date                                                    2>&1 | tee -a $TESTSLOG
+uname -a                                                2>&1 | tee -a $TESTSLOG
+echo "TESTSDIR=$TESTSDIR"                               2>&1 | tee -a $TESTSLOG
+
+if [ ! -n "$EXTRA_LEAN" ]; then
+case "$PLATFORM" in
+  rs6000-ibm-aix4.*)
+    # no dynamic libraries supported yet!
+    ;;
+  mips-sgi-irix6.*)
+    ABILIST=". n32"
+    echo "LD_LIBRARY64_PATH=$LD_LIBRARY64_PATH"         2>&1 | tee -a $TESTSLOG
+    ;;
+  *)
+    echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"             2>&1 | tee -a $TESTSLOG
+    ;;
+esac
+case "$PLATFORM" in
+  rs6000-ibm-aix4.*)
+    # no dynamic libraries supported yet!
+    ;;
+  *)
+    echo "DYNINSTAPI_RT_LIB=$DYNINSTAPI_RT_LIB"         2>&1 | tee -a $TESTSLOG
+    $PDSCRDIR/ident_PD $DYNINSTAPI_RT_LIB               2>&1 | tee -a $TESTSLOG
+    ;;
+esac
+fi
+
+JUNKFILES="core imagefile test?.out.*"
+
+JunkCheck ()
+{
+    for JUNK in $JUNKFILES
+    do
+        if [ -f $JUNK ]; then
+            printf "Deleting test junk: "
+            /bin/ls -l $JUNK
+            /bin/rm -f $JUNK
+        fi
+    done
+}
+
+RunTest ()
+{
+    echo \"$TEST\"
+    if [ ! "$SKIPTESTS" ]; then
+        ./$TEST -V
+        EXITCODE=$?
+        if [ $EXITCODE -ne 0 ]; then
+            printf "=========================================================\n"
+            printf "=== Exit code 0x%02x: %s\n" $EXITCODE "$TEST"
+            printf "=========================================================\n"
+#       else
+#           printf "=== Exit code 0x%02x: %s\n" $EXITCODE "$TEST"
+        fi
+        JunkCheck
+        reap -a -q test$TESTNUM
+        echo ""                                       
+    fi
+}
+
+RunTestIndi ()
+{
+  # the number of subtests should be acquired by running "test? -usage"
+  case $TESTNUM in
+    1)
+        SUBTESTS=34 ;;
+    2)
+        SUBTESTS=13 ;;
+    3)
+        SUBTESTS=5 ;;
+    4)
+        SUBTESTS=4 ;;
+    5)
+        SUBTESTS=12 ;;
+    6)
+        SUBTESTS=1 ;;
+    7)
+        SUBTESTS=1 ;;
+    *)
+        printf "Unexpected TESTNUM %d\n" $TESTNUM
+  esac
+  printf "Individual subtests for %s (%d)\n" $MUTATEE $SUBTESTS 
+
+  TESTSTUB=$TEST
+  n=1
+  while [ $n -le $SUBTESTS ]
+  do
+    TEST="$TESTSTUB -run $n"
+    RunTest
+    n=`expr $n + 1`
+  done
+}
+
+RUNAWAYS="test[1234567] test[1234567]*.m"
+RUNAWAYS="'test[1234567]*'"
+reap -a -q $RUNAWAYS                                    2>&1 | tee -a $TESTSLOG
+
+JunkCheck                                               2>&1 | tee -a $TESTSLOG
+
+# architecture
+ARCH=`echo $PLATFORM | cut -f1 -d'-'`
+
+for TESTNUM in $TESTLIST
+do
+  printf "\n*** dyninstAPI test$TESTNUM...\n"           2>&1 | tee -a $TESTSLOG
+  if [ ! -n "$EXTRA_LEAN" ]; then
+      $PDSCRDIR/ident_PD test$TESTNUM$EXT               2>&1 | tee -a $TESTSLOG
+      ldd_PD test$TESTNUM$EXT                           2>&1 | tee -a $TESTSLOG
+  fi
+  for ABI in $ABILIST
+  do
+    if [ $ABI = "." ]; then
+        ABIF=""; ABIX=""
+    else
+        ABIF="-$ABI"; ABIX="_$ABI"
+        printf "\n[Test series with ABI=$ABI]\n"        2>&1 | tee -a $TESTSLOG
+    fi
+    for MUT_CC in $MUT_CC_LIST
+    do
+      if [ $TESTNUM = 4 ]; then
+          TESTNUMOPT="a"
+      else
+          TESTNUMOPT=""
+      fi
+      if [ $TESTNUM = 5 -a \( $MUT_CC = $STD_CC -o $MUT_CC = $GNU_CC \) ]; then
+          # no C++ tests for these
+          continue
+      fi
+      MUTATEE="test$TESTNUM$TESTNUMOPT.mutatee_$MUT_CC$ABIX$EXT"
+      printf "\n[Tests with $MUTATEE]\n"                2>&1 | tee -a $TESTSLOG
+      if [ ! -x $MUTATEE ]; then
+          printf "\n[$MUTATEE unavailable for tests]\n" 2>&1 | tee -a $TESTSLOG
+          continue
+      fi
+      if [ ! -n "$EXTRA_LEAN" ]; then
+      for MUTATEX in test$TESTNUM*.mutatee_$MUT_CC$ABIX$EXT
+      do
+          ls -lLF $MUTATEX                              2>&1 | tee -a $TESTSLOG
+          ldd_PD $MUTATEX                               2>&1 | tee -a $TESTSLOG
+          $MUTATEX                                      2>&1 | tee -a $TESTSLOG
+      done
+      fi
+      echo ""                                           2>&1 | tee -a $TESTSLOG
+      TEST="test$TESTNUM $ABIF -mutatee $MUTATEE"
+      if [ -n "$INDITESTS" ]; then
+          RunTestIndi                                   2>&1 | tee -a $TESTSLOG
+      else
+          RunTest                                       2>&1 | tee -a $TESTSLOG
+      fi
+
+      # if x86 or sparc run extra test with relocation
+      if [ $ARCH = "i386" -o $ARCH = "sparc" ]; then
+ 
+        TEST="test$TESTNUM -relocate $ABIF -mutatee $MUTATEE"
+        if [ -n "$INDITESTS" ]; then
+            RunTestIndi                                 2>&1 | tee -a $TESTSLOG
+        else
+            RunTest                                     2>&1 | tee -a $TESTSLOG
+        fi
+      fi
+
+      if [ -n "$EXTRA_LEAN" ]; then
+          continue
+      fi
+      if [ $TESTNUM = 3 -o $TESTNUM = 4 -o $TESTNUM = 5 -o $TESTNUM = 7 ]; then
+          # no -attach tests for these
+          continue
+      fi
+
+      TEST="test$TESTNUM $ABIF -mutatee $MUTATEE -attach"
+      if [ -n "$INDITESTS" ]; then
+          RunTestIndi                                   2>&1 | tee -a $TESTSLOG
+      else
+          RunTest                                       2>&1 | tee -a $TESTSLOG
+      fi
+
+    done
+  done
+done
+
+reap -a -q $RUNAWAYS                                    2>&1 | tee -a $TESTSLOG
+
+printf "\nTests complete.\n"                            2>&1 | tee -a $TESTSLOG
+date                                                    2>&1 | tee -a $TESTSLOG
+
+if [ -n "$LOGGING" ]; then
+    gzip $TESTSLOG
+    printf "Test log %s.gz written.\n" $TESTSLOG
+fi
+
+exit 0
+
+
