@@ -1,15 +1,15 @@
 rem Script for building Paradyn & DynInstAPI on WinNT platform
 @echo off
-rem $Id: make-nt.bat,v 1.19 2003/11/14 22:41:35 pcroth Exp $
+rem $Id: make-nt.bat,v 1.20 2004/03/02 07:06:08 rchen Exp $
 @echo on
 
-set LIBRARY_DEST="..\lib"
-set PROGRAM_DEST="..\bin"
+set DEST_DIR="..\%PLATFORM%"
+set LIBRARY_DEST="..\%PLATFORM%\lib"
+set PROGRAM_DEST="..\%PLATFORM%\bin"
 
+if not exist %DEST_DIR% mkdir %DEST_DIR%
 if not exist %LIBRARY_DEST% mkdir %LIBRARY_DEST%
-if not exist %LIBRARY_DEST%\%PLATFORM% mkdir %LIBRARY_DEST%\%PLATFORM%
 if not exist %PROGRAM_DEST% mkdir %PROGRAM_DEST%
-if not exist %PROGRAM_DEST%\%PLATFORM% mkdir %PROGRAM_DEST%\%PLATFORM%
 
 cmd /c "cd igen\%PLATFORM% && nmake clean"
 cmd /c "cd igen\%PLATFORM% && nmake install"

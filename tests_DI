@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.6 2004/02/25 04:36:58 schendel Exp $
+# $Id: tests_DI,v 1.7 2004/03/02 07:06:08 rchen Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 STD_F90=f90
@@ -90,9 +90,9 @@ if [ "$PLATFORM" = "" ]; then
 fi
 
 # canonical locations
-TESTSDIR=$BASE_DIR/bin/$PLATFORM/testprogs
-PARADYN_LIB_API=$BASE_DIR/lib/$PLATFORM
-PARADYN_LIB_RTL=$BASE_DIR/lib/$PLATFORM
+TESTSDIR=$BASE_DIR/$PLATFORM/bin/testprogs
+PARADYN_LIB_API=$BASE_DIR/$PLATFORM/lib
+PARADYN_LIB_RTL=$BASE_DIR/$PLATFORM/lib
 
 CWD=`pwd | sed -e 's/\/afs\/cs.wisc.edu//'`
 DIR0=`basename $CWD`
@@ -101,11 +101,11 @@ DIR2=`basename $DIR1`
 
 if [ "$DIR0" = "testprogs" ]; then
 TESTSDIR=$CWD
-# navigate from bin/$PLATFORM/testprogs
+# navigate from $PLATFORM/bin/testprogs
 DIR1=`dirname $DIR1`
 DIR1=`dirname $DIR1`
-PARADYN_LIB_API=$DIR1/lib/$PLATFORM
-PARADYN_LIB_RTL=$DIR1/lib/$PLATFORM
+PARADYN_LIB_API=$DIR1/$PLATFORM/lib
+PARADYN_LIB_RTL=$DIR1/$PLATFORM/lib
 fi
 if [ "$DIR2" = "tests" ]; then
 TESTSDIR=$CWD
@@ -113,7 +113,7 @@ TESTSDIR=$CWD
 DIR1=`dirname $DIR1`
 DIR1=`dirname $DIR1`
 DIR1=`dirname $DIR1`
-PARADYN_LIB_API=../../$PLATFORM:$DIR1/lib/$PLATFORM
+PARADYN_LIB_API=../../$PLATFORM:$DIR1/$PLATFORM/lib
 PARADYN_LIB_RTL=../../../dyninstAPI_RT/$PLATFORM
 fi
 

@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.33 2003/07/18 20:06:59 schendel Exp $
+# $Id: files_PD,v 1.34 2004/03/02 07:06:08 rchen Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -185,7 +185,7 @@ function get_exes
    typeset PF=$1
    typeset RET_EXES
 
-   cd $P_ROOT/bin/$PF   # need to be in proper dir so "*" in vars will work
+   cd $P_ROOT/$PF/bin   # need to be in proper dir so "*" in vars will work
 
    if [[ $D_COMPS == "true" ]]
    then
@@ -219,7 +219,7 @@ function get_libs
    typeset PF=$1
    typeset RET_LIBS
 
-   cd $P_ROOT/lib/$PF   # need to be in proper dir so "*" in vars will work
+   cd $P_ROOT/$PF/lib   # need to be in proper dir so "*" in vars will work
 
    if [[ $D_COMPS == "true" ]]
    then
@@ -255,7 +255,7 @@ do
 
    printf "\nPLATFORM=%-22s %8s\n" $PLATFORM "$TODAY"
    if [ -n "$X_COMPS" ]; then
-      PROGRAM_DEST=$P_ROOT/bin/$PLATFORM
+      PROGRAM_DEST=$P_ROOT/$PLATFORM/bin
       if [ ! -d $PROGRAM_DEST ]; then       
 	 echo "$PROGRAM_DEST does not exist!"
       else
@@ -265,7 +265,7 @@ do
    fi
 
    if [ -n "$L_COMPS" ]; then
-      LIBRARY_DEST=$P_ROOT/lib/$PLATFORM
+      LIBRARY_DEST=$P_ROOT/$PLATFORM/lib
       if [ ! -d $LIBRARY_DEST ]; then       
 	 echo "$LIBRARY_DEST does not exist!"
       else
