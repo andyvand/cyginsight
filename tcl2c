@@ -52,6 +52,10 @@ print <<"END_OF_HEADER";
 #include <stdio.h>
 #include "tcl.h"
 
+#if defined(i386_unknown_nt4_0)
+#include <windows.h>
+#endif // defined(i386_unknown_nt4_0)
+
 
 END_OF_HEADER
 
@@ -70,6 +74,8 @@ END_OF_SOURCE
 }
 
 print <<END_OF_PREAMBLE;
+#if !defined(i386_unknown_nt4_0)
+
 #define SAFE_EVAL(str, file)                               \\
 do {                                                       \\
     if (Tcl_VarEval(interp, str, 0) != TCL_OK) {           \\
@@ -77,6 +83,24 @@ do {                                                       \\
         return TCL_ERROR;                                  \\
     }                                                      \\
 } while (0)
+
+#else
+
+#define SAFE_EVAL(str, file)                               \\
+do {                                                       \\
+    if (Tcl_VarEval(interp, str, 0) != TCL_OK) {           \\
+        Tcl_DString msg;                                   \\
+        Tcl_DStringInit( &msg );                           \\
+        Tcl_DStringAppend(&msg, file, -1);                 \\
+        Tcl_DStringAppend(&msg, ":", -1);                  \\
+        Tcl_DStringAppend(&msg, Tcl_GetStringResult(interp), -1); \\
+        MessageBox(NULL, Tcl_DStringValue(&msg), "Fatal", MB_ICONSTOP|MB_OK); \\
+        Tcl_DStringFree( &msg );                           \\
+        return TCL_ERROR;                                  \\
+    }                                                      \\
+} while (0)
+
+#endif // defined(i386_unknown_nt4_0)
 
 int
 initialize_tcl_sources(Tcl_Interp* interp) {
