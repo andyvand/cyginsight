@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.8 2005/03/18 04:37:56 rchen Exp $
+# $Id: tests_DI,v 1.9 2005/04/12 15:55:45 rchen Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -26,6 +26,7 @@ case "$PLATFORM" in
 	# Linux doesn't have a regular/native "cc", so use PGI compilers instead
 	STD_CC=pgcc
 	STD_CXX=pgCC
+	STD_F90=g77
 	;;
     i386-unknown-nt4.0)
 	# VisualC++ (actually "cl") handles C and C++, but contrive a distinction
