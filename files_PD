@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.36 2004/06/22 17:33:34 legendre Exp $
+# $Id: files_PD,v 1.37 2005/09/09 18:08:11 legendre Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -203,9 +203,7 @@ function get_exes
    if [[ $P_COMPS == "true" ]]
    then
       case $PF in
-      $SOL|$AIX)
-	 RET_EXES="$PDN_UNX_EXES $RET_EXES"  ;;
-      $LNX)
+      $SOL|$AIX|$LNX|$I64)
 	 RET_EXES="$PDN_UNX_EXES $RET_EXES"  ;;
       $WNT)
 	 RET_EXES="$PDN_WNT_EXES $RET_EXES"  ;;
@@ -225,14 +223,12 @@ function get_libs
    if [[ $D_COMPS == "true" ]]
    then
       case $PF in
-      $SOL|$LNX|$AIX|$OSF)
+      $SOL|$LNX|$AIX|$OSF|$I64)
 	 RET_LIBS="$DYN_UNX_LIBS" ;;
       $WNT)
 	 RET_LIBS=$DYN_WNT_LIBS ;;
       $IRX)
 	 RET_LIBS="$DYN_UNX_LIBS libdyninstAPI_RT_n32.so.1" ;;
-      $I64)
-    RET_LIBS="$DYN_UNX_LIBS" ;;
       esac
    fi
 
@@ -241,6 +237,8 @@ function get_libs
       case $PF in
       $SOL|$AIX|$LNX)
 	 RET_LIBS="$PDN_UNX_LIBS libparadynMT.so.1 $RET_LIBS" ;;
+      $I64)
+	 RET_LIBS="$PDN_UNX_LIBS $RET_LIBS" ;;
       $WNT)
 	 RET_LIBS="$PDN_WNT_LIBS $RET_LIBS" ;;
       esac
