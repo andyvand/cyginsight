@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.37 2005/09/09 18:08:11 legendre Exp $
+# $Id: files_PD,v 1.38 2005/10/04 18:09:54 legendre Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -235,9 +235,7 @@ function get_libs
    if [[ $P_COMPS == "true" ]]
    then
       case $PF in
-      $SOL|$AIX|$LNX)
-	 RET_LIBS="$PDN_UNX_LIBS libparadynMT.so.1 $RET_LIBS" ;;
-      $I64)
+      $SOL|$AIX|$LNX|$I64)
 	 RET_LIBS="$PDN_UNX_LIBS $RET_LIBS" ;;
       $WNT)
 	 RET_LIBS="$PDN_WNT_LIBS $RET_LIBS" ;;
