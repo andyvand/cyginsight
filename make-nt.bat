@@ -1,6 +1,6 @@
 rem Script for building Paradyn & DynInstAPI on WinNT platform
 @echo off
-rem $Id: make-nt.bat,v 1.23 2005/03/07 21:23:49 legendre Exp $
+rem $Id: make-nt.bat,v 1.24 2005/10/12 19:20:51 legendre Exp $
 @echo on
 
 rem enable the following to build with symbols
@@ -14,6 +14,11 @@ set PLATFORM=i386-unknown-nt4.0
 if not exist %DEST_DIR% mkdir %DEST_DIR%
 if not exist %LIBRARY_DEST% mkdir %LIBRARY_DEST%
 if not exist %PROGRAM_DEST% mkdir %PROGRAM_DEST%
+
+cmd /c "cd dyninstAPI_RT\%PLATFORM% && nmake clean && nmake %DBG% install"
+cmd /c "cd dyninstAPI\%PLATFORM% && nmake clean && nmake %DBG% install"
+cmd /c "cd dyninstAPI\tests\%PLATFORM% && nmake clean && nmake %DBG% install"
+cmd /c "cd dyner\%PLATFORM% && nmake clean && nmake %DBG% install"
 
 cmd /c "cd igen\%PLATFORM% && nmake clean && nmake %DBG% install"
 cmd /c "cd mrnet\%PLATFORM% && nmake clean && nmake %DBG% install"
@@ -31,7 +36,3 @@ cmd /c "cd visiClients\tclVisi\%PLATFORM% && nmake clean && nmake %DBG% install"
 rem No visiClients/terrain to build for WinNT!
 
 cmd /c "cd sharedMem\%PLATFORM% && nmake clean && nmake %DBG% install"
-cmd /c "cd dyninstAPI_RT\%PLATFORM% && nmake clean && nmake %DBG% install"
-cmd /c "cd dyninstAPI\%PLATFORM% && nmake clean && nmake %DBG% install"
-cmd /c "cd dyninstAPI\tests\%PLATFORM% && nmake clean && nmake %DBG% install"
-cmd /c "cd dyner\%PLATFORM% && nmake clean && nmake %DBG% install"
