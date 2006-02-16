@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.9 2005/04/12 15:55:45 rchen Exp $
+# $Id: tests_DI,v 1.10 2006/02/16 00:57:37 legendre Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -41,7 +41,7 @@ esac
 FULL_TEST_LIST="1 2 3 4 5 6 7 8 9 10 11 12"
 case "$PLATFORM" in
     i386-unknown-linux*)
-	TEST_LIST="1 2 3 4 5 6 7 8 9 12"
+	TEST_LIST="1 2 3 4 5 6 7 8 9 12 13 14"
 	;;
     ia64*)
 	TEST_LIST="1 2 3 4 5 6 7 8 12"
