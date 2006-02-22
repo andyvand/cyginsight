@@ -163,7 +163,7 @@ sub final_reap()
 {
     my $ps = "/bin/ps -u $<";	# "$<" == Effective UID
 
-    foreach (1 .. 3) {
+    foreach (1 .. 5) {
 	my $done = 1;
 	my @input = `$ps`;	# Run "ps".
 	chomp(@input);		# Remove trailing '\n'.
@@ -182,6 +182,7 @@ sub final_reap()
 		if ($cmd =~ /$pattern/) {
 		    print(STDERR "*** Extra process found;  Reaping $pid ($cmd).\n");
 		    kill(SIGKILL, $pid);
+		    kill(SIGCONT, $pid);
 		    $done = 0;
 		}
 	    }
