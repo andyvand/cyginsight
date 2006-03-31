@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.11 2006/03/13 22:13:50 tlmiller Exp $
+# $Id: tests_DI,v 1.12 2006/03/31 20:15:19 mjbrim Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -38,16 +38,16 @@ case "$PLATFORM" in
 	STD_CXX=CC
 esac
 
-FULL_TEST_LIST="1 2 3 4 5 6 7 8 9 10 11 12"
+FULL_TEST_LIST="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"
 case "$PLATFORM" in
     i386-unknown-linux*)
-	TEST_LIST="1 2 3 4 5 6 7 8 9 12 13 14"
+	TEST_LIST="1 2 3 4 5 6 7 8 9 12 13 14 15"
 	;;
     ia64*)
-	TEST_LIST="1 2 3 4 5 6 7 8 12 13 14"
+	TEST_LIST="1 2 3 4 5 6 7 8 12 13 14 15"
 	;;
     rs6000-ibm-aix*)
-	TEST_LIST="1 2 3 4 5 6 7 8 9 12"
+	TEST_LIST="1 2 3 4 5 6 7 8 9 12 13 14 15"
 	;;
     mips-sgi-irix6.*)
 	TEST_LIST="1 2 3 4 6 7 8"
