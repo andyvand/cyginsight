@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.12 2006/03/31 20:15:19 mjbrim Exp $
+# $Id: tests_DI,v 1.13 2006/04/04 19:24:10 mjbrim Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -551,8 +551,8 @@ do
 	    # If x86 or sparc run extra test with relocation
 	    #
 	    if [ $ARCH = "i386" -o $ARCH = "sparc" ]; then
-	    if [ $TESTNUM != 9 -a $TESTNUM != 10 -a $TESTNUM != 12 ]; then
-		# No -relocate tests for #9, #10, or #12
+	    if [ $TESTNUM != 9 -a $TESTNUM != 10 -a $TESTNUM != 12 -a $TESTNUM != 13 -a $TESTNUM != 14 -a $TESTNUM != 15 ]; then
+		# No -relocate tests for #9, 10, 12-15
 
 		TEST="test$TESTNUM -relocate $FLAGS -mutatee $MUTATEE"
 		if [ -n "$INDITESTS" ]; then
