@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.14 2006/04/04 19:54:54 bpellin Exp $
+# $Id: tests_DI,v 1.15 2006/04/07 22:59:48 mjbrim Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -393,7 +393,7 @@ RunTest ()
 {
     echo \"$TEST\"
     if [ ! "$SKIPTESTS" ]; then
-        $PDSCRDIR/timer.pl ./$TEST -V
+        $PDSCRDIR/timer.pl -t 1200 ./$TEST -V
         EXITCODE=$?
         if [ $EXITCODE -ne 0 ]; then
             printf "=========================================================\n"
@@ -517,7 +517,7 @@ do
 		    if [ -x $MUTATEX ]; then
 			ls -lLF $MUTATEX                          2>&1 | $PDSCRDIR/uniq.pl | tee -a $TESTSLOG
 			$PDSCRDIR/ldd_PD $MUTATEX                 2>&1 | $PDSCRDIR/uniq.pl | tee -a $TESTSLOG
-			$PDSCRDIR/timer.pl -t 1200 ./$MUTATEX      2>&1 | $PDSCRDIR/uniq.pl | tee -a $TESTSLOG
+			$PDSCRDIR/timer.pl -t 120 ./$MUTATEX      2>&1 | $PDSCRDIR/uniq.pl | tee -a $TESTSLOG
 		    fi
 		done
 	    fi
