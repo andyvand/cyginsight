@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: reap,v 1.2 2004/02/11 16:52:55 schendel Exp $
+# $Id: reap,v 1.3 2006/04/21 17:05:30 mjbrim Exp $
 # reap the named process(es)
 # Usage: reap [-a] [-n] [-q] [process_expressions]
 
@@ -60,6 +60,12 @@ case "$PLATFORM" in
     CUT="-c9-15"
     ;;
   ia64-unknown-linux*)
+    PS="ps"
+    PSX="$PS uxa"
+    PS1="$PS -fp"
+    CUT="-c9-15"
+    ;;
+  x86_64-unknown-linux*)
     PS="ps"
     PSX="$PS uxa"
     PS1="$PS -fp"
