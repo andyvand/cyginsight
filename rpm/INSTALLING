@@ -1,0 +1,35 @@
+Required packages for building:
+
+- gcc
+- gcc-c++
+- gcc-g77
+- tcl-devel
+- tk-devel
+- nasm
+- bison
+- flex
+- elfutils-libelf-devel
+- rpm-build
+
+In order to create the RPM, the spec file expects two tar files.
+
+- A Dyninst source distribution, containing the core and scripts subdirectory,
+  and the two documentation files, dyninstProgGuide.pdf and dynerGuid.pdf.
+- A libdwarf distribution.
+
+The dyninst source distribution is created from a clean CVS checkout.  After
+pulling the core and scripts modules and the two PDFs, run the "masktar.sh" 
+script to create a tar file suitable for inclusion in a source RPM.
+
+The two tar files should be placed in the rpm build heirarchy (e.g.
+/usr/src/redhat/SOURCES).
+
+To build the RPM, issue a "rpmbuild -ba <specfile>"  This will perform three
+actions.  It will
+
+- Install Dyninst into the system (i.e. inside /usr/bin, /usr/lib, and
+/usr/include/dyninst)
+- Create dyninst and dyninst-tests RPM, placing them in the rpm build 
+heirarchy (/usr/src/redhat/RPMS)
+- Create a Dyninst source RPM, placing it in the rpm build heirarchy
+(/usr/src/redhat/SRPMS)
