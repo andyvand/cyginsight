@@ -1,0 +1,4 @@
+lib/libdyninstAPI.so /usr/lib
+lib/libdyninstAPI_RT.so.1 /usr/lib
+bin/dyner /usr/bin
+

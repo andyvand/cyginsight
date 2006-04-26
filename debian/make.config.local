@@ -1,0 +1,45 @@
+# local definitions
+
+BUILD_MARK=
+BUILD_NUM=-549
+
+#TCL/TK is required for all Paradyn builds, but not DyninstAPI
+TCLTK_DIR       = /usr/include/tcl8.4
+TCLTK_LIB_DIR   = /usr/lib
+TCLTK_INC_DIR   = $(TCLTK_DIR)
+
+#Libelf is required by Linux/x86 and Linux/ia64
+LIBELFDIR       = /usr/include/libelf
+LIBELF_LIB      = /usr/lib
+LIBELF_INC      = $(LIBELFDIR)
+
+#Libdwarf is required by Linux/x86 and Linux/ia64
+LIBDWARFDIR     = /usr/include/libdwarf
+LIBDWARF_LIB    = /usr/lib
+LIBDWARF_INC    = $(LIBDWARFDIR)
+
+#libunwind is required by Linux/ia64
+#LIBUNWINDDIR    = /p/paradyn/packages/libunwind
+#LIBUNWIND_LIB   = $(LIBUNWINDDIR)/lib
+#LIBUNWIND_INC   = $(LIBUNWINDDIR)/include
+
+#Uncomment the following line to build Paradyn with Tcl/Tk 8.3
+# instead of 8.4
+#USE_TCL83      = true
+
+#Uncomment these lines to force the use static libraries
+#LIBELFSTATIC   = true
+#LIBDWARFSTATIC = true
+#LIBTCLTKSTATIC = true
+
+#nasm is needed for the Linux/x86 dyninst tests
+NASM            = /usr/bin/nasm
+
+# Set to the directory containing libflex.a.  Needed to build MRNet and Paradyn.
+# Neither of the IA-64 boxes are supported.
+#FLEX_DIR		= /usr/lib
+
+#PAPI_ROOT       = /p/paradyn/packages/papi-3.0.0-test
+
+#GCC = /usr/bin/gcc-3.3
+#GXX = /usr/bin/g++-3.3
