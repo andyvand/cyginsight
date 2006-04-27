@@ -54,7 +54,7 @@ while ($ARGV[0] =~ /^-/) {
 if (@regexList == undef) {
     # Default child regex list.
     # ** Should/Can this regex be more specific?
-    @regexList = ('^\S*test\d+',
+    @regexList = ('^\S*test\d+.mutatee',
 		  '^\S*dyncov',
 		  '^\S*ijpeg',
 		  '^\S*cc1'
