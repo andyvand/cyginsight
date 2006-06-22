@@ -118,20 +118,24 @@ sub set_reap($) {
 # Called if child returns normally.
 #
 sub catch_child($) {
+    my $result = -1;
+    my $status = -1;
     return if ($childStatus ne 'UNDEF');
 
-    wait();
-    if ($? & 127) {
-	$childStatus = 'SIGNAL';
-	$retVal = ($? & 127);
+    $result = waitpid(-1, &WNOHANG);
+    $status = $?;
 
-    } elsif ($? & 128) {
-	$childStatus = 'CORE';
-
-    } else {
-	$childStatus = 'NORMAL';
+    if ($result ==  $childPid) {
+      if ($? & 127) {
+	  $childStatus = 'SIGNAL';
+	  $retVal = ($? & 127);
+      } elsif ($? & 128) {
+	  $childStatus = 'CORE';
+      } else {
+  	$childStatus = 'NORMAL';
 	$retVal = ($? >> 8);
-    }
+      }
+    } 
 }
 
 ######################################################
