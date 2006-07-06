@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0C1E7CB29F0F4E778DF13F44FBD6506B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0CAA24D8E5584C8EB1DE82F6AF21E297"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,49 +33,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_15CE71CD2F3E46F6909E473925C897BA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_169261D321A84087A261ED59A223B89B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_18616189E1344977C6DE454EEAE83022"
         "OwnerKey" = "8:_4B6B687F59CD4EB89861B75154163A41"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_19CDBD806D7C47329882D88A22337E24"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1B8C8C98917146D395B048D158EFDD6A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1C41C1E9AA634738B58FF58674D0AF47"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1E2F467F524244ECB394A2C57AA789B1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2161A5503137433EA1AADA039E2AADF1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -93,37 +51,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_21D78F2B93D04AD981CE942F74DC2CA5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_236E2B9407224A42ADD5A90E77D20245"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_261849D1B5A5476F9FAAE63DF8EC59FF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D64B965ED6646D091BD7384B492CB36"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_300AA3F4BF19469F827BA38F02F883E6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_37FF0FC59BB64BEEA0E34815CD1774A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -135,7 +63,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_43A748EB96D84FAA984E4A711B725602"
+        "MsmKey" = "8:_44F815516EFA4B82A376FB901718B548"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -165,12 +93,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_560BDB54D01544C08777A644EE1074EE"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5B25EA8614FC4299B252AF22FED2CB0B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,25 +117,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6BD22A5325DE488DB2B36C45AD3B205F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6C33B062DBA24A2E8505065812388F9C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6EFC395010EC412799B5F59CBB7AFEA7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_72F59314D9EF4119BAD2BEFCC64F9A29"
+        "MsmKey" = "8:_782518C40D9E4887A391DDD8BC0B22C0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -231,49 +141,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_813AE66D02A54A759F0FAAC4EC2A2CD7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_829BD34DF6624BFEB48AD68C0CB7BA77"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_849A9917ED364E19A9529382588B6F1F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_88B8FCDBC96E452FBCEF2DEE9AD18578"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_92A03853636D4E61917994809C602931"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_95ECCF76579D45A79669C36FA02A0C95"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_99D94B8FE3364B769698D52073F5934C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9C9E327C10874AE3AE16EEC316DE3456"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -286,42 +160,6 @@
         "Entry"
         {
         "MsmKey" = "8:_A1713D2C0ADC4245949FF7441C6796E7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A782CEFB4ACE4AB799180A3107BF6D9E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A85A87785070480DADA72B361364A71C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AECFDE938749467A9BFB13BCB83E99AD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B384BB6A76AD400BA373B273496A1B85"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B5699A9A2DE741B3AC2D5C0C19BC684C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B86B82703B814B77BA67985356138992"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -345,31 +183,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C8C40F0D87A146D2B85DE8059AEB5BC9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C91A69E26FBD4DAD8A4464959C069B8B"
+        "MsmKey" = "8:_CDBE7E14C5D944808241A0A4079DF60A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CF84897A5EDA438599749C58CCA86C26"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D1A0CF088B3A4E9DA8930C1E001BCE1B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DCA7CB2886F74DDBACD79AA5AD7E7B3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -388,12 +208,6 @@
         "Entry"
         {
         "MsmKey" = "8:_E6A15496D6B0447094B146C572F22E75"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F5ECC52736254D76AC0884353F733700"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -437,6 +251,34 @@
     {
         "CustomAction"
         {
+            "{0C9D821E-95BB-411F-BE03-2864360EBF94}:_536F15462E494E7F871AE62392465DA2"
+            {
+            "Name" = "8:RemovePath.vbs"
+            "Condition" = "8:"
+            "Object" = "8:_CDBE7E14C5D944808241A0A4079DF60A"
+            "FileType" = "3:4"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_56A9CA28_E860_4BCC_B922_7E3A54F01EC4"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{0C9D821E-95BB-411F-BE03-2864360EBF94}:_7AA79322FFA24BA5A4176DB7FE70C535"
+            {
+            "Name" = "8:UpdatePath"
+            "Condition" = "8:"
+            "Object" = "8:_44F815516EFA4B82A376FB901718B548"
+            "FileType" = "3:4"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_E0AE84B6_EDA0_480B_BF6B_48A4DE914503"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -457,28 +299,8 @@
         {
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_075742BDE45C4A1191CDA3150736D695"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_Vector.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_Vector.h"
             "TargetName" = "8:BPatch_Vector.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_0C1E7CB29F0F4E778DF13F44FBD6506B"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\lprintf.h"
-            "TargetName" = "8:lprintf.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -497,50 +319,10 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_0CAA24D8E5584C8EB1DE82F6AF21E297"
             {
-            "SourcePath" = "8:..\\..\\i386-unknown-nt4.0\\lib\\libdyninstAPI_RT.lib"
+            "SourcePath" = "8:..\\..\\..\\i386-unknown-nt4.0\\lib\\libdyninstAPI_RT.lib"
             "TargetName" = "8:libdyninstAPI_RT.lib"
             "Tag" = "8:"
             "Folder" = "8:_A95DDB6D58EE4E23A9DF3EE38E8AEB11"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_15CE71CD2F3E46F6909E473925C897BA"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\String.h"
-            "TargetName" = "8:String.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_169261D321A84087A261ED59A223B89B"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\ntHeaders.h"
-            "TargetName" = "8:ntHeaders.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -575,90 +357,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_19CDBD806D7C47329882D88A22337E24"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\timing.h"
-            "TargetName" = "8:timing.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_1B8C8C98917146D395B048D158EFDD6A"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\osfKludges.h"
-            "TargetName" = "8:osfKludges.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_1C41C1E9AA634738B58FF58674D0AF47"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_basicBlock.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_basicBlock.h"
             "TargetName" = "8:BPatch_basicBlock.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_1E2F467F524244ECB394A2C57AA789B1"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\language.h"
-            "TargetName" = "8:language.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_2161A5503137433EA1AADA039E2AADF1"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\triple.h"
-            "TargetName" = "8:triple.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -677,88 +379,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_216A319C57C742B582DD7A6E34A5FC0A"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_sourceBlock.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_sourceBlock.h"
             "TargetName" = "8:BPatch_sourceBlock.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_21D78F2B93D04AD981CE942F74DC2CA5"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\int64iostream.h"
-            "TargetName" = "8:int64iostream.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_236E2B9407224A42ADD5A90E77D20245"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\pathName.h"
-            "TargetName" = "8:pathName.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_261849D1B5A5476F9FAAE63DF8EC59FF"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Dictionary.h"
-            "TargetName" = "8:Dictionary.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_2D64B965ED6646D091BD7384B492CB36"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Symbol.h"
-            "TargetName" = "8:Symbol.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -777,28 +399,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_300AA3F4BF19469F827BA38F02F883E6"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_loopTreeNode.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_loopTreeNode.h"
             "TargetName" = "8:BPatch_loopTreeNode.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_37FF0FC59BB64BEEA0E34815CD1774A6"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\debugOstream.h"
-            "TargetName" = "8:debugOstream.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -817,7 +419,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_3BE98A8D1D7D48B8BB5EC57FFF431394"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_frame.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_frame.h"
             "TargetName" = "8:BPatch_frame.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -835,12 +437,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_43A748EB96D84FAA984E4A711B725602"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_44F815516EFA4B82A376FB901718B548"
             {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Pair.h"
-            "TargetName" = "8:Pair.h"
+            "SourcePath" = "8:UpdatePath.vbs"
+            "TargetName" = "8:UpdatePath.vbs"
             "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
+            "Folder" = "8:_B7694DFD445B4D15BC36274B91C4CBA8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -851,13 +453,13 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_4787BD7B9A6743DA816D74452A398AF1"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\baseTrampTemplate.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\baseTrampTemplate.h"
             "TargetName" = "8:baseTrampTemplate.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -877,7 +479,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_4BB0D446132141ECB21809702307B989"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_image.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_image.h"
             "TargetName" = "8:BPatch_image.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -897,28 +499,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_4F0B2E3F268C4064AD95F7F7C8CCFEB2"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_basicBlockLoop.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_basicBlockLoop.h"
             "TargetName" = "8:BPatch_basicBlockLoop.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_560BDB54D01544C08777A644EE1074EE"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\machineType.h"
-            "TargetName" = "8:machineType.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -937,7 +519,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_5B25EA8614FC4299B252AF22FED2CB0B"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_point.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_point.h"
             "TargetName" = "8:BPatch_point.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -957,7 +539,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_6416A542BB6D4909A8B6AE1813FA4B36"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_process.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_process.h"
             "TargetName" = "8:BPatch_process.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -977,7 +559,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_65390268CC8B4DC090AA4540828CEA27"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_edge.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_edge.h"
             "TargetName" = "8:BPatch_edge.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -997,28 +579,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_69FA3995A9C0446DBB76E73FBD52775A"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_flowGraph.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_flowGraph.h"
             "TargetName" = "8:BPatch_flowGraph.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_6BD22A5325DE488DB2B36C45AD3B205F"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\headers.h"
-            "TargetName" = "8:headers.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1037,7 +599,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_6C33B062DBA24A2E8505065812388F9C"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_snippet.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_snippet.h"
             "TargetName" = "8:BPatch_snippet.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1055,12 +617,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_6EFC395010EC412799B5F59CBB7AFEA7"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_782518C40D9E4887A391DDD8BC0B22C0"
             {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\aixv41Headers.h"
-            "TargetName" = "8:aixv41Headers.h"
+            "SourcePath" = "8:..\\msiDyninstLogo.jpg"
+            "TargetName" = "8:msiDyninstLogo.jpg"
             "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
+            "Folder" = "8:_B7694DFD445B4D15BC36274B91C4CBA8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1071,33 +633,13 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_72F59314D9EF4119BAD2BEFCC64F9A29"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Vector.h"
-            "TargetName" = "8:Vector.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_78637167F4B04D0CBCD77C491E19A9FD"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\remoteDevice.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\remoteDevice.h"
             "TargetName" = "8:remoteDevice.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1117,48 +659,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_7EAA499D4B4E448890467CEC2F591839"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_type.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_type.h"
             "TargetName" = "8:BPatch_type.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_813AE66D02A54A759F0FAAC4EC2A2CD7"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Time.h"
-            "TargetName" = "8:Time.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_829BD34DF6624BFEB48AD68C0CB7BA77"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\fraction.h"
-            "TargetName" = "8:fraction.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1177,28 +679,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_849A9917ED364E19A9529382588B6F1F"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch.h"
             "TargetName" = "8:BPatch.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_88B8FCDBC96E452FBCEF2DEE9AD18578"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\vectorSet.h"
-            "TargetName" = "8:vectorSet.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1217,68 +699,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_92A03853636D4E61917994809C602931"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_memoryAccess_NP.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_memoryAccess_NP.h"
             "TargetName" = "8:BPatch_memoryAccess_NP.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_95ECCF76579D45A79669C36FA02A0C95"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\linuxHeaders.h"
-            "TargetName" = "8:linuxHeaders.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_99D94B8FE3364B769698D52073F5934C"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\std_namesp.h"
-            "TargetName" = "8:std_namesp.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_9C9E327C10874AE3AE16EEC316DE3456"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Types.h"
-            "TargetName" = "8:Types.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1297,7 +719,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_9D8CB458D5DA4AC2A0A02470D5F2C7E5"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_instruction.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_instruction.h"
             "TargetName" = "8:BPatch_instruction.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1317,128 +739,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_A1713D2C0ADC4245949FF7441C6796E7"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_sourceObj.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_sourceObj.h"
             "TargetName" = "8:BPatch_sourceObj.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_A782CEFB4ACE4AB799180A3107BF6D9E"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\osfHeaders.h"
-            "TargetName" = "8:osfHeaders.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_A85A87785070480DADA72B361364A71C"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\solarisKludges.h"
-            "TargetName" = "8:solarisKludges.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_AECFDE938749467A9BFB13BCB83E99AD"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Timer.h"
-            "TargetName" = "8:Timer.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B384BB6A76AD400BA373B273496A1B85"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\refCounter.h"
-            "TargetName" = "8:refCounter.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B5699A9A2DE741B3AC2D5C0C19BC684C"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\Ident.h"
-            "TargetName" = "8:Ident.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B86B82703B814B77BA67985356138992"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\stringDecl.h"
-            "TargetName" = "8:stringDecl.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1457,7 +759,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_BEC861C829AA45758D92270AC0D7D41D"
             {
-            "SourcePath" = "8:..\\..\\i386-unknown-nt4.0\\lib\\libdyninstAPI.lib"
+            "SourcePath" = "8:..\\..\\..\\i386-unknown-nt4.0\\lib\\libdyninstAPI.lib"
             "TargetName" = "8:libdyninstAPI.lib"
             "Tag" = "8:"
             "Folder" = "8:_A95DDB6D58EE4E23A9DF3EE38E8AEB11"
@@ -1477,7 +779,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_C67415D19E5C422292F990CEF574BD8A"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_module.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_module.h"
             "TargetName" = "8:BPatch_module.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1497,7 +799,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_C8BF7C753B6144888AE36421956676F0"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_Set.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_Set.h"
             "TargetName" = "8:BPatch_Set.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1515,12 +817,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_C8C40F0D87A146D2B85DE8059AEB5BC9"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_CDBE7E14C5D944808241A0A4079DF60A"
             {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\solarisHeaders.h"
-            "TargetName" = "8:solarisHeaders.h"
+            "SourcePath" = "8:RemovePath.vbs"
+            "TargetName" = "8:RemovePath.vbs"
             "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
+            "Folder" = "8:_B7694DFD445B4D15BC36274B91C4CBA8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1531,74 +833,14 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_C91A69E26FBD4DAD8A4464959C069B8B"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\irixKludges.h"
-            "TargetName" = "8:irixKludges.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_CF84897A5EDA438599749C58CCA86C26"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_dll.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_dll.h"
             "TargetName" = "8:BPatch_dll.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_D1A0CF088B3A4E9DA8930C1E001BCE1B"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\List.h"
-            "TargetName" = "8:List.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_DCA7CB2886F74DDBACD79AA5AD7E7B3D"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\irixHeaders.h"
-            "TargetName" = "8:irixHeaders.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1617,7 +859,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_E42726F57D394AE4A9343C6AC28921AB"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_thread.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_thread.h"
             "TargetName" = "8:BPatch_thread.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1637,7 +879,7 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_E47075041E954D94BC1167E0E2E3EEFB"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_function.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_function.h"
             "TargetName" = "8:BPatch_function.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
@@ -1657,28 +899,8 @@
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_E6A15496D6B0447094B146C572F22E75"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\h\\BPatch_eventLock.h"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\h\\BPatch_eventLock.h"
             "TargetName" = "8:BPatch_eventLock.h"
-            "Tag" = "8:"
-            "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_F5ECC52736254D76AC0884353F733700"
-            {
-            "SourcePath" = "8:..\\..\\core\\common\\h\\linuxKludges.h"
-            "TargetName" = "8:linuxKludges.h"
             "Tag" = "8:"
             "Folder" = "8:_29E2DD11AED44EFCA7BF0208E3596FB4"
             "Condition" = "8:"
@@ -1701,28 +923,6 @@
         }
         "Folder"
         {
-            "{78BAF5CE-F2E5-45BE-83BC-DB6AF387E941}:_2EEE74F070EB4722A9392F1103BB87E4"
-            {
-            "Name" = "8:#1919"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:ProgramMenuFolder"
-                "Folders"
-                {
-                }
-            }
-            "{78BAF5CE-F2E5-45BE-83BC-DB6AF387E941}:_7B945B8A1D1D470AA4E2F5D970CE4934"
-            {
-            "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:DesktopFolder"
-                "Folders"
-                {
-                }
-            }
             "{58C0ADA3-3CEA-43BD-A3B3-2EA121BC8217}:_B7694DFD445B4D15BC36274B91C4CBA8"
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][ProductName]"
@@ -1773,7 +973,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dyninst"
         "ProductCode" = "8:{2CE23ACA-125A-4F81-9903-F2EEAC112765}"
-        "PackageCode" = "8:{DD166CF7-D540-41D1-A776-9BFF153D69FA}"
+        "PackageCode" = "8:{439F45D3-A650-46AA-9E44-A75FA8476E5B}"
         "UpgradeCode" = "8:{A534751F-682C-4FEC-8625-2FF8ADC2932D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -1817,6 +1017,106 @@
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_F1FBF585235A4228A60CE71142859823"
+                                    {
+                                    "Name" = "8:Dyninst"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                            "{35AE352C-BC79-4EF9-ABD8-61F467188583}:_53FBD28B0ADE4383B4A78C07628A6D41"
+                                            {
+                                            "Name" = "8:Path"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:[TARGETDIR]"
+                                            }
+                                        }
+                                    }
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
+                    "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_A4EBBA3E25444A1AA467DF35FBB87819"
+                    {
+                    "Name" = "8:SYSTEM"
+                    "Condition" = "8:"
+                    "AlwaysCreate" = "11:FALSE"
+                    "DeleteAtUninstall" = "11:FALSE"
+                    "Transitive" = "11:FALSE"
+                        "Keys"
+                        {
+                            "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_DBAA2BEE7C9245F6AC6D1B81605F1D92"
+                            {
+                            "Name" = "8:CurrentControlSet"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                    "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_F4709B0E7D604B89AA12355C0157D943"
+                                    {
+                                    "Name" = "8:Control"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_26A035A4DC1A4281B96FAC8EB14DB7B7"
+                                            {
+                                            "Name" = "8:Session Manager"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{6A471EEF-D31B-40F8-BCF6-C9E8EC783F36}:_ED7A2C87B6EC413EB9E0B39D165C652D"
+                                                    {
+                                                    "Name" = "8:Environment"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                        }
+                                                        "Values"
+                                                        {
+                                                            "{35AE352C-BC79-4EF9-ABD8-61F467188583}:_2CFF227BC7F3411A93C393357BB8A236"
+                                                            {
+                                                            "Name" = "8:DYNINSTAPI_RT_LIB"
+                                                            "Condition" = "8:"
+                                                            "Transitive" = "11:FALSE"
+                                                            "ValueTypes" = "3:2"
+                                                            "Value" = "8:[TARGETDIR]Lib\\libdyninstAPI_RT.dll"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -2033,7 +1333,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_782518C40D9E4887A391DDD8BC0B22C0"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -2212,7 +1513,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_782518C40D9E4887A391DDD8BC0B22C0"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -2275,7 +1577,7 @@
         {
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_1063D41970E14AB3863B7EDC6C3FB1AC"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI_RT\\i386-unknown-nt4.0\\libdyninstAPI_RT.dll"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI_RT\\i386-unknown-nt4.0\\libdyninstAPI_RT.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A95DDB6D58EE4E23A9DF3EE38E8AEB11"
@@ -2331,7 +1633,7 @@
             }
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_4B6B687F59CD4EB89861B75154163A41"
             {
-            "SourcePath" = "8:..\\..\\core\\dyninstAPI\\i386-unknown-nt4.0\\libdyninstAPI.dll"
+            "SourcePath" = "8:..\\..\\..\\core\\dyninstAPI\\i386-unknown-nt4.0\\libdyninstAPI.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A95DDB6D58EE4E23A9DF3EE38E8AEB11"
