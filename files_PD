@@ -1,5 +1,5 @@
 #!/bin/ksh
-# $Id: files_PD,v 1.39 2005/10/12 19:20:53 legendre Exp $
+# $Id: files_PD,v 1.40 2007/03/22 19:56:35 legendre Exp $
 # list (or otherwise examine) all Paradyn/Dyninst executable/library files
 
 #SOS=sparc-sun-sunos4.1.3
@@ -161,7 +161,7 @@ elif [ -n "$CHECK_FRESH" ]; then
 fi
 
 V_COMPS="rthist barChart phaseTable tableVisi tclVisi terrain"
-V_COMPS_WNT="rthist.exe barChart.exe phaseTable.exe tableVisi.exe tclVisi.exe"
+V_COMPS_WNT="rthist.exe barchart.exe phaseTable.exe tableVisi.exe tclVisi.exe"
 DYNINST_UNX_MUTTEES="testprogs/test1.mutatee_g++ testprogs/test1.mutatee_gcc testprogs/test2.mutatee_g++ testprogs/test2.mutatee_gcc testprogs/test3.mutatee_g++ testprogs/test3.mutatee_gcc testprogs/test4a.mutatee_g++ testprogs/test4a.mutatee_gcc testprogs/test4b.mutatee_g++ testprogs/test4b.mutatee_gcc testprogs/test5.mutatee_g++"
 DYNINST_SOL_MUTTEES="testprogs/test1.mutatee_CC testprogs/test1.mutatee_cc testprogs/test2.mutatee_CC testprogs/test2.mutatee_cc testprogs/test3.mutatee_CC testprogs/test3.mutatee_cc testprogs/test4a.mutatee_CC testprogs/test4a.mutatee_cc testprogs/test4b.mutatee_CC testprogs/test4b.mutatee_cc testprogs/test5.mutatee_CC testprogs/test6.mutatee_cc testprogs/test7.mutatee_CC testprogs/test7.mutatee_cc"
 DYNINST_LNX_MUTTEES="testprogs/test1.mutatee_pgCC testprogs/test1.mutatee_pgcc testprogs/test2.mutatee_pgCC testprogs/test2.mutatee_pgcc testprogs/test3.mutatee_pgCC testprogs/test3.mutatee_pgcc testprogs/test4a.mutatee_pgCC testprogs/test4a.mutatee_pgcc testprogs/test4b.mutatee_pgCC testprogs/test4b.mutatee_pgcc testprogs/test5.mutatee_pgCC testprogs/test6.mutatee_pgcc testprogs/test7.mutatee_pgCC testprogs/test7.mutatee_pgcc"
@@ -175,13 +175,13 @@ PDN_UNX_EXES="paradyn paradynd* igen dyner $V_COMPS"
 PDN_OSF_EXES="paradynd igen dyner"
 PDN_WNT_EXES="paradyn.exe paradynd.exe igen.exe dyner.exe $V_COMPS_WNT"
 
-PDN_UNX_LIBS="libmrnet.a libparadynRT* libpdutil.a libvisi.a libsharedMutatee* libxplat.a"
+PDN_UNX_LIBS="libmrnet.a libparadynRT* libpdutil.a libvisi.a libdynShmMutatee* libdynShmMutator* libxplat.a"
 THR_UNX_LIB="libpdthread.so"
 THR_AIX_LIB="libpdthread.a"
 
 DYN_UNX_LIBS='libdyninstAPI.* libdyninstAPI_RT*'
 
-PDN_WNT_LIBS="libmrnet.lib libparadynRT.dll libpdutil.lib libpdthread.lib libvisi.lib libxplat.lib"
+PDN_WNT_LIBS="libmrnet.lib libparadynRT.dll pdutil.lib pdthread.lib libvisi.lib libxplat.lib"
 DYN_WNT_LIBS="libdyninstAPI.lib libdyninstAPI_RT.dll"
 
 function get_exes
