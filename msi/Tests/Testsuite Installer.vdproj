@@ -243,7 +243,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Dyninst-Tests-5.0.msi"
+        "OutputFilename" = "8:Debug\\Dyninst-tests-5.1.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1080,7 +1080,7 @@
             {
             "Name" = "8:Condition1"
             "Condition" = "8:DYNINSTEXISTS"
-            "Message" = "8:Dyninst-5.0 must be installed"
+            "Message" = "8:Dyninst-5.1 must be installed first."
             "InstallUrl" = "8:"
             }
         }
@@ -1101,13 +1101,13 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dyninst Tests"
-        "ProductCode" = "8:{9C292E58-CDBF-4406-A7F3-5C8FBB4A0622}"
-        "PackageCode" = "8:{03B1415C-0782-4F94-9212-9A4CBA071E3B}"
+        "ProductCode" = "8:{54CDAC05-D41E-4E67-9CEE-68BE6578A23D}"
+        "PackageCode" = "8:{F5EB19FB-207D-4C89-B445-75C424957DDF}"
         "UpgradeCode" = "8:{EEC8C4F0-DE99-41CC-8393-CDAB36B04CBD}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "ProductVersion" = "8:5.0"
+        "ProductVersion" = "8:5.1"
         "Manufacturer" = "8:University of Maryland"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1243,7 +1243,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1280,7 +1281,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1351,7 +1353,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1431,7 +1434,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1453,7 +1457,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1484,7 +1489,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -1534,7 +1540,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1578,7 +1585,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_92487EA95CE843B58EDB960FED04EB19"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
