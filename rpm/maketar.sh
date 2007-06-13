@@ -9,10 +9,10 @@
 [ -e /tmp/tmp-$$ ] && { "Error: /tmp/tmp-$$ exists"; exit;}
 
 mkdir /tmp/tmp-$$
-mkdir /tmp/tmp-$$/dyninst-5.0
-cp -R $1/core $1/scripts $1/dyninstProgGuide.pdf $1/dynerGuide.pdf /tmp/tmp-$$/dyninst-5.0
-find /tmp/tmp-$$/dyninst-5.0 -name CVS | xargs rm -rf
-rm -f $2/dyninst-5.0.tar.gz
-(cd /tmp/tmp-$$; tar fcz dyninst-5.0.tar.gz dyninst-5.0)
-mv /tmp/tmp-$$/dyninst-5.0.tar.gz $2
+mkdir /tmp/tmp-$$/dyninst-5.1
+cp -R $1/core $1/scripts $1/dyninstProgGuide.pdf $1/dynerGuide.pdf /tmp/tmp-$$/dyninst-5.1
+find /tmp/tmp-$$/dyninst-5.1 -name CVS | xargs rm -rf
+rm -f $2/dyninst-5.1.tar.gz
+(cd /tmp/tmp-$$; tar fcz dyninst-5.1.tar.gz dyninst-5.1)
+mv /tmp/tmp-$$/dyninst-5.1.tar.gz $2
 rm -rf /tmp/tmp-$$
