@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: tests_DI,v 1.15 2006/04/07 22:59:48 mjbrim Exp $
+# $Id: tests_DI,v 1.16 2008/04/11 23:31:28 legendre Exp $
 # run Dyninst test suite (on current platform) with optional logging, etc.
 
 if [ "$PLATFORM" = "" ]; then
@@ -312,6 +312,12 @@ fi
 
 # Some systems (currently only Irix) support multiple ABIs
 ABILIST="."
+
+# Hijack PATH and LD_LIBRARY_PATH to ensure that we have the "old" mutatees and libs
+# (some of our testing env's specify the new testdirs)
+PATH=$TESTDIR:$PATH
+LD_LIBRARY_PATH=$TESTDIR:$LD_LIBRARY_PATH
+LIBPATH=$LD_LIBRARY_PATH
 
 # Go to it!
 cd $TESTSDIR
