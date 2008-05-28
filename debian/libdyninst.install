@@ -1,4 +1,5 @@
 lib/libdyninstAPI.so /usr/lib
 lib/libdyninstAPI_RT.so.1 /usr/lib
 bin/dyner /usr/bin
-
+lib/libsymtabAPI.so /usr/lib
+lib/libcommon.so /usr/lib

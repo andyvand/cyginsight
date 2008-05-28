@@ -1,1 +1,3 @@
-dyninstAPI/h/* /usr/include/dyninst
+dyninstAPI/h/*.h /usr/include/dyninst
+common/h/*.h /usr/include/dyninst
+symtabAPI/h/*.h /usr/include/dyninst
