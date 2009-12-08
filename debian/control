@@ -1,7 +1,7 @@
 Source: dyninst
 Priority: optional
 Maintainer: Paradyn / Dyninst Project <paradyn@.cs.wisc.edu>
-Build-Depends: debhelper (>= 4.0.0), nasm, libelf-dev, g77, binutils-dev, libxml2-dev, tcl8.4-dev, tk8.4-dev, bison, flex
+Build-Depends: debhelper (>= 4.0.0), nasm, libelf-dev, binutils-dev, libxml2-dev
 Standards-Version: 3.6.2
 Section: libs
 
@@ -20,11 +20,3 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: The dyninstAPI library and the runtime library
  The dyninstAPI library and the runtime library
-
-Package: dyninst-testsuite
-Section: utils
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libdyninst
-Description: The dyninstAPI regression test suite
- The dyninstAPI regression test suite.  A collection of test programs intended
- to verify the correctness of the dyninst library.

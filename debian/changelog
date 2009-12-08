@@ -1,3 +1,23 @@
+dyninst (6.1-1) unstable; urgency=low
+
+  * Optimized instrumentation generation
+  * Bug fixes for static binary rewriter
+  * Optimized instruction decoding
+  * Initial release of depGraphAPI
+  * Gap parsing for stripped code
+
+ -- Paradyn / Dyninst Project <paradyn@cs.wisc.edu>  Mon, 7 Dec 2009 17:30:00 -0600
+
+dyninst (6.0-1) unstable; urgency=low
+
+  * Initial release of static binary rewriter
+  * Initial release of instructionAPI
+  * Initial release of stackwalkerAPI
+  * Beta release of depGraphAPI
+  * Code parsing improvements
+
+ -- Paradyn / Dyninst Project <paradyn@cs.wisc.edu>  Tue, 30 Jun 2009 00:00:00 -0600
+
 dyninst (5.2-1) unstable; urgency=low
 
   * Optimized instrumentation generation
