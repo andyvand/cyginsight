@@ -1,18 +1,54 @@
 #!/bin/bash
 
-BUILDDIR=/p/paradyn/development/legendre/release
+# Version-specific information
 
+DYNINST_VERSION=7.0
+SYMTAB_VERSION=$DYNINST_VERSION
+INSTRUCTIONAPI_VERSION=2.0
+STACKWALKERAPI_VERSION=2.0
+PARSEAPI_VERSION=1.0
+PROCCONTROLAPI_VERSION=1.0
+
+RELEASEDIR=/p/paradyn/release$DYNINST_VERSION
+
+# Get command options
+if [ -z "$1" ]; then
+  echo usage: $0 build_dir bin_dir
+  echo
+  echo "build_dir - Directory where tarballs will be built"
+  echo ""
+  echo "bin_dir   - Top-level Dyninst build directory"
+  echo "            with builds for all platforms"
+  echo "            Default: /p/paradyn/builds"
+  exit
+fi
+
+BUILDDIR=$1
+
+if [ -z "$2" ]; then
+  BINDIR=/p/paradyn/builds
+else
+  BINDIR=$2
+fi
+
+# Setup build directory
 cd $BUILDDIR
-rm -rf builds
-rm -rf rel61
-mkdir builds
-mkdir rel61
-cd builds
+BUILDDIR=$PWD
+
+STAGEDIR=$BUILDDIR/build_stage
+
+# Stage directory holds trees to be tarballed
+rm -rf $STAGEDIR
+mkdir $STAGEDIR
+cd $STAGEDIR
 
 mkdir dyninstAPI
 mkdir symtabAPI
 mkdir instructionAPI
 mkdir stackwalkAPI
+mkdir parseAPI
+mkdir procControlAPI 
+
 
 #######################################################
 # DyninstAPI
@@ -20,231 +56,244 @@ mkdir stackwalkAPI
 
 DYNSRC_RM='src/dyninst/codeCoverage src/dyninst/dyninstAPI/tests'
 
-DYNBIN_RM='bin/testprogs bin/testprogs_new include lib/*mrnet* lib/*paradyn* lib/*visi* lib/*pdthread* lib/*pdutil* bin/*barchar* bin/*dbghelp* bin/*igen* bin/*mrnet* bin/*paradyn* bin/*phaseTable* bin/*rthist* bin/*tableVisi* bin/*tclVisi* bin/*topgen* bin/*terrain* bin/*termWin* bin/*barChart* bin/ lib/*testSuite* lib/*xplat* lib/*libtestSuite*'
+DYNBIN_RM='bin/testprogs bin/testprogs_new include lib/*mrnet* lib/*paradyn* lib/*visi* lib/*pdthread* lib/*pdutil* bin/*barchar* bin/*dbghelp* bin/*igen* bin/*mrnet* bin/*paradyn* bin/*phaseTable* bin/*rthist* bin/*tableVisi* bin/*tclVisi* bin/*topgen* bin/*terrain* bin/*termWin* bin/*barChart* bin/ lib/*testSuite* lib/*xplat* lib/*libtestSuite* lib/*pcontrol*'
 
 #
 # Build Dyninst Release
 #
 
 #Dyninst Source
-OFILE=dyninst_src_6.1
+OFILE=dyninst_src_$DYNINST_VERSION
 echo BUILDING $OFILE
+cd $STAGEDIR
 mkdir dyninstAPI/src
 cd dyninstAPI/src
-cp -r /p/paradyn/builds/dyninst .
-cp -r /p/paradyn/builds/scripts .
-cp -r /p/paradyn/builds/packagers .
-cp -r /p/paradyn/builds/docs .
-find . -name .git | xargs rm -rf
-cd ../..
-cp /p/paradyn/release6.1/LICENSE dyninstAPI/LICENSE
-cp /p/paradyn/release6.1/README_dyninst dyninstAPI/README
+#cp -r $BINDIR/dyninst .
+#cp -r $BINDIR/scripts .
+#cp -r $BINDIR/packagers .
+#cp -r $BINDIR/docs .
+#find . -name .git | xargs rm -rf
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE dyninstAPI/LICENSE
+cp $RELEASEDIR/README_dyninst dyninstAPI/README
 cd dyninstAPI
 rm -rf $DYNSRC_RM
-cd ..
+cd $STAGEDIR
 
 tar -cf $OFILE.tar dyninstAPI
 gzip $OFILE.tar
 
 #Documentation
 mkdir dyninstAPI/doc
-cp /p/paradyn/release6.1/doc/dyninstProgGuide.v61.pdf dyninstAPI/doc
-cp /p/paradyn/release6.1/doc/instructionProgGuide.pdf dyninstAPI/doc
-cp /p/paradyn/release6.1/doc/stackwalkProgGuide.pdf dyninstAPI/doc
-cp /p/paradyn/release6.1/doc/symtabProgGuide.pdf dyninstAPI/doc
-
-BINDIR=/p/paradyn/builds
+cp $RELEASEDIR/doc/dyninstProgGuide.v61.pdf dyninstAPI/doc
+cp $RELEASEDIR/doc/instructionProgGuide.pdf dyninstAPI/doc
+cp $RELEASEDIR/doc/stackwalkProgGuide.pdf dyninstAPI/doc
+cp $RELEASEDIR/doc/symtabProgGuide.pdf dyninstAPI/doc
 
 #Includes
 cp -r $BINDIR/include dyninstAPI
 
 #Windows
 PLAT=i386-unknown-nt4.0
-OFILE=dyninst_win_x86_6.1
+OFILE=dyninst_win_x86_$DYNINST_VERSION
 
 echo COPYING FILES FOR $PLAT
-
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cp /p/paradyn/packages/WinDebug/dbghelp.dll dyninstAPI/$PLAT/lib
 cp /p/paradyn/packages/libxml2/win32/lib/libxml2.dll dyninstAPI/$PLAT/lib
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #AIX
 PLAT=rs6000-ibm-aix5.1
-OFILE=dyninst_aix_power_6.1
+OFILE=dyninst_aix_power_$DYNINST_VERSION
 
 echo COPYING FILES FOR $PLAT
-
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cp /p/paradyn/packages/libxml2/rs_aix51/lib/libxml2.so.2 dyninstAPI/$PLAT/lib/libxml2.so
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
+cd $STAGEDIR
 chmod 755 dyninstAPI/$PLAT/lib/libDyninstText.a
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/x86
 PLAT=i386-unknown-linux2.4
-OFILE=dyninst_linux_x86_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_linux_x86_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/i386_cent40/lib/libxml2.so dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/i386-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/i386-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/ia64
 PLAT=ia64-unknown-linux2.4
-OFILE=dyninst_linux_ia64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_linux_ia64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/ia64_linux26/lib/libxml2.so dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ia64-unknown-linux2.4/libelf.so.0 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ia64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/ia64-unknown-linux2.4/libelf.so.0 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/ia64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/AMD64
 PLAT=x86_64-unknown-linux2.4
-OFILE=dyninst_linux_amd64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_linux_amd64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/amd64_cent40/lib/libxml2.so dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/PPC32
 PLAT=ppc32_linux
-OFILE=dyninst_linux_ppc32_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_linux_ppc32_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/ppc32_linux/libelf.so.0 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ppc32_linux/libdwarf.so dyninstAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/ppc32_linux/libelf.so.0 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/ppc32_linux/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #AIX/PPC64
 PLAT=rs6000-ibm-aix64-5.2
-OFILE=dyninst_aix_ppc64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_aix_ppc64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
+cd $STAGEDIR
 chmod 755 dyninstAPI/$PLAT/lib/libDyninstText.a
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/PPC64
 PLAT=ppc64_linux
-OFILE=dyninst_linux_ppc64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_linux_ppc64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/linux_ppc64/libelf.so.1 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/linux_ppc64/libdwarf.so dyninstAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/linux_ppc64/libelf.so.1 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/linux_ppc64/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #Solaris/SPARC
 PLAT=sparc-sun-solaris2.9
-OFILE=dyninst_solaris_sparc_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=dyninst_solaris_sparc_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT dyninstAPI/
 cd dyninstAPI/$PLAT
 rm -rf $DYNBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/sparc-sun-solaris2.9/libdwarf.so dyninstAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/sparc-sun-solaris2.9/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar dyninstAPI/doc dyninstAPI/include dyninstAPI/README dyninstAPI/$PLAT
 gzip $OFILE.tar
 
 #MOVE GZs
-mv *.gz ../rel61
+mv *.gz $BUILDDIR
 
 #######################################################
 # SymtabAPI
 #######################################################
 
-SYMSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/instructionAPI src/dyninst/stackwalk src/dyninst/valueAdded src/testsuite/src/instruction src/testsuite/src/dyninst'
+SYMSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/instructionAPI src/dyninst/stackwalk src/dyninst/valueAdded src/testsuite/src/instruction src/testsuite/src/dyninst src/dyninst/parseAPI src/dyninst/proccontrol'
 
-SYMBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*instructionAPI* lib/*stackwalk* lib/*DyninstText*'
+SYMBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*instructionAPI* lib/*stackwalk* lib/*DyninstText* lib/*pcontrol* lib/*parseAPI*'
 
 #
 # Build Symtab Release
 #
 
 #Symtab Source
-OFILE=symtab_src_6.1
+OFILE=symtab_src_$DYNINST_VERSION
 echo BUILDING $OFILE
+cd $STAGEDIR
 mkdir symtabAPI/src
 cd symtabAPI/src
-cp -r /p/paradyn/builds/dyninst .
-cp -r /p/paradyn/builds/scripts .
-cp -r /p/paradyn/builds/packagers .
-cd ../..
-cp /p/paradyn/release6.1/LICENSE symtabAPI/LICENSE
-cp /p/paradyn/release6.1/README_symtab symtabAPI/README
-cp /p/paradyn/release6.1/Makefile.symtab symtabAPI/src/dyninst/Makefile
+cp -r $BINDIR/dyninst .
+cp -r $BINDIR/scripts .
+cp -r $BINDIR/packagers .
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE symtabAPI/LICENSE
+cp $RELEASEDIR/README_symtab symtabAPI/README
+cp $RELEASEDIR/Makefile.symtab symtabAPI/src/dyninst/Makefile
 cd symtabAPI
 rm -rf $DYNSRC_RM 
 rm -rf $SYMSRC_RM
-cd ..
+cd $STAGEDIR
 
 tar -cf $OFILE.tar symtabAPI
 gzip $OFILE.tar
 
 #Documentation
 mkdir symtabAPI/doc
-cp /p/paradyn/release6.1/doc/symtabProgGuide.pdf symtabAPI/doc
-
-BINDIR=/p/paradyn/builds
+cp $RELEASEDIR/doc/symtabProgGuide.pdf symtabAPI/doc
 
 #Includes
 mkdir symtabAPI/include
@@ -254,169 +303,182 @@ cp -r $BINDIR/dyninst/dynutil/h/dyn_detail symtabAPI/include
 
 #Windows
 PLAT=i386-unknown-nt4.0
-OFILE=symtab_win_x86_6.1
+OFILE=symtab_win_x86_$DYNINST_VERSION
 
 echo COPYING FILES FOR $PLAT
-
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cp /p/paradyn/packages/WinDebug/dbghelp.dll symtabAPI/$PLAT/lib
 cp /p/paradyn/packages/libxml2/win32/lib/libxml2.dll symtabAPI/$PLAT/lib
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #AIX
 PLAT=rs6000-ibm-aix5.1
-OFILE=symtab_aix_power_6.1
+OFILE=symtab_aix_power_$DYNINST_VERSION
 
 echo COPYING FILES FOR $PLAT
-
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cp /p/paradyn/packages/libxml2/rs_aix51/lib/libxml2.so.2 symtabAPI/$PLAT/lib/libxml2.so
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/x86
 PLAT=i386-unknown-linux2.4
-OFILE=symtab_linux_x86_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_linux_x86_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/i386_cent40/lib/libxml2.so symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/i386-unknown-linux2.4/libelf.so.1 symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/i386-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libelf.so.1 symtabAPI/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/ia64
 PLAT=ia64-unknown-linux2.4
-OFILE=symtab_linux_ia64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_linux_ia64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/ia64_linux26/lib/libxml2.so symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ia64-unknown-linux2.4/libelf.so.0 symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ia64-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
+cp $RELEASEDIR/ia64-unknown-linux2.4/libelf.so.0 symtabAPI/$PLAT/lib
+cp $RELEASEDIR/ia64-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/AMD64
 PLAT=x86_64-unknown-linux2.4
-OFILE=symtab_linux_amd64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_linux_amd64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/amd64_cent40/lib/libxml2.so symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libelf.so.1 symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libelf.so.1 symtabAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/PPC32
 PLAT=ppc32_linux
-OFILE=symtab_linux_ppc32_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_linux_ppc32_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/ppc32_linux/libelf.so.0 symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ppc32_linux/libdwarf.so symtabAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/ppc32_linux/libelf.so.0 symtabAPI/$PLAT/lib
+cp $RELEASEDIR/ppc32_linux/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/PPC64
 PLAT=ppc64_linux
-OFILE=symtab_linux_ppc64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_linux_ppc64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/linux_ppc64/libelf.so.1 symtabAPI/$PLAT/lib
-cp /p/paradyn/release6.1/linux_ppc64/libdwarf.so symtabAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/linux_ppc64/libelf.so.1 symtabAPI/$PLAT/lib
+cp $RELEASEDIR/linux_ppc64/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #Solaris/SPARC
 PLAT=sparc-sun-solaris2.9
-OFILE=symtab_solaris_sparc_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_solaris_sparc_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/sparc-sun-solaris2.9/libdwarf.so symtabAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/sparc-sun-solaris2.9/libdwarf.so symtabAPI/$PLAT/lib
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
 #AIX/PPC64
 PLAT=rs6000-ibm-aix64-5.2
-OFILE=symtab_aix_ppc64_6.1
-echo COPYING FILES FOR $PLAT
+OFILE=symtab_aix_ppc64_$DYNINST_VERSION
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT symtabAPI/
 cd symtabAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SYMBIN_RM
-cd ../..
+cd $STAGEDIR
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar symtabAPI/doc symtabAPI/include symtabAPI/README symtabAPI/LICENSE symtabAPI/$PLAT
 gzip $OFILE.tar
 
-
 #MOVE GZs
-mv *.gz ../rel61
+mv *.gz $BUILDDIR
 
 #######################################################
 # InstructionAPI
 #######################################################
 
-INSSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/symtabAPI src/dyninst/depGraphAPI src/dyninst/stackwalk src/dyninst/valueAdded src/dyninst/testsuite/src/dyninst src/dyninst/testsuite/symtab'
+INSSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/symtabAPI src/dyninst/depGraphAPI src/dyninst/stackwalk src/dyninst/valueAdded src/dyninst/testsuite/src/dyninst src/dyninst/testsuite/symtab src/dyninst/proccontrol src/dyninst/parseAPI'
 
-INSBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*symtabAPI* lib/*stackwalk*'
+INSBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*symtabAPI* lib/*stackwalk* lib/*pcontrol* lib/*parseAPI*'
 
 #
 # Build InstructionAPI Release
@@ -424,28 +486,28 @@ INSBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*
 
 #InstructionAPI Source
 OFILE=instruction_src_1.1
+
 echo BUILDING $OFILE
+cd $STAGEDIR
 mkdir instructionAPI/src
 cd instructionAPI/src
-cp -r /p/paradyn/builds/dyninst .
-cp -r /p/paradyn/builds/scripts .
-cd ../..
-cp /p/paradyn/release6.1/LICENSE instructionAPI/LICENSE
-cp /p/paradyn/release6.1/README_instruction instructionAPI/README
-cp /p/paradyn/release6.1/Makefile.instruction instructionAPI/src/dyninst/Makefile
+cp -r $BINDIR/dyninst .
+cp -r $BINDIR/scripts .
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE instructionAPI/LICENSE
+cp $RELEASEDIR/README_instruction instructionAPI/README
+cp $RELEASEDIR/Makefile.instruction instructionAPI/src/dyninst/Makefile
 cd instructionAPI
 rm -rf $DYNSRC_RM 
 rm -rf $INSSRC_RM
-cd ..
+cd $STAGEDIR
 
 tar -cf $OFILE.tar instructionAPI
 gzip $OFILE.tar
 
 #Documentation
 mkdir instructionAPI/doc
-cp /p/paradyn/release6.1/doc/instructionProgGuide.pdf instructionAPI/doc
-
-BINDIR=/p/paradyn/builds
+cp $RELEASEDIR/doc/instructionProgGuide.pdf instructionAPI/doc
 
 #Includes
 mkdir instructionAPI/include
@@ -456,43 +518,45 @@ cp -r $BINDIR/dyninst/dynutil/h/dyn_detail instructionAPI/include
 #Linux/x86
 PLAT=i386-unknown-linux2.4
 OFILE=instruction_linux_x86_1.1
-echo COPYING FILES FOR $PLAT
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT instructionAPI/
 cd instructionAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $INSBIN_RM
-cd ../..
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar instructionAPI/doc instructionAPI/include instructionAPI/README instructionAPI/LICENSE instructionAPI/$PLAT
 gzip $OFILE.tar
 
 #Linux/AMD64
 PLAT=x86_64-unknown-linux2.4
 OFILE=instruction_linux_amd64_1.1
-echo COPYING FILES FOR $PLAT
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT instructionAPI/
 cd instructionAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $INSBIN_RM
-cd ../..
 
 echo TAR GZ
+cd $STAGEDIR
 tar -cf $OFILE.tar instructionAPI/doc instructionAPI/include instructionAPI/README instructionAPI/LICENSE instructionAPI/$PLAT
 gzip $OFILE.tar
 
 #MOVE GZs
-mv *.gz ../rel61
+mv *.gz $BUILDDIR
 
 #######################################################
 # StackwalkerAPI
 #######################################################
 
-SWKSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/valueAdded src/dyninst/testsuite src/dyninst/instructionAPI'
+SWKSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/valueAdded src/dyninst/testsuite src/dyninst/instructionAPI src/dyninst/parseAPI src/dyninst/proccontrol'
 
-SWKBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*instruction*'
+SWKBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*instruction* lib/*pcontrol* lib/*parseAPI*'
 
 #
 # Build StackwalkAPI Release
@@ -500,28 +564,28 @@ SWKBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*
 
 #StackwalkAPI Source
 OFILE=stackwalk_src_1.1
+
 echo BUILDING $OFILE
+cd $STAGEDIR
 mkdir stackwalkAPI/src
 cd stackwalkAPI/src
-cp -r /p/paradyn/builds/dyninst .
-cp -r /p/paradyn/builds/scripts .
-cd ../..
-cp /p/paradyn/release6.1/LICENSE stackwalkAPI/LICENSE
-cp /p/paradyn/release6.1/README_stackwalk stackwalkAPI/README
-cp /p/paradyn/release6.1/Makefile.stackwalk stackwalkAPI/src/dyninst/Makefile
+cp -r $BINDIR/dyninst .
+cp -r $BINDIR/scripts .
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE stackwalkAPI/LICENSE
+cp $RELEASEDIR/README_stackwalk stackwalkAPI/README
+cp $RELEASEDIR/Makefile.stackwalk stackwalkAPI/src/dyninst/Makefile
 cd stackwalkAPI
 rm -rf $DYNSRC_RM 
 rm -rf $SWKSRC_RM
-cd ..
+cd $STAGEDIR
 
 tar -cf $OFILE.tar stackwalkAPI
 gzip $OFILE.tar
 
 #Documentation
 mkdir stackwalkAPI/doc
-cp /p/paradyn/release6.1/doc/stackwalkProgGuide.pdf stackwalkAPI/doc
-
-BINDIR=/p/paradyn/builds
+cp $RELEASEDIR/doc/stackwalkProgGuide.pdf stackwalkAPI/doc
 
 #Includes
 mkdir stackwalkAPI/include
@@ -532,13 +596,14 @@ cp -r $BINDIR/dyninst/dynutil/h/dyn_detail stackwalkAPI/include
 #Linux/x86
 PLAT=i386-unknown-linux2.4
 OFILE=stackwalk_linux_x86_1.1
-echo COPYING FILES FOR $PLAT
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT stackwalkAPI/
 cd stackwalkAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SWKBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/i386_cent40/lib/libxml2.so stackwalkAPI/$PLAT/lib
 cp /usr/lib/libelf.so.1 stackwalkAPI/$PLAT/lib
 cp /p/paradyn/packages/libdwarf/libdwarf/i386_rhel5/libdwarf.so stackwalkAPI/$PLAT/lib
@@ -550,16 +615,17 @@ gzip $OFILE.tar
 #Linux/AMD64
 PLAT=x86_64-unknown-linux2.4
 OFILE=stackwalk_linux_amd64_1.1
-echo COPYING FILES FOR $PLAT
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT stackwalkAPI/
 cd stackwalkAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SWKBIN_RM
-cd ../..
+cd $STAGEDIR
 cp /p/paradyn/packages/libxml2/amd64_cent40/lib/libxml2.so stackwalkAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
-cp /p/paradyn/release6.1/x86_64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libelf.so.1 dyninstAPI/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libdwarf.so dyninstAPI/$PLAT/lib
 
 echo TAR GZ
 tar -cf $OFILE.tar stackwalkAPI/doc stackwalkAPI/include stackwalkAPI/README stackwalkAPI/LICENSE stackwalkAPI/$PLAT
@@ -568,19 +634,293 @@ gzip $OFILE.tar
 #Linux/PPC32
 PLAT=ppc32_linux
 OFILE=stackwalk_linux_ppc32_1.1
-echo COPYING FILES FOR $PLAT
 
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
 cp -r $BINDIR/$PLAT stackwalkAPI/
 cd stackwalkAPI/$PLAT
 rm -rf $DYNBIN_RM
 rm -rf $SWKBIN_RM
-cd ../..
-cp /p/paradyn/release6.1/ppc32_linux/libelf.so.0 stackwalkAPI/$PLAT/lib
-cp /p/paradyn/release6.1/ppc32_linux/libdwarf.so stackwalkAPI/$PLAT/lib
+cd $STAGEDIR
+cp $RELEASEDIR/ppc32_linux/libelf.so.0 stackwalkAPI/$PLAT/lib
+cp $RELEASEDIR/ppc32_linux/libdwarf.so stackwalkAPI/$PLAT/lib
 
 echo TAR GZ
 tar -cf $OFILE.tar stackwalkAPI/doc stackwalkAPI/include stackwalkAPI/README stackwalkAPI/LICENSE stackwalkAPI/$PLAT
 gzip $OFILE.tar
 
 #MOVE GZs
-mv *.gz ../rel61
+mv *.gz $BUILDDIR
+
+#######################################################
+# ParseAPI
+#######################################################
+
+PARSESRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/stackwalk src/dyninst/valueAdded src/testsuite/src/instruction src/testsuite/src/dyninst'
+
+PARSEBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*stackwalk* lib/*DyninstText* lib/*pcontrol*'
+
+#
+# Build ParseAPI Release
+#
+
+COMP_DIR=parseAPI
+
+#ParseAPI Source
+OFILE=parse_src_$DYNINST_VERSION
+
+echo BUILDING $OFILE
+cd $STAGEDIR
+mkdir $COMP_DIR/src
+cd $COMP_DIR/src
+cp -r $BINDIR/dyninst .
+cp -r $BINDIR/scripts .
+cp -r $BINDIR/packagers .
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE $COMP_DIR/LICENSE
+cp $RELEASEDIR/README_parse $COMP_DIR/README
+cp $RELEASEDIR/Makefile.parse $COMP_DIR/src/dyninst/Makefile
+cd parseAPI
+rm -rf $DYNSRC_RM 
+rm -rf $SYMSRC_RM
+cd $STAGEDIR
+
+tar -cf $OFILE.tar $COMP_DIR
+gzip $OFILE.tar
+
+#Documentation
+mkdir $COMP_DIR/doc
+cp $BINDIR/dyninst/parseAPI/doc/parseapi.pdf $COMP_DIR/doc
+
+#Includes
+mkdir $COMP_DIR/include
+cp $BINDIR/dyninst/parseAPI/h/*.h $COMP_DIR/include
+cp $BINDIR/dyninst/symtabAPI/h/*.h symtabAPI/include
+cp $BINDIR/dyninst/instructionAPI/h/*.h instructionAPI/include
+cp $BINDIR/dyninst/dynutil/h/*.h $COMP_DIR/include
+cp -r $BINDIR/dyninst/dynutil/h/dyn_detail $COMP_DIR/include
+
+#Windows
+PLAT=i386-unknown-nt4.0
+OFILE=parse_win_x86_$DYNINST_VERSION
+
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cp /p/paradyn/packages/WinDebug/dbghelp.dll $COMP_DIR/$PLAT/lib
+cp /p/paradyn/packages/libxml2/win32/lib/libxml2.dll $COMP_DIR/$PLAT/lib
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#AIX
+PLAT=rs6000-ibm-aix5.1
+OFILE=parse_aix_power_$DYNINST_VERSION
+
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cp /p/paradyn/packages/libxml2/rs_aix51/lib/libxml2.so.2 $COMP_DIR/$PLAT/lib/libxml2.so
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Linux/x86
+PLAT=i386-unknown-linux2.4
+OFILE=parse_linux_x86_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp /p/paradyn/packages/libxml2/i386_cent40/lib/libxml2.so $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libelf.so.1 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Linux/AMD64
+PLAT=x86_64-unknown-linux2.4
+OFILE=parse_linux_amd64_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp /p/paradyn/packages/libxml2/amd64_cent40/lib/libxml2.so $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libelf.so.1 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Linux/PPC32
+PLAT=ppc32_linux
+OFILE=parse_linux_ppc32_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp $RELEASEDIR/ppc32_linux/libelf.so.0 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/ppc32_linux/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Linux/PPC64
+PLAT=ppc64_linux
+OFILE=parse_linux_ppc64_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp $RELEASEDIR/linux_ppc64/libelf.so.1 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/linux_ppc64/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Solaris/SPARC
+PLAT=sparc-sun-solaris2.9
+OFILE=parse_solaris_sparc_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp $RELEASEDIR/sparc-sun-solaris2.9/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#AIX/PPC64
+PLAT=rs6000-ibm-aix64-5.2
+OFILE=parse_aix_ppc64_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+
+#MOVE GZs
+mv *.gz $BUILDDIR
+
+#######################################################
+# ProcControlAPI
+#######################################################
+
+PROCSRC_RM='src/dyninst/codeCoverage src/dyninst/dyner src/dyninst/dyninstAPI src/dyninst/dyninstAPI_RT src/dyninst/parseThat src/dyninst/sharedMem src/dyninst/testsuite src/dyninst/DyninstAPI* src/dyninst/Paradyn.sln src/dyninst/depGraphAPI src/dyninst/instructionAPI src/dyninst/stackwalk src/dyninst/valueAdded src/testsuite/src/instruction src/testsuite/src/dyninst src/dyninst/symtabAPI'
+
+PROCBIN_RM='bin/testprogs_new lib/*dyninstAPI* lib/*ShmMut* lib/*testsuite* lib/*sharedMut* lib/*testSuite* lib/*instructionAPI* lib/*stackwalk* lib/*DyninstText* lib/*symtabAPI* lib/*parseAPI*'
+
+#
+# Build ProcControlAPI Release
+#
+
+COMP_DIR=procControlAPI
+
+#ProcControlAPI Source
+OFILE=proccontrol_src_$DYNINST_VERSION
+echo BUILDING $OFILE
+cd $STAGEDIR
+mkdir $COMP_DIR/src
+cd $COMP_DIR/src
+cp -r $BINDIR/dyninst .
+cp -r $BINDIR/scripts .
+cp -r $BINDIR/packagers .
+cd $STAGEDIR
+cp $RELEASEDIR/LICENSE $COMP_DIR/LICENSE
+cp $RELEASEDIR/README_proc $COMP_DIR/README
+cp $RELEASEDIR/Makefile.proc $COMP_DIR/src/dyninst/Makefile
+cd $COMP_DIR
+rm -rf $DYNSRC_RM 
+rm -rf $SYMSRC_RM
+cd $STAGEDIR
+
+tar -cf $OFILE.tar $COMP_DIR
+gzip $OFILE.tar
+
+#Documentation
+mkdir $COMP_DIR/doc
+cp $BINDIR/docs/ProcControlAPI.docx $COMP_DIR/doc
+
+#Includes
+mkdir $COMP_DIR/include
+cp $BINDIR/dyninst/proccontrol/h/*.h $COMP_DIR/include
+cp $BINDIR/dyninst/dynutil/h/*.h $COMP_DIR/include
+cp -r $BINDIR/dyninst/dynutil/h/dyn_detail $COMP_DIR/include
+
+#Linux/x86
+PLAT=i386-unknown-linux2.4
+OFILE=proccontrol_linux_x86_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp /p/paradyn/packages/libxml2/i386_cent40/lib/libxml2.so $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libelf.so.1 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/i386-unknown-linux2.4/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#Linux/AMD64
+PLAT=x86_64-unknown-linux2.4
+OFILE=proccontrol_linux_amd64_$DYNINST_VERSION
+echo COPYING FILES FOR $PLAT
+
+cp -r $BINDIR/$PLAT $COMP_DIR/
+cd $COMP_DIR/$PLAT
+rm -rf $DYNBIN_RM
+rm -rf $SYMBIN_RM
+cd $STAGEDIR
+cp /p/paradyn/packages/libxml2/amd64_cent40/lib/libxml2.so $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libelf.so.1 $COMP_DIR/$PLAT/lib
+cp $RELEASEDIR/x86_64-unknown-linux2.4/libdwarf.so $COMP_DIR/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar $COMP_DIR/doc $COMP_DIR/include $COMP_DIR/README $COMP_DIR/LICENSE $COMP_DIR/$PLAT
+gzip $OFILE.tar
+
+#MOVE GZs
+mv *.gz $BUILDDIR
+
