@@ -1,3 +1,12 @@
+dyninst (7.0-1) unstable; urgency=low
+
+  * Initial release of ParseAPI
+  * Initial release of ProcControlAPI
+  * PowerPC release of InstructionAPI
+  * BlueGene support for static binary rewriter
+
+ -- Paradyn / Dyninst Project <paradyn@cs.wisc.edu>  Thur, 10 Mar 2011 13:35:00 -0600
+
 dyninst (6.1-1) unstable; urgency=low
 
   * Optimized instrumentation generation
