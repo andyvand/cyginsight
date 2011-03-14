@@ -1,2 +1,3 @@
-../docs/dyninstProgGuide.doc
-instructionAPI/instructionProgGuide.v11.pdf
+../docs/*.pdf
+../docs/symtabAPI/*.pdf
+../docs/stackwalk/*.pdf
