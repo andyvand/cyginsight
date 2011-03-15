@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Dyninst-7.0", "Dyninst-7.0.vdproj", "{4A70A467-1D8E-44BE-A55B-EDEB486A0C8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A70A467-1D8E-44BE-A55B-EDEB486A0C8B}.Debug|Default.ActiveCfg = Debug
+		{4A70A467-1D8E-44BE-A55B-EDEB486A0C8B}.Debug|Default.Build.0 = Debug
+		{4A70A467-1D8E-44BE-A55B-EDEB486A0C8B}.Release|Default.ActiveCfg = Release
+		{4A70A467-1D8E-44BE-A55B-EDEB486A0C8B}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
