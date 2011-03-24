@@ -824,6 +824,24 @@ echo TAR GZ
 tar -cf $OFILE.tar stackwalkAPI/doc stackwalkAPI/include stackwalkAPI/README stackwalkAPI/LICENSE stackwalkAPI/$PLAT
 gzip $OFILE.tar
 
+#Linux/PPC64
+PLAT=ppc64_linux
+OFILE=stackwalk_linux_ppc64_$STACKWALKERAPI_VERSION
+
+echo COPYING FILES FOR $PLAT
+cd $STAGEDIR
+cp -r $BINDIR/$PLAT stackwalkAPI/
+cd stackwalkAPI/$PLAT
+rm -rf $SWKBIN_RM
+cd $STAGEDIR
+cp $RELEASEDIR/ppc32_linux/libelf.so.0 stackwalkAPI/$PLAT/lib
+cp $RELEASEDIR/ppc32_linux/libdwarf.so stackwalkAPI/$PLAT/lib
+
+echo TAR GZ
+tar -cf $OFILE.tar stackwalkAPI/doc stackwalkAPI/include stackwalkAPI/README stackwalkAPI/LICENSE stackwalkAPI/$PLAT
+gzip $OFILE.tar
+
+
 #MOVE GZs
 mv *.gz $BUILDDIR
 
