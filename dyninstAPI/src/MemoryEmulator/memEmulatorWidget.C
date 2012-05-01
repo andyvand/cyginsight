@@ -55,7 +55,7 @@
 
 #include "dyninstAPI/src/RegisterConversion.h"
 
-#include "boost/tuple/tuple.hpp"
+#include <boost/tuple/tuple.hpp>
 #include "memEmulator.h"
 
 

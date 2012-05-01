@@ -65,7 +65,7 @@ using namespace NS_power;
 
 #include <sys/poll.h>
 
-#include "boost/tuple/tuple.hpp"
+#include <boost/tuple/tuple.hpp>
 
 /////////////////////////////////////////////////////////////////////////////
 /// Massive amounts of signal handling code

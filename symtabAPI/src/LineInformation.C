@@ -33,7 +33,7 @@
 #include <assert.h>
 #include <list>
 #include <cstring>
-#include "boost/functional/hash.hpp"
+#include <boost/functional/hash.hpp>
 #include "common/h/headers.h"
 #include "Module.h"
 #include "Serialization.h"

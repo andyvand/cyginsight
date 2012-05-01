@@ -54,7 +54,7 @@
 
 #include "debug_dataflow.h"
 
-#include "boost/tuple/tuple.hpp"
+#include <boost/tuple/tuple.hpp>
 
 using namespace Dyninst;
 using namespace InstructionAPI;

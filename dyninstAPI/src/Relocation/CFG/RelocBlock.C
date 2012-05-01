@@ -46,7 +46,7 @@
 #include "../Transformers/Transformer.h" // transformer class
 #include "RelocGraph.h"
 
-#include "boost/tuple/tuple.hpp"
+#include <boost/tuple/tuple.hpp>
 
 
 using namespace Dyninst;

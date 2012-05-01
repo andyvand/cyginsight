@@ -33,7 +33,7 @@
 #define TYPE_MEM_H_
 
 #include "symtabAPI/h/Type.h"
-#include "boost/static_assert.hpp"
+#include <boost/static_assert.hpp>
 
 namespace Dyninst {
   namespace SymtabAPI {
