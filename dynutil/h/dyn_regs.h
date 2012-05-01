@@ -34,7 +34,7 @@
 #define DYN_REGS_H_
 
 #include "util.h"
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 
 #include <assert.h>
 #include <map>

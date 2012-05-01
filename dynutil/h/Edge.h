@@ -32,8 +32,8 @@
 #if !defined(EDGE_H)
 #define EDGE_H
 
-#include "dyn_detail/boost/shared_ptr.hpp"
-#include "dyn_detail/boost/weak_ptr.hpp"
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <set>
 #include "Annotatable.h"
 

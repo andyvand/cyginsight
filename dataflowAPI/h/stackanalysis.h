@@ -49,7 +49,7 @@
 // for blockSet...
 //#include "dyninstAPI/src/image-func.h"
 
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 
 // To define StackAST
 #include "DynAST.h"

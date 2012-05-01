@@ -34,7 +34,7 @@
 #define _R_CODE_MOVER_H_
 
 #include "CFG.h"
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 #include "common/h/Types.h"
 #include <list>
 #include <map>

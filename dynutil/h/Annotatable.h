@@ -45,9 +45,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "util.h"
-#include "dyn_detail/boost/type_traits/is_base_of.hpp"
-#include "dyn_detail/boost/type_traits/is_pointer.hpp"
-#include "dyn_detail/boost/type_traits/remove_pointer.hpp"
+#include <boost/type_traits/is_base_of.hpp>
+#include <boost/type_traits/is_pointer.hpp>
+#include <boost/type_traits/remove_pointer.hpp>
 #define serialize_printf serializer_printf
 
 namespace Dyninst

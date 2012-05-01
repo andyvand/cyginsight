@@ -35,7 +35,7 @@
 #include "CFG.h"
 #include "dyntypes.h"
 #include "IA_platformDetails.h"
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 
 namespace Dyninst
 {

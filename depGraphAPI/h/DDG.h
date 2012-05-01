@@ -32,7 +32,7 @@
 #if !defined(DDG_GRAPH_H)
 #define DDG_GRAPH_H
 
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 #include <set>
 #include <list>
 #include <queue>

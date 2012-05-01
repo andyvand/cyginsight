@@ -32,7 +32,7 @@
 #if !defined(PATCHAPI_ATOM_H_)
 #define PATCHAPI_ATOM_H_
 
-#include "dyn_detail/boost/shared_ptr.hpp" // shared_ptr
+#include <boost/shared_ptr.hpp> // shared_ptr
 #include "common/h/Types.h" // Address
 #include "instructionAPI/h/Instruction.h" // Instruction::Ptr
 #include <list> // stl::list

@@ -36,7 +36,7 @@
 #if !defined(_RELOCATION_H_)
 #define _RELOCATION_H_
 
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 #include "common/h/Types.h"
 #include <list>
 #include <map>

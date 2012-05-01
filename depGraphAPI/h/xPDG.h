@@ -35,7 +35,7 @@
 #include "Node.h"
 #include "Graph.h"
 
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 
 class BPatch_function;
 

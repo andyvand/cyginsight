@@ -34,7 +34,7 @@
 #include <set>
 #include <map>
 
-#include "dyn_detail/boost/shared_ptr.hpp"
+#include <boost/shared_ptr.hpp>
 
 #include "Graph.h"
 #include "analyzeDDG.h"
