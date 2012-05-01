@@ -43,7 +43,7 @@
 #include "common/h/serialize.h"
 #include "common/h/pathName.h"
 
-#include <boost/make_shared.hpp>
+#include "dyn_detail/boost/make_shared.hpp"
 
 #include "Serialization.h"
 #include "Symtab.h"

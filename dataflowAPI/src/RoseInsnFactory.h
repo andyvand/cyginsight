@@ -37,7 +37,7 @@
 #include "external/rose/rose-compat.h"
 #include "external/rose/powerpcInstructionEnum.h"
 #include "Visitor.h"
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 #include "dynutil/h/util.h"
 #include <vector>
 

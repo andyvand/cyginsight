@@ -32,7 +32,7 @@
 #if !defined(_R_T_BASE_H_)
 #define _R_T_BASE_H_
 
-#include <boost/shared_ptr.hpp> // shared_ptr
+#include "dyn_detail/boost/shared_ptr.hpp" // shared_ptr
 #include "common/h/Types.h" // Address
 #include <list>
 #include <map>

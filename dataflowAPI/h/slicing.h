@@ -34,7 +34,7 @@
 #if !defined(_SLICING_H_)
 #define _SLICING_H_
 
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 #include <vector>
 #include "dyntypes.h"
 #include <queue>

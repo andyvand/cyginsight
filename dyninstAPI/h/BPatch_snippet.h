@@ -43,7 +43,7 @@
 #include "BPatch_callbacks.h"
 #include "BPatch_instruction.h" // for register type
 #include "BPatch_enums.h"
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 
 class AstNode;
 // Don't include the boost shared_ptr library

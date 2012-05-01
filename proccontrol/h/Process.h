@@ -40,8 +40,8 @@
 #include "dyntypes.h"
 #include "dyn_regs.h"
 #include "EventType.h"
-#include <boost/shared_ptr.hpp>
-#include <dyn_detail/boost/weak_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
+#include "dyn_detail/boost/weak_ptr.hpp"
 
 class int_process;
 class int_breakpoint;

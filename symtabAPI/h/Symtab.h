@@ -43,7 +43,7 @@
 
 #include "ProcReader.h"
 
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 
 class MappedFile;
 

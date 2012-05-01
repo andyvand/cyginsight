@@ -32,7 +32,7 @@
 #if !defined(PATCHAPI_TRACE_H_)
 #define PATCHAPI_TRACE_H_
 
-#include <boost/shared_ptr.hpp> // shared_ptr
+#include "dyn_detail/boost/shared_ptr.hpp" // shared_ptr
 #include "common/h/Types.h" // Address
 #include "dyninstAPI/src/codegen.h" // codeGen
 #include "dyninstAPI/src/function.h"

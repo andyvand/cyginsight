@@ -43,7 +43,7 @@
 #include "BPatch_function.h"
 #include "Annotatable.h"
 
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 
 using namespace std;
 using namespace Dyninst;

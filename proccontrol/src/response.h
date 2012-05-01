@@ -32,8 +32,8 @@
 #ifndef RESPONSE_H_
 #define RESPONSE_H_
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
+#include "dyn_detail/boost/weak_ptr.hpp"
 
 #include "proccontrol/h/Event.h"
 #include "common/h/dthread.h"

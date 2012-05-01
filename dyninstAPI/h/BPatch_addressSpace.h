@@ -32,7 +32,7 @@
 #ifndef _BPatch_addressSpace_h_
 #define _BPatch_addressSpace_h_
 
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 #include "BPatch_dll.h"
 #include "BPatch_Vector.h"
 #include "BPatch_eventLock.h"

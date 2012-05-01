@@ -32,7 +32,7 @@
 #if !defined(NODE_H)
 #define NODE_H
 
-#include <boost/shared_ptr.hpp>
+#include "dyn_detail/boost/shared_ptr.hpp"
 #include <set>
 #include <string>
 #include "Annotatable.h"
