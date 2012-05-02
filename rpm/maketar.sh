@@ -26,9 +26,9 @@ for i in dyninst scripts; do
     cd $1/$i; git archive --format=tar --prefix=${i}/ HEAD | (cd $TMP_DIR/$TAR_DIR && tar xpf -)
 done
 # Copy the documentation
-cp -R $1/docs/*.pdf $TMP_DIR/$TAR_DIR
+cp -a $1/docs/*.pdf $TMP_DIR/$TAR_DIR
 for i in $DOC_FILES; do
-    cp $1/$i $TMP_DIR/$TAR_DIR
+    cp -a $1/$i $TMP_DIR/$TAR_DIR
 done
 
 #do cleanup
