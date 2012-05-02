@@ -89,8 +89,7 @@ clean distclean:
 	done
 
 install:	ready world
-	+@for subsystem in $(fullSystem); do 
-			\
+	+@for subsystem in $(fullSystem); do 			\
 		if [ -f $$subsystem/$(PLATFORM)/Makefile ]; then	\
 			$(MAKE) -C $$subsystem/$(PLATFORM) install;		\
 		elif [ -f $$subsytem/Makefile ]; then 			\
