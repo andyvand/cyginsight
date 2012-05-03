@@ -1,30 +1,31 @@
-Required packages for building:
+Required packages for building the dyninst RPM:
 
+- make
 - gcc
 - gcc-c++
-- gcc-g77
-- elfutils-libelf-devel
+- gcc-gfortran
 - rpm-build
+- elfutils-libelf-devel
+- libxml2-devel >= 2.7.8
+- libdwarf-devel 
+- boost-devel
 
-In order to create the RPM, the spec file expects the following files:
+
+In order to create the RPMs, the spec file expects the following file:
 - A Dyninst source distribution, containing the dyninst and scripts
   subdirectory, and any documentation files in the form of .pdf's.
-- A libdwarf distribution.
-- A libxml2 distribution.
 
-The dyninst source distribution is created from a clean CVS checkout.
+The dyninst source distribution is created from a clean git checkout.
 After pulling the dyninst and scripts modules and the documentation PDFs,
-run the "maketar7.0.sh" script to create a tar file suitable for inclusion
+run the "maketar.sh" script to create a tar file suitable for inclusion
 in a source RPM.
 
-The two tar files should be placed in the rpm build heirarchy (e.g.
-/usr/src/redhat/SOURCES).
+The tar file should be placed in the rpm build heirarchy (e.g.
+~user_name/rpmbuild/SOURCES).
 
-To build the RPM, issue a "rpmbuild -ba <specfile>"  This will perform three
+To build the RPM, issue a "rpmbuild -ba <specfile>".  This will perform two
 actions.  It will:
-- Install Dyninst into the system (i.e. inside /usr/bin, /usr/lib, and
-/usr/include/dyninst)
-- Create dyninst and dyninst-tests RPM, placing them in the rpm build 
-heirarchy (/usr/src/redhat/RPMS)
+- Create dyninst and RPMs, placing them in the rpm build heirarchy
+  (~user_name/rpmbuild/RPMS/<arch>)
 - Create a Dyninst source RPM, placing it in the rpm build heirarchy
-(/usr/src/redhat/SRPMS)
+  (~user_name/rpmbuild/SRPMS)
