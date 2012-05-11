@@ -9,31 +9,28 @@ CP_DIR = cp -r
 
 TO_INC = h
 PUBLIC_H = Annotatable.h \
-		dyntypes.h \
-		util.h \
-		Serialization.h \
-		Graph.h \
-		Edge.h \
-		Node.h \
-		dyn_regs.h \
-		stl_utils.h \
-		SymReader.h \
-		AST.h \
-		ProcReader.h \
+	dyntypes.h \
+	util.h \
+	Serialization.h \
+	Graph.h \
+	Edge.h \
+	Node.h \
+	dyn_regs.h \
+	stl_utils.h \
+	SymReader.h \
+	AST.h \
+	ProcReader.h \
         IBSTree.h \
         entryIDs.h
 
-#INSTALL_TARGETS = $(pathsubst %, $(INCLUDE_DEST)/%,$(PUBLIC_H))
-INSTALL_TARGETS = $(addprefix $(LOCAL_INCLUDE_DEST)/, $(PUBLIC_H))
+INSTALL_TARGETS = $(addprefix $(TO_INC)/, $(PUBLIC_H))
 world:
 	@echo Nothing to be done for build
 
-#install: $(patsubst %,$(INCLUDE_DEST)/%,$(PUBLIC_H))
 install: $(INSTALL_TARGETS)
-#	echo INSTALL_TARGETS = $(INSTALL_TARGETS);
-
-$(LOCAL_INCLUDE_DEST)/%.h: $(TO_INC)/%.h
-	mkdir -p $(LOCAL_INCLUDE_DEST)
-	$(CP) $^ $@
+	mkdir -p $(DESTDIR)$(LOCAL_INCLUDE_DEST)
+	$(CP) $(INSTALL_TARGETS) $(DESTDIR)$(LOCAL_INCLUDE_DEST)
 
 clean distclean:
+
+.PHONY: install clean distclean
