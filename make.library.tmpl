@@ -110,10 +110,8 @@ endif # STATIC_TARGET
 endif  # OVERRIDE_LINK
 
 ifdef PUBLIC_H
-$(INCLUDE_DEST)/%.h: $(TO_INC)/%.h
-	$(CP) $^ $(INCLUDE_DEST)
-
-public_includes: $(patsubst %,$(INCLUDE_DEST)/%,$(PUBLIC_H))
+public_includes: $(addprefix $(TO_INC)/,$(PUBLIC_H))
+	$(CP) $^ $(DESTDIR)$(INCLUDE_DEST)
 else
 public_includes:
 endif 
@@ -131,18 +129,16 @@ clean:
 distclean: clean
 	$(RM) DEPENDS
 
-$(DEST)/$(TARGET): $(TARGET)
-	-$(CP) $(TARGET) $(DEST)
-
 ifdef STATIC_TARGET
-$(DEST)/$(STATIC_TARGET): $(STATIC_TARGET)
-	-$(CP) $(STATIC_TARGET) $(DEST)
 
-install_generic: $(DEST)/$(TARGET) public_includes $(DEST)/$(STATIC_TARGET)
+install_generic: $(TARGET) public_includes $(STATIC_TARGET)
+	-$(CP) $(TARGET) $(DESTDIR)$(DEST)
+	-$(CP) $(STATIC_TARGET) $(DESTDIR)$(DEST)
 
 else
 
-install_generic: $(DEST)/$(TARGET) public_includes
+install_generic: $(TARGET) public_includes
+	-$(CP) $(TARGET) $(DESTDIR)$(DEST)
 
 endif
 
@@ -151,6 +147,8 @@ endif
 ifndef OVERRIDE_INSTALL
 install: install_generic
 endif
+
+.PHONY: public_includes clean distclean install_generic install
 
 # %.C: %.y
 # 	$(YACC) $(YFLAGS) $<
