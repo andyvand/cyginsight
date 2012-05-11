@@ -88,10 +88,6 @@ RTspace.o: ../src/RTspace.S
 
 RELEASE_NUM ?= $(RELEASE_MAJOR).$(RELEASE_MINOR)
 
-$(DEST)/$(TARGET_32_SO): $(TARGET_32_SO)
-	-$(CP) $(TARGET_32_SO) $(DEST)/$(TARGET_32_SO).$(RELEASE_NUM)
-	-cd $(DEST); $(LN) -f $(TARGET_32_SO).$(RELEASE_NUM) $(TARGET_32_SO)
-
 # 32-bit static runtime library
 
 STATIC_TARGET_32 = libdyninstAPI_RT_m32.a
@@ -109,11 +105,11 @@ $(STATIC_TARGET_32): $(STATIC_OBJS_32) $(STATIC_ASM_OBJS_32)
 	$(HIDE_COMP)$(RM) $(STATIC_TARGET_32)
 	$(HIDE_COMP)$(AR) rcs $(STATIC_TARGET_32) $(STATIC_OBJS_32) $(STATIC_ASM_OBJS_32)
 
-$(DEST)/$(STATIC_TARGET_32): $(STATIC_TARGET_32)
-	-$(CP) $(STATIC_TARGET_32) $(DEST)
-
 ifndef SKIP_BUILD_RTLIB_32
-install: $(DEST)/$(TARGET_32_SO) $(DEST)/$(STATIC_TARGET_32)
+install: $(STATIC_TARGET_32) $(TARGET_32_SO)
+	-$(INSTALL) $(STATIC_TARGET_32) $(DESTDIR)$(DEST)
+	-$(INSTALL) $(TARGET_32_SO) $(DESTDIR)$(DEST)/$(TARGET_32_SO)
+
 all: $(TARGET_32_SO) $(STATIC_TARGET_32)
 endif
 
@@ -127,3 +123,5 @@ include ../../make.library.tmpl
 # a 64-bit runtime library.
 #$(TARGET3_SO):
 #	touch $(TARGET3_SO)
+
+.PHONY: install
