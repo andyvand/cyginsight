@@ -62,6 +62,12 @@ extern "C" DLLEXPORT TestMutator* test1_1_factory()
 // Start Test Case #1 - (zero arg function call)
 //
 test_results_t test1_1_Mutator::executeTest() {
+  // !!!!!!!!!!!!!!!!!
+  // !! FORCING FAILURE FOR BATLAB TESTING
+  // !!!!!!!!!!!!!!!!!
+  return FAILED;
+  
+  
   const char *funcName = "test1_1_func1_1";
   const char* testName = "zero arg function call";
   int testNo = 1;
