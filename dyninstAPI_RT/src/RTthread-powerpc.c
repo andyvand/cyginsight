@@ -40,6 +40,7 @@
  *
  **/
 
+#if !defined(os_linux)
 int tc_lock_lock(tc_lock_t *tc)
 {
    dyntid_t me;
@@ -57,3 +58,4 @@ int tc_lock_lock(tc_lock_t *tc)
    }
    return 0;
 }
+#endif

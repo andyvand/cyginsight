@@ -638,13 +638,15 @@ int tc_lock_init(tc_lock_t *t)
   return 0;
 }
 
+#if !defined(os_linux)
 int tc_lock_unlock(tc_lock_t *t)
 {
   t->tid = (dyntid_t) DYNINST_INITIAL_LOCK_PID;
   t->mutex = 0;
   return 0;
 }
-    
+#endif
+
 int tc_lock_destroy(tc_lock_t *t)
 {
   t->tid = (dyntid_t) DYNINST_INITIAL_LOCK_PID;

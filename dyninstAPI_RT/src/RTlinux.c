@@ -53,6 +53,8 @@
 #include <sys/mman.h>
 #include <link.h>
 
+#include <linux/futex.h>
+
 #if defined(DYNINST_RT_STATIC_LIB)
 /* 
  * The weak symbol here removes the dependence of the static version of this
@@ -692,6 +694,36 @@ void runDYNINSTBaseInit()
    DYNINSTBaseInit();
 }
 #endif
+
+
+int tc_lock_lock(tc_lock_t *tc)
+{
+   dyntid_t me = dyn_pthread_self();
+   if (me == tc->tid)
+      return DYNINST_DEAD_LOCK;
+
+   /* Try to set unlocked(0) to locked(1). */
+   if (!__sync_bool_compare_and_swap(&tc->mutex, 0, 1)) {
+      /* The lock is busy.  Make sure it's marked contended(2)
+       * and spin until we're able to xchg for unlocked(0). */
+      while (__sync_lock_test_and_set(&tc->mutex, 2))
+         syscall(SYS_futex, &tc->mutex, FUTEX_WAIT_PRIVATE, 2, NULL);
+   }
+   tc->tid = me;
+   return 0;
+}
+
+int tc_lock_unlock(tc_lock_t *tc)
+{
+  tc->tid = (dyntid_t) DYNINST_INITIAL_LOCK_PID;
+   /* Try to set locked(1) to unlocked(0). */
+  if (!__sync_bool_compare_and_swap(&tc->mutex, 1, 0)) {
+     /* It was contended(2), so set unlocked(0) and wake someone up. */
+     __sync_lock_release(&tc->mutex);
+     syscall(SYS_futex, &tc->mutex, FUTEX_WAKE_PRIVATE, 1);
+  }
+  return 0;
+}
 
 
 /*
